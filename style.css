@@ -1,3 +1,4 @@
+/* RESET */
 * {
   margin: 0;
   padding: 0;
@@ -5,72 +6,87 @@
   font-family: Arial, sans-serif;
 }
 
-/* BODY - matched dark theme */
+/* BODY */
 body {
-  background: #0b0f1a;   /* dark professional */
+  background: #0b0f1a;
   color: #e5e7eb;
+  line-height: 1.6;
 }
 
 /* SIDEBAR */
 .sidebar {
-  font-family: 'Cinzel', serif;
   width: 255px;
   height: 100vh;
   position: fixed;
   left: 0;
   top: 0;
-  background: #111827;   /* match theme */
-  border-right: 1px solid #1f2937; /* subtle dev border */
+  background: #111827;
+  border-right: 1px solid #1f2937;
   padding: 20px;
   z-index: 999;
 }
 
 .logo {
-  font-family: 'Cinzel', serif;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
   margin-bottom: 30px;
 }
 
+/* SIDEBAR LINKS */
 .sidebar nav a {
-  font-family: 'Cinzel', serif;
   display: block;
   padding: 12px;
   text-decoration: none;
-  color: #cbd5e1;   /* fixed dark theme text */
+  color: #e5e7eb;
   border-radius: 8px;
   margin-bottom: 8px;
   transition: 0.3s;
+  font-weight: 500;
 }
 
-.sidebar nav a.active,
-.sidebar nav a:hover {
-  background: linear-gradient(45deg, #7b2ff7, #9f44d3);
-  color: white;
+/* HOVER + ACTIVE (HIGH CONTRAST SAFE) */
+.sidebar nav a:hover,
+.sidebar nav a.active {
+  background: #4c1d95;
+  color: #ffffff;
 }
 
 /* CONTENT */
 .content-wrapper {
-  margin-left: 255px;  /* fixed alignment */
+  margin-left: 255px;
 }
 
 /* HERO */
 .header {
   padding: 80px 20px;
   background: linear-gradient(135deg, #1e1b4b, #312e81);
-  color: white;
+  color: #ffffff;
   text-align: center;
 }
 
+/* ACCESSIBLE BUTTON */
 .btn {
   display: inline-block;
   margin-top: 20px;
-  background: #7c3aed;
-  color: white;
+  background-color: #4c1d95;
+  color: #ffffff;
   padding: 12px 25px;
   border-radius: 25px;
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 16px;
+  border: 2px solid #4c1d95;
+  transition: 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #3b0764;
+  border-color: #3b0764;
+}
+
+.btn:focus {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
 }
 
 /* CARDS */
@@ -87,10 +103,11 @@ body {
 }
 
 .card {
-  background: #1f2937;   /* dark card */
+  background: #1f2937;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  color: #e5e7eb;
 }
 
 /* ROADMAP */
@@ -99,34 +116,42 @@ body {
   text-align: center;
 }
 
-/* WHY */
+/* WHY SECTION */
 .why-section {
   padding: 40px 20px;
   background: #111827;
 }
 
-/* FOOTER */
+/* FOOTER (FIXED CONTRAST) */
 footer {
   text-align: center;
   padding: 15px;
-  background: #111827;
-  color: #9ca3af;
+  background: #0f172a;
+  color: #e5e7eb;
+  font-size: 14px;
 }
 
-/* MOBILE */
+/* MOBILE MENU BUTTON */
 .menu-btn {
   display: none;
   position: fixed;
   top: 15px;
   left: 15px;
-  background: #7c3aed;
-  color: white;
-  border: none;
+  background-color: #4c1d95;
+  color: #ffffff;
+  border: 2px solid #4c1d95;
   font-size: 22px;
   padding: 10px 14px;
   z-index: 1100;
+  border-radius: 8px;
 }
 
+.menu-btn:focus {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
+}
+
+/* RESPONSIVE */
 @media (max-width: 768px) {
   .sidebar {
     transform: translateX(-100%);
@@ -146,19 +171,9 @@ footer {
   }
 }
 
-.active {
-  background: linear-gradient(45deg, #7b2ff7, #9f44d3);
-  color: white;
-  border-radius: 12px;
-}
+
+
 .b{
   position: fixed;
   top: 600px;
 }
-
-
-
-
-
-
-

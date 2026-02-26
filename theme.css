@@ -1,4 +1,4 @@
-/* ===== INFINITY MINDS GLOBAL DARK THEME ===== */
+/* ===== INFINITY MINDS GLOBAL DARK THEME (FIXED) ===== */
 
 body {
   margin: 0;
@@ -25,32 +25,42 @@ p {
   border-radius: 16px;
   box-shadow: 0 0 25px rgba(168, 85, 247, 0.15);
   transition: 0.3s ease;
+  color: #e5e7eb;
 }
 
 .card:hover {
   transform: translateY(-5px);
 }
 
-/* Buttons */
-button, .btn {
-  background-color: #7c3aed;
-  color: black;
+/* ===== FIXED BUTTONS ===== */
+button,
+.btn {
+  background-color: #4c1d95;   /* darker purple */
+  color: #ffffff;              /* white text for contrast */
   padding: 12px 28px;
-  border: none;
+  border: 2px solid #4c1d95;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
   transition: 0.3s ease;
 }
 
-button:hover, .btn:hover {
-  background-color: #6d28d9;
-  box-shadow: 0 0 12px #7c3aed;
+button:hover,
+.btn:hover {
+  background-color: #3b0764;
+  border-color: #3b0764;
+}
+
+/* Focus for accessibility */
+button:focus,
+.btn:focus {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
 }
 
 /* Links */
 a {
-  color: #a855f7;
+  color: #c084fc;   /* lighter purple for better contrast */
   text-decoration: none;
 }
 
@@ -58,9 +68,9 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Why Section - FIXED TO DARK */
+/* Why Section */
 .why-section {
-  background-color: #111827;   /* dark instead of light */
+  background-color: #111827;
   padding: 60px 20px;
 }
 
@@ -72,4 +82,3 @@ a:hover {
 .why-section li {
   color: #cbd5e1;
 }
-
