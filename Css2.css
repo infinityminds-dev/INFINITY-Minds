@@ -333,6 +333,118 @@ a:hover {
   outline-offset: 3px;
 }
 
+/* ===== APP CARDS SPECIFIC STYLING ===== */
+
+.app-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.app-card {
+    background: #111827; /* Dark Grey/Black */
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    border: 1px solid rgba(168, 85, 247, 0.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Card Hover Effect */
+.app-card:hover {
+    transform: translateY(-10px);
+    border-color: #a855f7;
+    box-shadow: 0 15px 35px rgba(168, 85, 247, 0.2);
+}
+
+/* App Icon Styling */
+.app-card img {
+    width: 140px;
+    height: 140px;
+    border-radius: 30px;
+    margin-bottom: 20px;
+    object-fit: cover;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+}
+
+/* Typography */
+.app-card h3 {
+    color: #a855f7;
+    font-size: 24px;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.app-card p {
+    color: #9ca3af;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Version & Size Badge */
+.app-meta {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    font-size: 13px;
+    color: #d1d5db;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+/* Developer Notice Box */
+.dev-notice {
+    background: rgba(30, 27, 75, 0.6);
+    border-left: 4px solid #a855f7;
+    padding: 12px;
+    text-align: left;
+    font-size: 13px;
+    color: #e0e7ff;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+/* Action Button */
+.download-link {
+    display: inline-block;
+    width: 100%;
+    padding: 14px 0;
+    background: linear-gradient(45deg, #a855f7, #9333ea);
+    color: white !important;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 16px;
+    transition: 0.3s;
+    box-shadow: 0 4px 12px rgba(147, 51, 234, 0.3);
+}
+
+.download-link:hover {
+    opacity: 0.9;
+    letter-spacing: 0.5px;
+    box-shadow: 0 6px 18px rgba(147, 51, 234, 0.5);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 480px) {
+    .app-card {
+        padding: 20px;
+    }
+    .app-card img {
+        width: 100px;
+        height: 100px;
+    }
+}
 
 
 
