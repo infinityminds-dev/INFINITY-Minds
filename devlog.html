@@ -61,161 +61,168 @@
 </script>
   
 </head>
+
+   
 <body>
   
-  <main>
-  <!-- Mobile Toggle Button -->
-<button class="menu-btn" onclick="toggleSidebar()">☰</button>
+  <button class="menu-btn" onclick="toggleSidebar()" aria-label="Toggle Menu">☰</button>
 
-<!-- Sidebar -->
-<aside class="sidebar" id="sidebar">
-  <h2 class="logo">INFINITY</h2>
-  <nav>
-    <a href="index.html">Home 🌐</a> 
-    <a href="Computer.html" >Computer Basic 💻</a>
-    <a href="Course.html">Programming 🛰️</a>
-    <a href="devlog.html"class="active">Developer Tools 🛠️</a>
-    <a class="F"href="Quantum.html">Quantum Computing ⚛️</a>
-    <a href="Download.html">Downloads 📥</a>
-    <a href="feedback.html">Feedback 📬</a>
-    <a href="faq.html">FAQ❓</a>
-    <a href="contact.html">Contact ✉️</a>
-    <a href="about.html" class="b">About INFINITY 🧠 </a>
-  </nav>
-</aside>
+  <aside class="sidebar" id="sidebar">
+    <h2 class="logo">INFINITY</h2>
+    <nav>
+      <a href="index.html">Home 🌐</a> 
+      <a href="Computer.html">Computer Basic 💻</a>
+      <a href="Course.html">Programming 🛰️</a>
+      <a href="devlog.html" class="active">Developer Tools 🛠️</a>
+      <a class="F" href="Quantum.html">Quantum Computing ⚛️</a>
+      <a href="Download.html">Downloads 📥</a>
+      <a href="feedback.html">Feedback 📬</a>
+      <a href="faq.html">FAQ❓</a>
+      <a href="contact.html">Contact ✉️</a>
+      <a href="about.html" class="b">About INFINITY 🧠</a>
+    </nav>
+  </aside>
 
-<!-- Content Wrapper -->
-<div class="content-wrapper">
-  
-  </div>
+  <div class="content-wrapper">
+    
+    <header class="page-header">
+      <h1>🛠 Developer Tools</h1>
+      <p>Essential tools every beginner developer should know</p>
+    </header>
 
-  <header class="page-header">
-    <h1>🛠 Developer Tools</h1>
-    <p>Essential tools every beginner developer should know</p>
-  </header>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <h2>💻 VS Code</h2>
+        <p>Powerful and lightweight code editor for building websites.</p>
+        <a href="https://code.visualstudio.com/" target="_blank">Visit Website</a>
+      </div>
 
-  <div class="tools-grid">
+      <div class="tool-card">
+        <h2>🌐 Chrome DevTools</h2>
+        <p>Inspect and debug your website directly in the browser.</p>
+        <a href="https://developer.chrome.com/docs/devtools/" target="_blank">Visit Guide</a>
+      </div>
 
-    <div class="tool-card">
-      <h2>💻 VS Code</h2>
-      <p>Powerful and lightweight code editor for building websites.</p>
-      <a href="https://code.visualstudio.com/" target="_blank">Visit Website</a>
-    </div>
+      <div class="tool-card">
+        <h2>🚀 Netlify</h2>
+        <p>Deploy your website easily with free hosting and CI/CD.</p>
+        <a href="https://www.netlify.com" target="_blank">Visit Website</a>
+      </div>
 
-    <div class="tool-card">
-      <h2>🌐 Chrome DevTools</h2>
-      <p>Inspect and debug your website directly in the browser.</p>
-    </div>
+      <div class="tool-card">
+        <h2>📂 GitHub</h2>
+        <p>Store, manage code, and collaborate with other developers.</p>
+        <a href="https://github.com" target="_blank">Visit Website</a> 
+      </div>
 
-    <div class="tool-card">
-      <h2>🚀 Netlify</h2>
-      <p>Deploy your website easily with free hosting.</p>
-      <a href="https://www.netlify.com" target="_blank">Visit Website</a>
-    </div>
-
-    <div class="tool-card">
-      <h2>📂 GitHub</h2>
-      <p>Store and manage your code And Hosting collaborate with other developer </p>
-      <a href="https://github.com" target="_blank">Visit Website</a> 
-    </div>
-
-    <div class="tool-card">
-  <h2>🔥 Firebase</h2>
-  <p>Google backend platform providing authentication, database, hosting and cloud services.</p>
+      <div class="tool-card">
+        <h2>🔥 Firebase</h2>
+        <p>Google's backend platform for auth, database, and hosting.</p>
         <a href="https://firebase.google.com/" target="_blank">Visit Website</a>
-</div>
+      </div>
 
-    <div class="tool-card">
-      <h2>📂 Git</h2>
-      <p>Store and manage your code with version control System.</p>
-      <a href="https://git-scm.com/" target="_blank">Visit Website</a> 
+      <div class="tool-card">
+        <h2>📂 Git</h2>
+        <p>Standard version control system to track your code changes.</p>
+        <a href="https://git-scm.com/" target="_blank">Visit Website</a> 
+      </div>
+      
+      <div class="tool-card">
+        <h2>📱 Android Studio</h2>
+        <p>The official IDE for professional Android app development.</p>
+        <a href="https://developer.android.com/" target="_blank">Visit Website</a> 
+      </div>
+
+      <div class="tool-card">
+        <h2>📊 Google Analytics</h2>
+        <p>Track visitors and user behavior on your site in real time.</p>
+        <a href="https://analytics.google.com/" target="_blank">Visit Website</a>
+      </div>
+
+      <div class="tool-card">
+        <h2>🔍 Search Console</h2>
+        <p>Monitor and fix your website's presence in Google Search.</p>
+        <a href="https://search.google.com/search-console/" target="_blank">Visit Website</a>
+      </div>
+
+      <div class="tool-card">
+        <h2>🛠️ More Tools</h2>
+        <p>Check out our full download section for offline setups.</p>
+        <a href="Download.html">Visit Section</a> 
+      </div>
     </div>
+
+    <h2 class="section-title" style="text-align:center; margin: 60px 0 30px; color:#a855f7; font-size: 2rem;">🤖 AI Tools for Developers</h2>
     
-    <div class="tool-card">
-      <h2>📱 Android Studio </h2>
-      <p>Store and manage your code with version control.</p>
-      <a href="https://developer.android.com/" target="_blank">Visit Website</a> 
+    <div class="tools-grid">
+      <div class="tool-card">
+        <h2>🤖 ChatGPT</h2>
+        <p>Best for explaining logic, generating snippets, and debugging.</p>
+        <a href="https://chat.openai.com/" target="_blank">Visit Website</a>
+      </div>
+
+      <div class="tool-card">
+        <h2>🧠 DeepSeek V3</h2>
+        <p>Powerful new AI specialized in advanced coding and math.</p>
+        <a href="https://www.deepseek.com/" target="_blank">Visit Website</a>
+      </div>
+
+      <div class="tool-card">
+        <h2>🔍 Perplexity AI</h2>
+        <p>AI-powered search engine for real-time coding answers.</p>
+        <a href="https://www.perplexity.ai/" target="_blank">Visit Website</a>
+      </div>
+
+      <div class="tool-card">
+        <h2>💻 Cursor AI</h2>
+        <p>The ultimate AI-first code editor (Fork of VS Code).</p>
+        <a href="https://cursor.com/" target="_blank">Visit Website</a>
+      </div>
+
+      <div class="tool-card">
+        <h2>💡 Claude AI</h2>
+        <p>Exceptional at writing long, clean, and logical code blocks.</p>
+        <a href="https://claude.ai/" target="_blank">Visit Website</a>
+      </div>
+
+      <div class="tool-card">
+        <h2>🚀 Phind</h2>
+        <p>A search engine specifically optimized for developers.</p>
+        <a href="https://www.phind.com/" target="_blank">Visit Website</a>
+      </div>
+
+      <div class="tool-card">
+        <h2>🧠 Blackbox AI</h2>
+        <p>Fastest AI for code generation and autocomplete.</p>
+        <a href="https://www.blackbox.ai/" target="_blank">Visit Website</a>
+      </div>
+
+      <div class="tool-card">
+        <h2>✨ Google Gemini</h2>
+        <p>Google's LLM with a massive context window for large files.</p>
+        <a href="https://gemini.google.com/" target="_blank">Visit Website</a>
+      </div>
     </div>
-    
-    <div class="tool-card">
-  <h2>📊 Google Analytics</h2>
-  <p>Track website visitors, traffic sources, and user behavior in real time.</p>
-  <a href="https://analytics.google.com/" target="_blank" rel="noopener">Visit Website</a>
-</div>
 
-<div class="tool-card">
-  <h2>🔍 Google Search Console</h2>
-  <p>Monitor your website performance on Google Search and fix indexing issues.</p>
-  <a href="https://search.google.com/search-console/" target="_blank" rel="noopener">Visit Website</a>
-</div>
-    
-    
-  <div class="tool-card">
-      <h2>🛠️ Tools</h2>
-      <p>All tools available on INFINITYMind Download Section Go Check out ✅ Tools🛠️</p>
-      <a href="Download.html" target="_blank">Visit Section</a> 
-    </div>  
+    <div style="text-align: center; margin: 60px 0;">
+      <button class="changelog-btn" onclick="window.location.href='developer-tutorials.html'">
+        📖 View Developer Tutorials
+      </button>
+    </div>
 
-    <h2 class="section-title">🤖 AI Tools</h2>
-    
-    <div class="tool-card">
-  <h2>🤖 ChatGPT</h2>
-  <p>AI assistant for coding help, debugging and learning programming concepts.</p>
-  <a href="https://chat.openai.com/" target="_blank">Visit Website</a>
-</div>
+  </div> <script>
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      sidebar.classList.toggle("show");
+    }
+  </script>
 
-<div class="tool-card">
-  <h2>🧠 GitHub Copilot</h2>
-  <p>AI pair programmer that suggests code in real time inside your editor.</p>
-  <a href="https://github.com/features/copilot" target="_blank">Visit Website</a>
-</div>
-
-<div class="tool-card">
-  <h2>✨ Google Gemini</h2>
-  <p>Google’s AI assistant for coding support and research tasks.</p>
-  <a href="https://gemini.google.com/" target="_blank">Visit Website</a>
-</div>
-
-<div class="tool-card">
-  <h2>💡 Claude AI</h2>
-  <p>Advanced AI assistant for detailed explanations and documentation help.</p>
-  <a href="https://claude.ai/" target="_blank">Visit Website</a>
-</div>
-
-    <div class="tool-card">
-  <h2>🧠 Cursor AI</h2>
-  <p>AI-powered code editor built for faster development with smart code generation and editing.</p>
-  <a href="https://cursor.sh/" target="_blank">Visit Website</a>
-</div>
-    
-<div class="tool-card">
-  <h2>⚡ Windsurf (Codeium)</h2>
-  <p>Free AI coding assistant providing smart code suggestions.</p>
-  <a href="https://codeium.com/" target="_blank">Visit Website</a>
-</div>
-
-<div class="tool-card">
-  <h2>🚀 Tabnine</h2>
-  <p>AI-powered code completion tool to increase development speed.</p>
-  <a href="https://www.tabnine.com/" target="_blank">Visit Website</a>
-</div>
-
-<div class="tool-card">
-  <h2>🌐 Replit AI</h2>
-  <p>Online coding platform with built-in AI assistant for faster development.</p>
-  <a href="https://replit.com/" target="_blank">Visit Website</a>
-</div>
-    
-     <button class="changelog-btn" onclick="window.location.href='developer-tutorials.html'">
-  📖 View Developer Tutorial </button>
-    
-    
-    
-    
-    
-    </main>
-    
 </body>
+
+
+
+
+
 </html>
 
 

@@ -1,51 +1,23 @@
- /* RESET */
-html, body {
+/* ---------------- 1. RESET & BASE ---------------- */
+* {
   margin: 0;
   padding: 0;
-  height: 100%;
-  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+}
+
+body {
   background-color: #0b0f1a;
   color: #f1f5f9;
-  
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
 }
 
-/* ---------------- FULLSCREEN VIDEO ---------------- */
-.fullscreen-video {
-  position: fixed;
-  inset: 0;
-  background: black;
-  z-index: 99999; /* ABOVE SIDEBAR */
-}
-
-.fullscreen-video video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* ---------------- IMAGE AFTER VIDEO ---------------- */
-.after-video {
-  display: none;              /* hidden initially */
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.after-video img {
-  width: 340px;
-  height: 200px;
-  border-radius: 12px;
-  position: relative;
-  left: 5px;
-}
-
-/* ---------------- SIDEBAR ---------------- */
+/* ---------------- 2. SIDEBAR ---------------- */
 .sidebar {
   font-family: 'Cinzel', serif;
-  width: 210px;
+  width: 240px;
   background: #0f0f1a;
-  border-right: 2px solid #eee;
+  border-right: 1px solid rgba(168, 85, 247, 0.2);
   height: 100vh;
   position: fixed;
   left: 0;
@@ -56,14 +28,11 @@ html, body {
 }
 
 .logo {
-  font-family: 'Cinzel', serif;
-  position: relative;
-  top: -20px;
-  left: 13px;
-  color: #FFFFFF;
+  color: #a855f7;
   text-align: center;
   margin-bottom: 30px;
   font-weight: bold;
+  font-size: 24px;
 }
 
 .sidebar nav a {
@@ -71,33 +40,92 @@ html, body {
   padding: 12px;
   margin-bottom: 10px;
   text-decoration: none;
-  color: #444;
+  color: #94a3b8;
   border-radius: 8px;
+  transition: 0.3s;
 }
 
 .sidebar nav a:hover {
-  background: #f2e9ff;
-  color: #6a0dad;
+  background: rgba(168, 85, 247, 0.1);
+  color: #a855f7;
+  padding-left: 18px;
 }
 
 .sidebar nav a.active {
-  background: #6a0dad;
-  color: white;
+  background: linear-gradient(45deg, #7b2ff7, #9f44d3);
+  color: white !important;
+  box-shadow: 0 4px 15px rgba(123, 47, 247, 0.3);
 }
 
-/* ---------------- CONTENT ---------------- */
+.sidebar .b {
+  position: absolute;
+  bottom: 20px;
+  width: calc(100% - 40px);
+}
+
+/* ---------------- 3. CONTENT WRAPPER ---------------- */
 .content-wrapper {
-  margin-left: 220px;
-  padding: 20px;
+  margin-left: 240px;
+  padding: 40px 20px;
 }
 
-h1 {
-  position: relative;
-   top: -365px;
+/* ---------------- 4. MODERN NEON CARDS & IMAGE FIX ---------------- */
+.tools-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  padding: 20px 0;
+}
+
+.tool-card {
+  background: #161b2e;
+  width: 300px;
+  padding: 20px; /* Padding thoda kam kiya taaki image ko jagah mile */
+  border-radius: 18px;
+  border: 1px solid rgba(168, 85, 247, 0.15);
+  transition: 0.4s ease;
   text-align: center;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* ---------------- MOBILE MENU BUTTON ---------------- */
+.tool-card:hover {
+  transform: translateY(-10px);
+  border-color: #a855f7;
+  box-shadow: 0 0 25px rgba(168, 85, 247, 0.4);
+}
+
+/* 🔥 IMAGE FIX: Ab image poori dikhegi aur kategi nahi */
+.tool-card img {
+  width: 100%;
+  height: auto;           /* Fixed height hata di */
+  max-height: 250px;      /* Card zyada lamba na ho isliye limit lagayi */
+  object-fit: contain;    /* Image ko box ke andar poora fit karega */
+  border-radius: 12px;
+  margin-bottom: 15px;
+  background: rgba(0, 0, 0, 0.1); /* Halka background agar image transparent ho */
+}
+
+.tool-card h3 {
+  color: #f1f5f9;
+  margin-bottom: 10px;
+}
+
+.tool-card p {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.tool-card a {
+  display: inline-block;
+  margin-top: 15px;
+  color: #a855f7;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* ---------------- 5. MOBILE RESPONSIVE ---------------- */
 .menu-btn {
   display: none;
   position: fixed;
@@ -105,134 +133,19 @@ h1 {
   left: 15px;
   width: 48px;
   height: 48px;
-  background: #6a0dad;
+  background: #7b2ff7;
   color: white;
   border: none;
+  border-radius: 8px;
+  z-index: 1100;
   font-size: 22px;
-  border-radius: 6px;
-  z-index: 1001;
+  cursor: pointer;
 }
 
-/* ---------------- MOBILE RESPONSIVE ---------------- */
 @media (max-width: 768px) {
-
-  .sidebar {
-    transform: translateX(-100%);
-  }
-
-  .sidebar.show {
-    transform: translateX(0);
-  }
-
-  .content-wrapper {
-    margin-left: 0;
-    padding-top: 80px;
-  }
-
-  .menu-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.show { transform: translateX(0); }
+  .content-wrapper { margin-left: 0; padding-top: 70px; }
+  .menu-btn { display: flex; align-items: center; justify-content: center; }
+  .tool-card { width: 95%; }
 }
-
-ul{
-  position: relative;
-  top: -370px;
-  
-}
-
-h2{
-  position: relative;
-  top: -380px;
-  text-align: center;
-  
-}
-
-.Ui{ 
-  height: 260px;
-  width: 330px;
-  position: relative;
-  top: -380px;
-  left: 10px;
-}
-
-.Uii{ 
-  height: 260px;
-  width: 330px;
-  position: relative;
-  top: -390px;
-  left: 10px;
-  
-}
-
-.Uiii{ 
-  height: 350px;
-  width: 330px;
-  position: relative;
-  top: -360px;
-  left: 10px;
-  
-}
-
-.Uiiii{ 
-  height: 350px;
-  width: 330px;
-  position: relative;
-  top: -350px;
-  left: 10px;
-  
-}
-
-.Uiiiii{ 
-  height: 350px;
-  width: 330px;
-  position: relative;
-  top: -340px;
-  left: 10px;
-  
-}
-
-.U{
-  position: relative;
-  top: -350px;
-  text-align: center;
-  font-size: 26px;
-}
-
-.Uiiiiii{ 
-  height: 350px;
-  width: 330px;
-  position: relative;
-  top: -360px;
-  left: 10px;
-  
-}
-
-.active {
-  background: linear-gradient(45deg, #7b2ff7, #9f44d3);
-  color: white;
-  border-radius: 12px;
-  
-}
-
-
-.b{
-  position: fixed;
-  top: 600px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

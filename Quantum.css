@@ -1,42 +1,39 @@
-body{
-  background-color: cornsilk;
+/* ===== 1. GLOBAL SETTINGS ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-img{
-  width:350px;
-  height: 200px;
-  border-radius: 40px;
+body {
+  background-color: #0f0f1a; /* Pure Dark Theme */
+  color: white;
+  font-family: 'Arial', sans-serif;
+  overflow-x: hidden;
 }
 
-h2,h1{
-  text-align: center;
-}
-
-
-/* Sidebar */
+/* ===== 2. SIDEBAR (Fixed & Professional) ===== */
 .sidebar {
   font-family: 'Cinzel', serif;
-  width: 210px;
+  width: 240px;
   background: #0f0f1a;
-  border-right: 2px solid #eee;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
   height: 100vh;
   position: fixed;
   left: 0;
   top: 0;
   padding: 20px;
   transition: transform 0.3s ease;
-  z-index: 999;
+  z-index: 1000;
 }
 
 .logo {
-  font-family: 'Cinzel', serif;
-  position: relative;
-  top: -20px;
-  left: 13px;
   color: #FFFFFF;
   text-align: center;
   margin-bottom: 30px;
   font-weight: bold;
+  font-size: 22px;
+  letter-spacing: 2px;
 }
 
 .sidebar nav a {
@@ -44,42 +41,143 @@ h2,h1{
   padding: 12px;
   margin-bottom: 10px;
   text-decoration: none;
-  color: #444;
+  color: #bbb;
   border-radius: 8px;
+  transition: 0.3s;
 }
 
 .sidebar nav a:hover {
-  background: #f2e9ff;
-  color: #6a0dad;
+  background: rgba(168, 85, 247, 0.1);
+  color: #a855f7;
+  padding-left: 15px;
 }
 
 .sidebar nav a.active {
-  background: #6a0dad;
-  color: white;
+  background: linear-gradient(45deg, #7b2ff7, #9f44d3) !important;
+  color: white !important;
+  box-shadow: 0 4px 15px rgba(123, 47, 247, 0.4);
 }
 
-/* Content spacing (NO style change) */
+.sidebar .b {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: calc(100% - 40px);
+}
+
+/* ===== 3. CONTENT WRAPPER ===== */
 .content-wrapper {
-  margin-left: 260px;
-  padding: 10px;
+  margin-left: 240px; /* Sidebar space fix */
+  padding: 40px 20px;
+  transition: margin 0.3s ease;
 }
 
-/* Mobile menu button */
-.menu-btn {
-  display: none;
-  position: fixed;
-  top: 15px;
-  left: 15px;
+.page-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.page-header h1 {
+  font-size: 2.5rem;
+  color: #a855f7;
+  text-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
+}
+
+.page-header p {
+  opacity: 0.8;
+  margin-top: 10px;
+}
+
+/* ===== 4. TOOLS & QUANTUM GRID (Match Screenshot 1) ===== */
+.tools-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  padding: 20px;
+}
+
+.tool-card, .qc-card {
+  background: #1a1a2e; /* Dark Card Base */
+  width: 280px;
+  padding: 25px;
+  border-radius: 15px;
+  border: 1px solid rgba(168, 85, 247, 0.1);
+  transition: 0.4s ease;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.tool-card:hover, .qc-card:hover {
+  transform: translateY(-10px);
+  border-color: #a855f7;
+  box-shadow: 0 0 25px rgba(168, 85, 247, 0.4); /* Neon Glow effect */
+}
+
+.tool-card h2, .qc-card h3 {
+  color: #a855f7;
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+}
+
+.tool-card p, .qc-card p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #ccc;
+}
+
+.tool-card img, .qc-card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.tool-card a {
+  display: inline-block;
+  margin-top: 15px;
+  color: #a855f7;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.tool-card a:hover {
+  text-decoration: underline;
+}
+
+/* ===== 5. BUTTONS ===== */
+.changelog-btn {
   background: #6a0dad;
   color: white;
   border: none;
-  padding: 10px 14px;
-  font-size: 20px;
-  border-radius: 6px;
-  z-index: 1000;
+  padding: 12px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
 }
 
-/* Mobile Responsive */
+.changelog-btn:hover {
+  background: #7b2ff7;
+  box-shadow: 0 0 15px #7c3aed;
+}
+
+/* ===== 6. MOBILE RESPONSIVE FIX ===== */
+.menu-btn {
+  display: none; /* Desktop hidden */
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  width: 48px;
+  height: 48px;
+  background: #6a0dad;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  z-index: 1100;
+  font-size: 22px;
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
   .sidebar {
     transform: translateX(-100%);
@@ -90,108 +188,17 @@ h2,h1{
   }
 
   .content-wrapper {
-    margin-left: 0;
-    padding-top: 60px;
+    margin-left: 0; /* Full width for mobile */
+    padding-top: 80px;
   }
 
   .menu-btn {
-    display: block;
-  }
-}
-
-/* FIX MOBILE MENU BUTTON */
-.menu-btn {
-  width: 48px !important;
-  height: 48px !important;
-  padding: 0 !important;
-  border-radius: 4px !important;
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .menu-btn {
-    display: flex !important;
+    display: flex;
     align-items: center;
     justify-content: center;
-    background: #6a0dad;
-    color: white;
-    border: none;
-    font-size: 22px;
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    z-index: 1000;
+  }
+
+  .tool-card, .qc-card {
+    width: 90%;
   }
 }
-
-
-
-.section-heading {
-  text-align: center;
-  font-size: 28px;
-  color: ;
-  margin: 25px 0;
-}
-
-.qc-container {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  padding: 10px;
-}
-
-.qc-card {
-  background: #f3e8ff;
-  border-radius: 18px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(90, 24, 154, 0.15);
-}
-
-.qc-card img {
-  height: 250px;
-  width: 270px;
-  margin-bottom: 12px;
-}
-
-.qc-card h3 {
-  color: #3c096c;
-  font-size: 20px;
-  margin-bottom: 8px;
-}
-
-.qc-card p {
-  font-size: 15px;
-  color: #333;
-  line-height: 1.6;
-}
-
-/* Mobile Friendly */
-@media (max-width: 768px) {
-  .qc-card {
-    margin: 0 10px;
-  }
-}
-
-.active {
-  background: linear-gradient(45deg, #7b2ff7, #9f44d3);
-  color: white;
-  border-radius: 12px;
-  
-  
-}
-
-.b{
-  position: fixed;
-  top: 600px;
-}
-
-
-
-
-
-
-
-
-
-

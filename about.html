@@ -109,85 +109,68 @@
 
 <body>
   
-<!-- Mobile Toggle Button -->
-<button class="menu-btn" onclick="toggleSidebar()">☰</button>
+  <button class="menu-btn" onclick="toggleSidebar()">☰</button>
 
-<!-- Sidebar -->
-<aside class="sidebar" id="sidebar">
-  <h2 class="logo">INFINITY</h2>
-  <nav>
-    <a href="index.html">Home 🌐</a> 
-    <a href="Computer.html" >Computer Basic 💻</a>
-    <a href="Course.html">Programming 🛰️</a>
-    <a href="devlog.html">Developer Tools 🛠️</a>
-    <a class="F"href="Quantum.html">Quantum Computing ⚛️</a>
-    <a href="Download.html">Downloads 📥</a>
-    <a href="feedback.html">Feedback 📬</a>
-    <a href="faq.html">FAQ❓</a>
-    <a href="contact.html">Contact ✉️</a>
-    <a href="about.html"class="active">About INFINITY 🧠</a>
-    
-  </nav>
-</aside>
+  <aside class="sidebar" id="sidebar">
+    <h2 class="logo">INFINITY</h2>
+    <nav>
+      <a href="index.html">Home 🌐</a> 
+      <a href="Computer.html">Computer Basic 💻</a>
+      <a href="Course.html">Programming 🛰️</a>
+      <a href="devlog.html">Developer Tools 🛠️</a>
+      <a class="F" href="Quantum.html">Quantum Computing ⚛️</a>
+      <a href="Download.html">Downloads 📥</a>
+      <a href="feedback.html">Feedback 📬</a>
+      <a href="faq.html">FAQ❓</a>
+      <a href="contact.html">Contact ✉️</a>
+      <a href="about.html" class="active">About INFINITY 🧠</a>
+    </nav>
+  </aside>
 
-<!-- Content Wrapper -->
-<div class="content-wrapper">
-  
-  </div>
-  
-<section class="about-infinity">
-  <h2>About InfinityMinds</h2>
+  <div class="content-wrapper">
+    <section class="about-infinity">
+      <h2>About INFINITY Minds</h2>
+      <p>INFINITY Minds is a simple platform built to help beginners learn Computer Science and Programming easily.</p>
 
-  <p>
-    InfinityMind is a learning platform built step by step to help beginners
-    understand Computer Science/Programming languages in a simple way.
-  </p>
-
-  <div class="version-box">
+        <div class="version-box">
     <h3>Current Version</h3>
     <p id="version-number"></p>
     <p id="last-updated"></p>
   </div>
 
-  <div class="mission">
-    <h3>Mission</h3>
-    <p>
-      To make coding simple and accessible for students.
-    </p>
+      <div class="founder-card">
+        <h3 class="section-title">The Founder</h3>
+        <div class="founder-details">
+          <p><strong>Name:</strong> Pankaj Panwar</p>
+          <p><strong>Role:</strong> Founder & Developer</p>
+          <p>Pankaj is a 16-year-old student (Class 10) from Uttarakhand. He loves building tools that help people focus.</p>
+          
+          <div class="quick-stats-grid">
+            <div class="stat-item">📍 Uttarakhand</div>
+            <div class="stat-item">🎓 Class 10 Student</div>
+            <div class="stat-item">🛡️ Focus: Anti-Distraction</div>
+          </div>
+        </div>
+      </div>
+
+      <button class="changelog-btn" onclick="window.location.href='changelog.html'" style="width:100%; margin-top:20px; padding:12px; background:#6a0dad; color:white; border:none; border-radius:10px; cursor:pointer;">
+        📜 View Version History
+      </button>
+
+      <div class="social-section" style="margin-top:30px;">
+        <p>Follow my journey on Instagram:</p>
+        <a href="https://instagram.com/infinitymind.tech" target="_blank" style="display:inline-block; margin-top:10px; padding:10px 20px; background:linear-gradient(45deg, #f09433, #bc1888); color:white; text-decoration:none; border-radius:10px;">
+          🔗 Instagram
+        </a>
+      </div>
+    </section>
   </div>
-  
-  <div class="mission">
-  <h3>Team INFINITYMinds</h3>
 
- <p><strong>— Pankaj Panwar, Founder of INFINITYMinds</strong></p>
-  <p><strong>— Shivin Gusain, Technical Advisor & QA Tester</strong></p>
-  
-</div>
-  
-  <button class="changelog-btn" onclick="window.location.href='changelog.html'">
-  📜 View Version History
-</button>
-
-  <div class="social-section">
-  <h3>📲 Connect With Me</h3>
-  <p>Follow me on Instagram for updates, projects and development journey.</p>
-  
-  <a href="https://instagram.com/infinitymind.tech" target="_blank" class="insta-link">
-    🔗 Follow on Instagram
-  </a>
-</div>
-  
- 
-  
-  
-  
-  
-  
-  
-</section>
-
+  <script>
+    function toggleSidebar() {
+      document.getElementById('sidebar').classList.toggle('show');
+    }
+  </script>
 </body>
-</html>
-
 
 

@@ -1,154 +1,99 @@
+/* ALL-IN-ONE CSS FOR INFINITY MIND */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+body { background: #0f0f1a; color: white; overflow-x: hidden; }
 
-body{
-  background-color: cornsilk;
-  
-}
-
-ul{
-  text-align: start;
-}
-
-.hg{
-  text-align: center;
-}
- 
-img{
-  width:350px;
-  height: 200px;
-  border-radius: 40px;
-}
-
-.container {
-    text-align: center;
-  }
-
-/* Sidebar */
+/* Sidebar Fixed - Width & Box Sizing Fix */
 .sidebar {
-  font-family: 'Cinzel', serif;
-  width: 210pxpx;
-  background: #0f0f1a;
-  border-right: 2px solid #eee;
-  height: 100vh;
-  position: fixed;
-  left: 0;
-  top: 0;
-  padding: 20px;
-  transition: transform 0.3s ease;
-  z-index: 999;
+  width: 260px; /* Slightly wider for better text fit */
+  background: #0f0f1a; 
+  border-right: 1px solid rgba(255,255,255,0.1); /* Soft border */
+  height: 100vh; 
+  position: fixed; 
+  left: 0; 
+  top: 0; 
+  padding: 20px; 
+  z-index: 999; 
+  transition: 0.3s;
+  display: flex;
+  flex-direction: column;
 }
 
-.logo {
-  font-family: 'Cinzel', serif;
-  position: relative;
-  top: -20px;
-  left: 13px;
-  color: #FFFFFF;
-  text-align: center;
-  margin-bottom: 30px;
-  font-weight: bold;
+.sidebar a { 
+  display: block; 
+  padding: 12px; 
+  color: #bbb; 
+  text-decoration: none; 
+  border-radius: 8px; 
+  margin-bottom: 5px; 
+  white-space: nowrap; /* Text wrap na ho */
 }
 
-.sidebar nav a {
-  display: block;
-  padding: 12px;
-  margin-bottom: 10px;
-  text-decoration: none;
-  color: #444;
-  border-radius: 8px;
+.sidebar a.active, .sidebar a:hover { 
+  background: linear-gradient(45deg, #7b2ff7, #9f44d3); 
+  color: white; 
 }
 
-.sidebar nav a:hover {
-  background: #f2e9ff;
-  color: #6a0dad;
+/* Content Wrapper Adjustment */
+.content-wrapper { 
+  margin-left: 260px; /* Sidebar width ke barabar */
+  padding: 40px 20px; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
 }
 
-.sidebar nav a.active {
-  background: #6a0dad;
-  color: white;
-}
-
-/* Content spacing (NO style change) */
-.content-wrapper {
-  margin-left: 260px;
-  padding: 10px;
-}
-
-/* Mobile menu button */
-.menu-btn {
-  display: none;
-  position: fixed;
-  top: 15px;
-  left: 15px;
-  background: #6a0dad;
-  color: white;
-  border: none;
-  padding: 10px 14px;
+/* Mobile Menu Button - SIZE & ALIGNMENT FIX */
+.menu-btn { 
+  display: none; 
+  position: fixed; 
+  top: 15px; 
+  left: 15px; 
+  z-index: 1000; 
+  background: #6a0dad; 
+  color: white; 
+  border: none; 
+  /* Fixed square size */
+  width: 42px; 
+  height: 42px; 
+  border-radius: 8px; 
+  cursor: pointer; 
   font-size: 20px;
-  border-radius: 6px;
-  z-index: 1000;
+  /* Center the icon */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 
-/* Mobile Responsive */
+/* Responsive Fixes */
 @media (max-width: 768px) {
-  .sidebar {
-    transform: translateX(-100%);
+  .sidebar { 
+    width: 260px;
+    transform: translateX(-100%); 
+    padding-top: 70px; /* Space for the button */
   }
-
-  .sidebar.show {
-    transform: translateX(0);
+  .sidebar.show { transform: translateX(0); }
+  .content-wrapper { 
+    margin-left: 0; 
+    padding-top: 80px; 
+    width: 100%;
   }
-
-  .content-wrapper {
-    margin-left: 0;
-    padding-top: 60px;
-  }
-
-  .menu-btn {
-    display: block;
-  }
+  .menu-btn { display: flex; } /* Display flex for centering */
 }
 
-/* FIX MOBILE MENU BUTTON */
-.menu-btn {
-  width: 48px !important;
-  height: 48px !important;
-  padding: 0 !important;
-  border-radius: 4px !important;
-  display: none;
+/* Cards & Other Styles (No changes to design) */
+.main-card {
+  width: 100%; max-width: 800px; background: #14142b; padding: 30px; 
+  border-radius: 20px; box-shadow: 0 0 30px rgba(168, 85, 247, 0.15); margin-bottom: 30px;
 }
+.main-img { width: 100%; max-width: 800px; border-radius: 15px; margin-bottom: 20px; object-fit: cover; }
+.course-list { list-style: none; text-align: left; }
+.course-list li { padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.course-list a { color: #c084fc; text-decoration: none; font-weight: bold; }
+.course-list span { color: #777; font-size: 12px; margin-left: 10px; }
+.note { color: #aaa; font-size: 14px; margin-top: 10px; font-style: italic; }
+.watch-btn { background: #1a1a2e; padding: 15px; border-radius: 10px; cursor: pointer; text-align: left; }
+summary { font-weight: bold; color: #a855f7; }
 
-@media (max-width: 768px) {
-  .menu-btn {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    background: #6a0dad;
-    color: white;
-    border: none;
-    font-size: 22px;
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    z-index: 1000;
-  }
-}
 
-.active {
-  background: linear-gradient(45deg, #7b2ff7, #9f44d3);
-  color: white;
-  border-radius: 12px;
   
-}
-
-
-
-.b{
-  position: fixed;
-  top: 600px;
-}
-
-
-
-
-
-

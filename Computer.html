@@ -58,77 +58,95 @@
 }
 </script>
   
-</head>
+</head><body>
 
-<body>
+  <button class="menu-btn" onclick="toggleSidebar()">☰</button>
 
-<button class="menu-btn" onclick="toggleSidebar()">☰</button>
+  <aside class="sidebar" id="sidebar">
+    <h2 class="logo">INFINITY</h2>
+    <nav>
+      <a href="index.html">Home 🌐</a> 
+      <a href="Computer.html" class="active">Computer Basics 💻</a>
+      <a href="Course.html">Programming 🛰️</a>
+      <a href="devlog.html">Developer Tools 🛠️</a>
+      <a href="Quantum.html">Quantum Computing ⚛️</a>
+      <a href="Download.html">Downloads 📥</a>
+      <a href="feedback.html">Feedback 📬</a>
+      <a href="faq.html">FAQ❓</a>
+      <a href="contact.html">Contact ✉️</a>
+      <a href="about.html" class="b">About INFINITY 🧠</a>
+    </nav>
+  </aside>
 
-<aside class="sidebar" id="sidebar">
-  <h2 class="logo">INFINITY</h2>
-  <nav>
-    <a href="index.html">Home 🌐</a> 
-    <a href="Computer.html" class="active">Computer Basics 💻</a>
-    <a href="Course.html">Programming 🛰️</a>
-    <a href="devlog.html">Developer Tools 🛠️</a>
-    <a href="Quantum.html">Quantum Computing ⚛️</a>
-    <a href="Download.html">Downloads 📥</a>
-    <a href="feedback.html">Feedback 📬</a>
-    <a href="faq.html">FAQ❓</a>
-    <a href="contact.html">Contact ✉️</a>
-    <a href="about.html" class="b">About INFINITY 🧠</a>
-  </nav>
-</aside>
+  <div class="content-wrapper">
+    
+    
 
-<main>
+    <header class="page-header" id="afterVideo">
+      <img src="Computer.jpg" alt="Computer Overview" style="max-width: 600px; width: 100%; border-radius: 20px; box-shadow: 0 0 20px rgba(168, 85, 247, 0.4); margin-bottom: 20px;">
+      <h1>💻 Computer Basics</h1>
+      <p>Master the fundamentals of Hardware, Software, and OS</p>
+    </header>
 
-<div class="content-wrapper"></div>
+    <h2 style="color: #a855f7; text-align: center; margin-bottom: 20px;">📺 Tutorial Playlist</h2>
+    <div class="tools-grid" style="margin-bottom: 50px;">
+      <div class="tool-card" style="width: 200px; padding: 15px; text-align: center;">
+        <p style="font-size: 14px;">What is Computer?</p>
+        <a href="https://youtu.be/Cu3R5it4cQs" target="_blank">Watch Now 📺</a>
+      </div>
+      <div class="tool-card" style="width: 200px; padding: 15px; text-align: center;">
+        <p style="font-size: 14px;">What is OS?</p>
+        <a href="https://youtu.be/PU9O3shK4wc" target="_blank">Watch Now 📺</a>
+      </div>
+      <div class="tool-card" style="width: 200px; padding: 15px; text-align: center;">
+        <p style="font-size: 14px;">CPU vs GPU</p>
+        <a href="https://youtu.be/UnVrtDzwaeI" target="_blank">Watch Now 📺</a>
+      </div>
+      <div class="tool-card" style="width: 200px; padding: 15px; text-align: center;">
+        <p style="font-size: 14px;">Hardware/Software</p>
+        <a href="https://youtu.be/vG_qmtdBPTU" target="_blank">Watch Now 📺</a>
+      </div>
+    </div>
 
-<div class="fullscreen-video" id="videoContainer">
-  <video id="myVideo"
-         src="AI.mp4"
-         autoplay
-         muted
-         playsinline>
-  </video>
-</div>
+    <h1 class="section-heading" style="color: #a855f7; margin-bottom: 40px;">📸 Visual Learning</h1>
+    
+    <div class="tools-grid">
+      <div class="tool-card">
+        <img src="Computers Pictures.jpg" alt="Types of Computers">
+        <h3>Types of Computers</h3>
+        <p>From Supercomputers to Microcomputers, understand every category.</p>
+      </div>
 
-<div id="afterVideo" class="after-video">
-  <img src="Computer.jpg" alt="Computer hardware and software overview image">
-</div>
+      <div class="tool-card">
+        <img src="Parts.jpg" alt="Parts of Computer">
+        <h3>Internal Parts</h3>
+        <p>Deep dive into Motherboard, RAM, and Storage components.</p>
+      </div>
 
-<script src="AI.js"></script>
+      <div class="tool-card">
+        <img src="Virus.jpg" alt="Computer Virus">
+        <h3>Cyber Security</h3>
+        <p>Learn how viruses affect your system and how to stay safe.</p>
+      </div>
 
-<h1>Computer Basics</h1>
+      <div class="tool-card">
+        <img src="Notes.jpg" alt="Notes">
+        <h3>Quick Revision</h3>
+        <p>Short handwritten notes for your upcoming exams.</p>
+      </div>
 
-<ul>
-  <li><a href="https://youtu.be/Cu3R5it4cQs?si=CiiePjFybEn7L0g5">What is Computer</a> <<< Click</li>
-  <li><a href="https://youtu.be/PU9O3shK4wc?si=xJx-QXedHhZszyWQ">What is OS</a> <<< Click</li>
-  <li><a href="https://youtu.be/UnVrtDzwaeI?si=ljwTNGHg4O0JLzRl">What is GPU and CPU</a> <<< Click</li>
-  <li><a href="https://youtu.be/e_Mhgi0jMzU?si=YsEB6LPINVHlQxs2">Types of Computers</a> <<< Click</li>
-  <li><a href="https://youtu.be/r2YvFsdYpd8?si=ekxC-N_J_FPIK_Wp">What is Virus</a> <<< Click</li>
-  <li><a href="https://youtu.be/vG_qmtdBPTU?si=aoWkLaM5hzniXUy4">What is Hardware and Software</a> <<< Click</li>
-</ul>
+      <div class="tool-card">
+        <img src="Easy.jpg" alt="Definition">
+        <h3>Simple Definition</h3>
+        <p>The easiest way to define a computer for beginners.</p>
+      </div>
+    </div>
 
-<h2>Understanding with images</h2>
-
-<img class="Uii" src="Computers Pictures.jpg" alt="Different types of computers" loading="lazy">
-<img class="Ui" src="Parts.jpg" alt="Parts of a computer diagram" loading="lazy">
-<img class="Uiii" src="Virus.jpg" alt="Computer virus illustration" loading="lazy">
-<img class="Uiiii" src="Virus 2.jpg" alt="Malware example image" loading="lazy">
-<img class="Uiiiii" src="Notes.jpg" alt="Computer basics handwritten notes" loading="lazy">
-
-<h2 class="U">Easy and Simple Definition</h2>
-
-<img class="Uiiiiii" src="Easy.jpg" alt="Simple computer definition chart" loading="lazy">
-
-</main>
-
-<script>
-function toggleSidebar() {
-  document.getElementById("sidebar").classList.toggle("show");
-}
-</script>
-
+  </div> <script>
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("show");
+    }
+  </script>
 </body>
+
 </html>

@@ -1,0 +1,48 @@
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+body { background: #0b0b14; color: white; overflow-x: hidden; }
+
+/* Sidebar */
+.sidebar {
+  width: 250px; background: #0f0f1a; height: 100vh; position: fixed; 
+  left: 0; top: 0; padding: 20px; z-index: 1000; border-right: 1px solid #1e1e2e; transition: 0.3s;
+}
+.sidebar h2 { color: #a855f7; margin-bottom: 30px; letter-spacing: 1px; }
+.sidebar a { display: block; padding: 12px; color: #888; text-decoration: none; border-radius: 8px; margin-bottom: 8px; transition: 0.3s; }
+.sidebar a:hover, .sidebar a.active { background: #7b2ff7; color: white; box-shadow: 0 4px 15px rgba(123, 47, 247, 0.4); }
+
+/* Content Wrapper */
+.content-wrapper { margin-left: 250px; padding: 40px; transition: 0.3s; display: flex; flex-direction: column; align-items: center; }
+
+/* Cards */
+.main-card { 
+  width: 100%; max-width: 900px; background: #14142b; padding: 30px; 
+  border-radius: 20px; margin-bottom: 30px; border: 1px solid #1e1e2e;
+}
+.main-img { width: 100%; max-width: 900px; border-radius: 15px; margin-bottom: 25px; }
+.hg { font-size: 24px; color: #c084fc; margin-bottom: 20px; border-left: 4px solid #7b2ff7; padding-left: 15px; }
+
+/* Download Grid */
+.download-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; }
+.resource-item {
+  display: flex; align-items: center; background: #1c1c3d; padding: 15px; 
+  border-radius: 12px; border: 1px solid #2a2a4a; transition: 0.3s;
+}
+.resource-item:hover { transform: translateY(-3px); border-color: #7b2ff7; }
+.resource-item img { width: 45px; height: 45px; border-radius: 8px; margin-right: 15px; }
+.resource-item span { flex: 1; font-weight: 500; }
+.download-btn { background: #7b2ff7; color: white; text-decoration: none; padding: 8px 12px; border-radius: 6px; font-size: 13px; font-weight: bold; }
+
+/* Apps Hub */
+.app-card-container { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; }
+.app-card { background: #1c1c3d; width: 300px; padding: 25px; border-radius: 20px; text-align: center; border: 1px solid #2a2a4a; }
+.app-card img { width: 80px; margin-bottom: 15px; }
+.app-download { display: block; margin-top: 15px; background: linear-gradient(45deg, #7b2ff7, #9f44d3); color: white; padding: 12px; border-radius: 10px; text-decoration: none; font-weight: bold; }
+
+/* Mobile */
+@media (max-width: 768px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.show { transform: translateX(0); }
+  .content-wrapper { margin-left: 0; padding: 20px; padding-top: 80px; }
+  .menu-btn { display: block !important; }
+}
+.menu-btn { display: none; position: fixed; top: 15px; left: 15px; z-index: 1100; background: #7b2ff7; color: white; border: none; padding: 10px 15px; border-radius: 8px; font-size: 20px; }
