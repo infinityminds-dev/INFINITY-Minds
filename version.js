@@ -1,8 +1,30 @@
 /* ---------------------------------------------------
-    INFINITY MINDS - MASTER VERSION CONTROL (v2.8.0)
+    INFINITY MINDS - MASTER VERSION CONTROL (v2.10.1)
 ----------------------------------------------------- */
 
 const changelogData = [
+  {
+    version: "2.10.1",
+    date: "April 1, 2026",
+    title: "🔐 The Authentication Era",
+    added: [
+      "Google Firebase Authentication (Secure Login 🛡️)",
+      "New 'index.html' Login Gateway with Glassmorphism UI",
+      "Dynamic User Personalization (Welcome, [User Name]! 👋)",
+      "Real-time Leaderboard integration with Firestore"
+    ],
+    improved: [
+      "Multi-page navigation flow (Login -> Home -> Quiz)",
+      "Persistent XP & Level tracking via LocalStorage",
+      "Redirect logic for game-over and unauthorized access"
+    ],
+    fixed: [
+      "Unauthorized login bypass bug",
+      "XP sync lag between Dashboard and Quiz pages",
+      "Mobile button alignment on Login screen"
+    ]
+  },
+
   {
     version: "2.9.1",
     date: "March 27, 2026",
@@ -88,6 +110,17 @@ document.addEventListener("DOMContentLoaded", () => {
   if(verBox) verBox.textContent = "v" + latest.version;
   if(dateBox) dateBox.textContent = "Last Updated: " + latest.date;
 });
+
+ // Sidebar Logic 
+
 function toggleSidebar() {
       document.getElementById("sidebar").classList.toggle("show");
     }
+
+
+
+
+
+
+
+

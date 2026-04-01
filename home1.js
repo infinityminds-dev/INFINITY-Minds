@@ -1,12 +1,17 @@
-document.addEventListener("DOMContentLoaded", function () {
+// Sidebar Logic 
 
-  const menuBtn = document.getElementById("menuBtn");
-  const sidebar = document.getElementById("sidebar");
+function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("show");
+    }
 
-  if (menuBtn && sidebar) {
-    menuBtn.addEventListener("click", function () {
-      sidebar.classList.toggle("show");
-    });
-  }
 
-});
+
+window.onload = () => {
+    // LocalStorage se naam uthao jo index.html ne save kiya tha
+    const name = localStorage.getItem('user_name');
+    const displayName = document.getElementById('display-name');
+    
+    if (name && displayName) {
+        displayName.innerText = name;
+    }
+};

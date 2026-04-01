@@ -1,217 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  
-  <meta name="yandex-verification" content="ca02e9f887b7d5b5" />
-  
-  <!-- Backup Code -->
-  <link rel="canonical" href="https://infinitymind1.netlify.app/">
-  
-  <!-- Basic Meta -->
-  <meta charset="UTF-8">
-  <meta name="robots" content="index, follow">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>INFINITY Minds – Learn Coding, Programming & Web Development Step-by-Step</title>
-  <meta name="description" content="INFINITY Minds helps beginners learn coding with HTML, CSS and programming basics in a simple and practical way.">
-  <meta name="author" content="Pankaj Panwar">
-  <meta name="google-site-verification" content="Aw7-Hbe_r5pVyRuQA9LXYem0Elmla9F3F6uAmhe3FQ0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinity Brain-Gym | Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #10b981;
+            --dark: #0f172a;
+            --light: #f8fafc;
+        }
 
-  <!-- Favicon -->
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--dark);
+            color: var(--light);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="theme.css">
+        .login-container {
+            background: rgba(30, 41, 59, 0.7);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+            animation: fadeIn 0.8s ease-out;
+        }
 
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XLYRTMS32V"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XLYRTMS32V');
-  </script>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-  <!-- Organization Schema -->
-  
-  <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "@id": "https://infinitymind1.netlify.app/#organization",
-  "name": "INFINITY Minds",
-  "alternateName": "InfinityMind1",
-  "url": "https://infinitymind1.netlify.app/",
-  "logo": {
-    "@type": "ImageObject",
-    "url": "https://infinitymind1.netlify.app/images/logo.png"
-  },
-  "description": "INFINITY Minds is an educational platform providing coding tutorials, programming resources, and developer tools for students and beginners.",
-  
-  "founder": {
-    "@type": "Person",
-    "name": "Pankaj Panwar"
-  },
+        .logo {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
 
-  "member": [
-    {
-      "@type": "Person",
-      "name": "Shivin Gusain"
-    }
-  ],
+        h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(to right, #818cf8, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "contactType": "customer support",
-    "email": "pankajsingh9w7@gmail.com"
-  },
+        p {
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
 
-  "sameAs": [
-    "https://instagram.com/infinitymind.tech",
-    "https://github.com/infinityminds-dev"
-  ]
-}
-</script>
+        .btn-google {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: white;
+            color: #1f2937;
+            border: none;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
 
-  <!-- Website Schema -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "@id": "https://infinitymind1.netlify.app/#website",
-  "url": "https://infinitymind1.netlify.app/",
-  "name": "INFINITY Minds",
-  "alternateName": "InfinityMind1",
-  "description": "INFINITY Minds is an educational platform providing coding tutorials, programming resources, and developer tools for students and beginners.",
-  "publisher": {
-    "@id": "https://infinitymind1.netlify.app/#organization"
-  },
-  "inLanguage": "en",
-  "copyrightHolder": {
-    "@id": "https://infinitymind1.netlify.app/#organization"
-  }
-}
-</script>
-  
-  <script defer src="home1.js"></script>
+        .btn-google:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+            background: #f1f5f9;
+        }
+
+        .btn-google img {
+            width: 22px;
+        }
+
+        .footer-note {
+            margin-top: 25px;
+            font-size: 12px;
+            color: #64748b;
+        }
+    </style>
 </head>
-
 <body>
 
- <!-- MENU BUTTON (MOBILE) -->
-<button class="menu-btn" onclick="toggleSidebar()">☰</button>
+    <div class="login-container">
+        <div class="logo">🧠</div>
+        <h1>INFINITYMinds</h1>
+        <p>Welcome to INFINITYMinds  </p>
 
-<!-- SIDEBAR -->
-<aside class="sidebar" id="sidebar">
-  <h2 class="logo">INFINITY</h2>
-  <nav>
-    <a href="index.html" class="active">Home 🌐</a> 
-    <a href="Computer.html">Computer Basics 💻</a>
-    <a href="Course.html">Programming 🛰️</a>
-    <a href="devlog.html">Developer Tools 🛠️</a>
-    <a href="Quantum.html">Quantum Computing ⚛️</a>
-    <a href="Download.html">Downloads 📥</a>
-    <a href="feedback.html" >Feedback 📬</a>
-    <a href="faq.html">FAQ❓</a>
-    <a href="contact.html">Contact ✉️</a>
-    <a href="about.html" class="b">About INFINITY 🧠 </a>
-  </nav>
-</aside>
+        <button class="btn-google" onclick="loginWithGoogle()">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+            Continue with Google
+        </button>
 
-<!-- MAIN CONTENT -->
-<div class="content-wrapper">
-  
- <script>
-function toggleSidebar() {
-  document.getElementById("sidebar").classList.toggle("show");
-}
-</script>
-  
-  
-  <!-- 🔥 SPECIAL LAUNCH BANNER -->
-  <section class="launch-banner" role="region" aria-label="InfinityMinds Phase 2 Announcement">
-    <h2>🚀 NEW ERA STARTS NOW</h2>
-    <p><strong>March 1, 2026</strong> – InfinityMinds enters its Learning Expansion Phase.</p>
-    <p>Foundation Complete. Tutorials & Courses Begin.</p>
-  </section>
-
-  <!-- HERO -->
-  <header class="header">
-    <h1>INFINITY Minds</h1>
-    <p>Learn Computer Science Step-by-Step 🚀</p>
-    <a href="Computer.html" class="btn">Start Learning</a>
-  </header>
-
-  <!-- CARDS -->
-  <section class="cards">
-    <h2>What You Will Learn</h2>
-    <div class="card-container">
-      <div class="card">💻 Computer Basics</div>
-      <div class="card">🐍 Programming</div>
-      <div class="card">🌐 Web Development</div>
-      <div class="card">🔐 Cybersecurity</div>
-      <div class="card">📡 Networking</div>
-      <div class="card">⚛️ Quantum Computing</div>
+        <div class="footer-note">
+            By joining, you agree to level up your IQ! 🚀
+        </div>
     </div>
-  </section>
 
-  <!-- ROADMAP -->
-  <section class="roadmap">
-    <h2>Learning Roadmap</h2>
-    <p>Beginner → Intermediate → Advanced</p>
-  </section>
+    <script type="module" src="quiz.js"></script>
 
-  <!-- WHY -->
-  <section class="why-section">
-    <h2>Why INFINITY Minds?</h2>
-    <ul>
-      <li>✔ Beginner Friendly</li>
-      <li>✔ Simple Notes & Images</li>
-      <li>✔ Free Resources</li>
-      <li>✔ Career Guidance</li>
-    </ul>
-  </section>
-
-  <!-- 🎓 PHASE 2 PROFESSIONAL SECTION -->
-  <section class="phase-two">
-    <h2>InfinityMinds – Phase 2 Begins</h2>
-    <p>
-      InfinityMinds officially moves from foundation stage 
-      to structured learning expansion.
-    </p>
-    <p>
-      Tutorials. Courses. Growth.
-      Structured. Focused. Powerful.
-    </p>
-  </section>
-
-  <!-- ❤️ FOUNDER MESSAGE -->
-  <section class="founder-note">
-    <h2>Message from the Founder</h2>
-    <p>
-      InfinityMinds started as an idea — built with consistency,
-      patience, and long-term vision.
-    </p>
-    <p>
-      The base system is now complete.
-      The next step is delivering powerful learning experiences.
-    </p>
-    
-    <p><strong>— Pankaj Panwar, Founder of INFINITYMinds</strong></p>
-    <p><strong>— Shivin Gusain, Technical Advisor & QA Tester</strong></p>
-  </section>
-
-
-
-<!-- FOOTER -->
-<footer>
-  <p>© 2026 INFINITY Minds</p>
-  <p>Version 2.7.0</p>
-</footer>
-
-  
-  </main>
-  
 </body>
 </html>
