@@ -3,6 +3,28 @@
 ----------------------------------------------------- */
 
 const changelogData = [
+
+  {
+    version: "2.10.2",
+    date: "April 2, 2026",
+    title: "⚡ The Seamless Experience Update",
+    added: [
+      "Auto-Login functionality (Baar-baar login karne ka jhanjhat khatam! 🔄)",
+      "Session Persistence (Page refresh par bhi data nahi jayega 💾)",
+      "Direct Game Access from Login (No more manual redirects 🚪)"
+    ],
+    improved: [
+      "Leaderboard Sync Speed (Real-time data push 🚀)",
+      "UI/UX for Question Window (Instant appearance after auth ⚡)",
+      "Header Stats synchronization with Google Profile"
+    ],
+    fixed: [
+      "Fixed 'Question Window Gayab' bug (Sawaal ab turant prakat honge 🛠️)",
+      "Resolved home.html redirect loop on Quiz page",
+      "Corrected Leaderboard display names for new Google users"
+    ]
+  },
+
   {
     version: "2.10.1",
     date: "April 1, 2026",

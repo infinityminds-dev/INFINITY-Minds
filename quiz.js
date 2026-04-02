@@ -34,23 +34,24 @@ const database = [
     { type: 'puzzle', q: "The more of me there is, the less you see. What am I?", a: "Darkness 🌑" }
 ];
 
-// --- 3. AUTO-LOGIN & SESSION LOGIC ---
+// --- 3. AUTO-LOGIN & UI CONTROL ---
 function handleAuthStatus() {
     onAuthStateChanged(auth, (user) => {
         const loginScreen = document.getElementById('login-screen');
         const gameArea = document.getElementById('main-game-area');
 
         if (user) {
+            // User Logged In
             currentUserName = user.displayName;
             currentUserEmail = user.email;
             localStorage.setItem('user_name', user.displayName);
             localStorage.setItem('user_email', user.email);
             
-            // ✅ Fix: UI Switch aur Game Start
+            // Switch UI
             if(loginScreen) loginScreen.style.display = "none";
             if(gameArea) {
                 gameArea.style.display = "block";
-                // Agar game container khali hai toh sawaal load karo
+                // Agar game khali hai toh sawal load karo
                 const container = document.getElementById('game-container');
                 if(container && container.innerHTML.trim() === "") {
                     generateNextChallenge();
@@ -60,7 +61,7 @@ function handleAuthStatus() {
             syncStatsUI();
             saveToFirebase(); 
         } else {
-            // Logout state mein login screen dikhao
+            // User Logged Out
             if(loginScreen) loginScreen.style.display = "block";
             if(gameArea) gameArea.style.display = "none";
         }
@@ -69,15 +70,8 @@ function handleAuthStatus() {
 
 window.loginWithGoogle = async function() {
     try {
-        const result = await signInWithPopup(auth, provider);
-        const user = result.user;
-        currentUserName = user.displayName;
-        currentUserEmail = user.email;
-        localStorage.setItem('user_name', user.displayName);
-        localStorage.setItem('user_email', user.email);
-        
-        await saveToFirebase();
-        // Redirect ki zaroorat nahi, onAuthStateChanged handle kar lega
+        await signInWithPopup(auth, provider);
+        // handleAuthStatus apne aap baki kaam kar lega, redirect ki zarurat nahi
     } catch (error) {
         console.error("Login Error:", error);
     }
@@ -109,7 +103,6 @@ function checkHeartStatus() {
             localStorage.removeItem('last_heart_zero_time');
             hearts = 3;
             if(timerScreen) timerScreen.style.display = "none";
-            // Game area tabhi dikhao agar user logged in hai
             if(auth.currentUser && mainGame) mainGame.style.display = "block";
             return true;
         }
