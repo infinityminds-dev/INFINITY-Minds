@@ -17,11 +17,16 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
+// quiz.js ke ekdum top par daal do safety ke liye
+window.loginWithGoogle = window.loginWithGoogle || function() { 
+    console.log("Login function called on wrong page"); 
+};
+
+
 // --- Game Variables ---
 let xp = parseInt(localStorage.getItem('inf_xp')) || 0;
 let level = parseInt(localStorage.getItem('inf_lvl')) || 1;
-let hearts = 3;
-// Fix 1: Page load par fresh data LocalStorage se uthana zaroori hai
+let hearts = 3; 
 let currentUserName = localStorage.getItem('user_name') || "";
 let currentUserEmail = localStorage.getItem('user_email') || ""; 
 const REFILL_TIME = 3 * 60 * 60 * 1000;
@@ -35,9 +40,10 @@ const database = [
     { type: 'puzzle', q: "The more of me there is, the less you see. What am I?", a: "Darkness 🌑" }
 ];
 
-// --- 2. Google Login Function ---
+// --- 2. Google Login Function (FIXED FOR MODULES) ---
 window.loginWithGoogle = async function() {
     try {
+        console.log("Login start...");
         const result = await signInWithPopup(auth, provider);
         const user = result.user;
         
@@ -45,10 +51,10 @@ window.loginWithGoogle = async function() {
         localStorage.setItem('user_email', user.email);
         localStorage.setItem('user_photo', user.photoURL);
         
-        window.location.replace("home.html")
+        window.location.replace("home.html");
     } catch (error) {
         console.error("Login Error:", error);
-        alert("Google Login fail ho gaya!");
+        alert("Google Login fail ho gaya! Check Console.");
     }
 };
 
@@ -141,7 +147,7 @@ function updateXP(val) {
 }
 
 function syncStatsUI() {
-    // Fix 2: '?' ka use kiya hai taaki agar element na mile toh code crash na ho
+    // FIX: 'document' small letter mein (Line 145)
     document.getElementById('user-hearts')?.innerText = hearts;
     document.getElementById('user-xp')?.innerText = xp;
     document.getElementById('user-level')?.innerText = level;
@@ -150,7 +156,6 @@ function syncStatsUI() {
 
 // --- 5. FIREBASE DATA SYNC ---
 async function saveToFirebase() {
-    // Fix 3: Variable currentUserName upar se globally fetch ho raha hai
     if(!currentUserEmail) return;
     const totalScore = (level * 100) + xp;
     const q = query(collection(db, "leaderboard"), where("email", "==", currentUserEmail));
@@ -182,6 +187,14 @@ setInterval(checkHeartStatus, 1000);
 window.onload = () => {
     checkHeartStatus();
     syncStatsUI();
-    // Quiz page check
     if(document.getElementById('game-container')) generateNextChallenge();
 };
+
+
+
+
+
+
+
+
+
