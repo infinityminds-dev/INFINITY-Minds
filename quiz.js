@@ -34,24 +34,24 @@ const database = [
     { type: 'puzzle', q: "The more of me there is, the less you see. What am I?", a: "Darkness 🌑" }
 ];
 
-// --- 3. AUTO-LOGIN & UI CONTROL ---
+// --- 3. AUTO-LOGIN & FLOW CONTROL ---
 function handleAuthStatus() {
     onAuthStateChanged(auth, (user) => {
         const loginScreen = document.getElementById('login-screen');
         const gameArea = document.getElementById('main-game-area');
 
         if (user) {
-            // User Logged In
+            // User Logged In (Redirect ke baad yahan aayega)
             currentUserName = user.displayName;
             currentUserEmail = user.email;
             localStorage.setItem('user_name', user.displayName);
             localStorage.setItem('user_email', user.email);
             
-            // Switch UI
+            // UI Switch: Login chhupao, Game dikhao
             if(loginScreen) loginScreen.style.display = "none";
             if(gameArea) {
                 gameArea.style.display = "block";
-                // Agar game khali hai toh sawal load karo
+                // Question load check
                 const container = document.getElementById('game-container');
                 if(container && container.innerHTML.trim() === "") {
                     generateNextChallenge();
@@ -61,17 +61,18 @@ function handleAuthStatus() {
             syncStatsUI();
             saveToFirebase(); 
         } else {
-            // User Logged Out
+            // Agar bina login ke is page par aaya toh wapas bhej do
+            // window.location.href = "index.html"; 
             if(loginScreen) loginScreen.style.display = "block";
             if(gameArea) gameArea.style.display = "none";
         }
     });
 }
 
+// Home page se agar user click karke aaye toh Login button isi page par bhi chale
 window.loginWithGoogle = async function() {
     try {
         await signInWithPopup(auth, provider);
-        // handleAuthStatus apne aap baki kaam kar lega, redirect ki zarurat nahi
     } catch (error) {
         console.error("Login Error:", error);
     }
@@ -211,6 +212,7 @@ if(lbList) {
     });
 }
 
+// --- INITIALIZE ---
 setInterval(checkHeartStatus, 1000);
 
 window.onload = () => {
