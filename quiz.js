@@ -35,22 +35,34 @@ const database = [
 ];
 
 // --- 3. AUTO-LOGIN & SESSION LOGIC ---
-// Ye function check karega ki user logged in hai ya nahi
 function handleAuthStatus() {
     onAuthStateChanged(auth, (user) => {
+        const loginScreen = document.getElementById('login-screen');
+        const gameArea = document.getElementById('main-game-area');
+
         if (user) {
-            // User logged in hai
             currentUserName = user.displayName;
             currentUserEmail = user.email;
             localStorage.setItem('user_name', user.displayName);
             localStorage.setItem('user_email', user.email);
             
-            // Login UI hide karo (agar aapke HTML mein login-screen ID hai)
-            const loginScreen = document.getElementById('login-screen');
+            // ✅ Fix: UI Switch aur Game Start
             if(loginScreen) loginScreen.style.display = "none";
+            if(gameArea) {
+                gameArea.style.display = "block";
+                // Agar game container khali hai toh sawaal load karo
+                const container = document.getElementById('game-container');
+                if(container && container.innerHTML.trim() === "") {
+                    generateNextChallenge();
+                }
+            }
             
             syncStatsUI();
-            saveToFirebase(); // Login hote hi leaderboard sync
+            saveToFirebase(); 
+        } else {
+            // Logout state mein login screen dikhao
+            if(loginScreen) loginScreen.style.display = "block";
+            if(gameArea) gameArea.style.display = "none";
         }
     });
 }
@@ -59,19 +71,15 @@ window.loginWithGoogle = async function() {
     try {
         const result = await signInWithPopup(auth, provider);
         const user = result.user;
-        
         currentUserName = user.displayName;
         currentUserEmail = user.email;
-        
         localStorage.setItem('user_name', user.displayName);
         localStorage.setItem('user_email', user.email);
         
-        // Success sync
         await saveToFirebase();
-        window.location.replace("home.html");
+        // Redirect ki zaroorat nahi, onAuthStateChanged handle kar lega
     } catch (error) {
         console.error("Login Error:", error);
-        alert("Login fail! Netlify link use karein.");
     }
 };
 
@@ -101,7 +109,8 @@ function checkHeartStatus() {
             localStorage.removeItem('last_heart_zero_time');
             hearts = 3;
             if(timerScreen) timerScreen.style.display = "none";
-            if(mainGame) mainGame.style.display = "block";
+            // Game area tabhi dikhao agar user logged in hai
+            if(auth.currentUser && mainGame) mainGame.style.display = "block";
             return true;
         }
     }
@@ -109,7 +118,7 @@ function checkHeartStatus() {
 }
 
 // --- 5. GAMEPLAY LOGIC ---
-function generateNextChallenge() {
+window.generateNextChallenge = function() {
     const container = document.getElementById('game-container');
     if(!container) return; 
     
@@ -131,7 +140,7 @@ window.revealPuzzle = function(btn, ans) {
         p.style.display = "block";
         updateXP(10);
         btn.innerText = "Next Challenge ➡️";
-        btn.onclick = generateNextChallenge;
+        btn.onclick = () => generateNextChallenge();
     }
 };
 
@@ -198,7 +207,6 @@ async function saveToFirebase() {
     } catch (e) { console.error("Sync Error", e); }
 }
 
-// Real-time Leaderboard
 const lbList = document.getElementById('leaderboard-list');
 if(lbList) {
     onSnapshot(query(collection(db, "leaderboard"), orderBy("score", "desc"), limit(5)), (snapshot) => {
@@ -213,8 +221,7 @@ if(lbList) {
 setInterval(checkHeartStatus, 1000);
 
 window.onload = () => {
-    handleAuthStatus(); // Auto-login check
+    handleAuthStatus(); 
     checkHeartStatus();
     syncStatsUI();
-    if(document.getElementById('game-container')) generateNextChallenge();
 };
