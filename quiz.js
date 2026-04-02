@@ -4,7 +4,7 @@ import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, do
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAFRj4L-nsDW37e5gc4WC41pbGgostvN6A",
+    apiKey: "AIzaSyAFRj4L-nsDW37e5gc4WC4lpbGgostvN6A",
     authDomain: "infinitybraingym.firebaseapp.com",
     projectId: "infinitybraingym",
     storageBucket: "infinitybraingym.firebasestorage.app",
