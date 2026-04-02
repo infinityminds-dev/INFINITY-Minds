@@ -1,7 +1,7 @@
-// --- 1. FIREBASE SETUP ---
+// --- 1. SABSE UPAR SARE IMPORTS ---
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
 import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, doc, updateDoc, getDocs, where } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAFRj4L-nsDW37e5gc4WC4lpbGgostvN6A",
@@ -34,7 +34,17 @@ const database = [
     { type: 'puzzle', q: "The more of me there is, the less you see. What am I?", a: "Darkness 🌑" }
 ];
 
-// --- 3. SMART AUTH CONTROL (Login vs Quiz Logic) ---
+// --- 3. AUTH & LOGOUT LOGIC ---
+
+// ✅ Logout Function (Ab auto-login nahi hoga!)
+window.logout = function() {
+    signOut(auth).then(() => {
+        localStorage.clear();
+        console.log("Logged out!");
+        window.location.replace("index.html"); 
+    }).catch((e) => console.error("Error logging out", e));
+};
+
 function handleAuthStatus() {
     onAuthStateChanged(auth, (user) => {
         const isLoginPage = window.location.pathname.includes("index.html") || window.location.pathname === "/";
@@ -42,19 +52,16 @@ function handleAuthStatus() {
         const gameArea = document.getElementById('main-game-area');
 
         if (user) {
-            // User Logged In
             currentUserName = user.displayName;
             currentUserEmail = user.email;
             localStorage.setItem('user_name', user.displayName);
             localStorage.setItem('user_email', user.email);
             
-            // 🔥 AGAR LOGIN PAGE PAR HAI TOH HOME BHEJO
             if (isLoginPage) {
                 window.location.href = "home.html";
                 return;
             }
 
-            // Quiz page par hai toh game dikhao
             if(loginScreen) loginScreen.style.display = "none";
             if(gameArea) {
                 gameArea.style.display = "block";
@@ -63,11 +70,9 @@ function handleAuthStatus() {
                     generateNextChallenge();
                 }
             }
-            
             syncStatsUI();
             saveToFirebase(); 
         } else {
-            // User Logged Out: Sirf Quiz page par Login screen dikhao
             if(!isLoginPage) {
                 if(loginScreen) loginScreen.style.display = "block";
                 if(gameArea) gameArea.style.display = "none";
@@ -79,7 +84,6 @@ function handleAuthStatus() {
 window.loginWithGoogle = async function() {
     try {
         await signInWithPopup(auth, provider);
-        // handleAuthStatus automatically redirect kar dega v2.10.2 logic se
     } catch (error) {
         console.error("Login Error:", error);
     }
