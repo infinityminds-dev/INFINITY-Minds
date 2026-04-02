@@ -147,12 +147,19 @@ function updateXP(val) {
 }
 
 function syncStatsUI() {
-    // FIX: 'document' small letter mein (Line 145)
-    document.getElementById('user-hearts')?.innerText = hearts;
-    document.getElementById('user-xp')?.innerText = xp;
-    document.getElementById('user-level')?.innerText = level;
-    document.getElementById('display-name')?.innerText = currentUserName;
+    // Elements ko pehle dhoondo
+    const heartsEl = document.getElementById('user-hearts');
+    const xpEl = document.getElementById('user-xp');
+    const levelEl = document.getElementById('user-level');
+    const nameEl = document.getElementById('display-name');
+
+    // Agar element page par maujood hai, tabhi update karo
+    if (heartsEl) { heartsEl.innerText = hearts; }
+    if (xpEl) { xpEl.innerText = xp; }
+    if (levelEl) { levelEl.innerText = level; }
+    if (nameEl) { nameEl.innerText = currentUserName; }
 }
+
 
 // --- 5. FIREBASE DATA SYNC ---
 async function saveToFirebase() {
