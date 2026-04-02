@@ -1,7 +1,7 @@
 // --- 1. FIREBASE SETUP ---
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
 import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, doc, updateDoc, getDocs, where } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAFRj4L-nsDW37e5gc4WC4lpbGgostvN6A",
@@ -23,7 +23,7 @@ let level = parseInt(localStorage.getItem('inf_lvl')) || 1;
 let hearts = 3; 
 let currentUserName = localStorage.getItem('user_name') || "";
 let currentUserEmail = localStorage.getItem('user_email') || ""; 
-const REFILL_TIME = 3 * 60 * 60 * 1000; // 3 Hours
+const REFILL_TIME = 3 * 60 * 60 * 1000;
 
 const database = [
     { type: 'quiz', q: "Which tag is used for an image?", opt: ["<img>", "<pic>", "<src>"], c: "<img>" },
@@ -34,27 +34,44 @@ const database = [
     { type: 'puzzle', q: "The more of me there is, the less you see. What am I?", a: "Darkness 🌑" }
 ];
 
-// --- 3. GOOGLE LOGIN FUNCTION ---
+// --- 3. AUTO-LOGIN & SESSION LOGIC ---
+// Ye function check karega ki user logged in hai ya nahi
+function handleAuthStatus() {
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // User logged in hai
+            currentUserName = user.displayName;
+            currentUserEmail = user.email;
+            localStorage.setItem('user_name', user.displayName);
+            localStorage.setItem('user_email', user.email);
+            
+            // Login UI hide karo (agar aapke HTML mein login-screen ID hai)
+            const loginScreen = document.getElementById('login-screen');
+            if(loginScreen) loginScreen.style.display = "none";
+            
+            syncStatsUI();
+            saveToFirebase(); // Login hote hi leaderboard sync
+        }
+    });
+}
+
 window.loginWithGoogle = async function() {
     try {
-        console.log("Login start...");
         const result = await signInWithPopup(auth, provider);
         const user = result.user;
         
-        // Save to LocalStorage
-        localStorage.setItem('user_name', user.displayName);
-        localStorage.setItem('user_email', user.email);
-        localStorage.setItem('user_photo', user.photoURL);
-        
-        // Update local variables for immediate use
         currentUserName = user.displayName;
         currentUserEmail = user.email;
         
-        console.log("Login Success! Redirecting...");
+        localStorage.setItem('user_name', user.displayName);
+        localStorage.setItem('user_email', user.email);
+        
+        // Success sync
+        await saveToFirebase();
         window.location.replace("home.html");
     } catch (error) {
         console.error("Login Error:", error);
-        alert("Login Fail! Check if you are using HTTPS (Netlify link) and not a local file.");
+        alert("Login fail! Netlify link use karein.");
     }
 };
 
@@ -98,20 +115,13 @@ function generateNextChallenge() {
     
     const item = database[Math.floor(Math.random() * database.length)];
     if (item.type === 'puzzle') {
-        container.innerHTML = `
-            <div class="card">
-                <h3>🧩 ${item.q}</h3>
-                <button class="btn-main" onclick="revealPuzzle(this, '${item.a}')">Show Answer 💡</button>
-                <p style="display:none; color:#10b981; margin-top:15px; font-weight:800;">Ans: ${item.a}</p>
-            </div>`;
+        container.innerHTML = `<div class="card"><h3>🧩 ${item.q}</h3>
+            <button class="btn-main" onclick="revealPuzzle(this, '${item.a}')">Show Answer 💡</button>
+            <p style="display:none; color:#10b981; margin-top:15px; font-weight:800;">Ans: ${item.a}</p></div>`;
     } else {
-        container.innerHTML = `
-            <div class="card">
-                <h3>💻 ${item.q}</h3>
-                <div class="options">
-                    ${item.opt.map(o => `<button onclick="checkAnswer(this, '${o}', '${item.c}')">${o}</button>`).join('')}
-                </div>
-            </div>`;
+        container.innerHTML = `<div class="card"><h3>💻 ${item.q}</h3><div class="options">
+            ${item.opt.map(o => `<button onclick="checkAnswer(this, '${o}', '${item.c}')">${o}</button>`).join('')}
+        </div></div>`;
     }
 }
 
@@ -142,17 +152,13 @@ window.checkAnswer = function(btn, sel, cor) {
 
 function handleGameOver() {
     localStorage.setItem('last_heart_zero_time', new Date().getTime().toString());
-    alert("💥 GAME OVER! 3 ghante baad refill hoga.");
+    alert("💥 GAME OVER! Wait for refill.");
     window.location.reload(); 
 }
 
 function updateXP(val) {
     xp += val;
-    if(xp >= level * 100) { 
-        level++; 
-        xp = 0; 
-        alert("🎉 LEVEL UP! Level " + level); 
-    }
+    if(xp >= level * 100) { level++; xp = 0; alert("🎉 LEVEL UP!"); }
     localStorage.setItem('inf_xp', xp);
     localStorage.setItem('inf_lvl', level);
     syncStatsUI();
@@ -160,15 +166,16 @@ function updateXP(val) {
 }
 
 function syncStatsUI() {
-    const hEl = document.getElementById('user-hearts');
-    const xEl = document.getElementById('user-xp');
-    const lEl = document.getElementById('user-level');
-    const nEl = document.getElementById('display-name');
-
-    if(hEl) hEl.innerText = hearts;
-    if(xEl) xEl.innerText = xp;
-    if(lEl) lEl.innerText = level;
-    if(nEl) nEl.innerText = currentUserName || "Explorer";
+    const elements = {
+        'user-hearts': hearts,
+        'user-xp': xp,
+        'user-level': level,
+        'display-name': currentUserName || "Explorer"
+    };
+    for (const [id, val] of Object.entries(elements)) {
+        const el = document.getElementById(id);
+        if(el) el.innerText = val;
+    }
 }
 
 // --- 6. FIREBASE SYNC & LEADERBOARD ---
@@ -176,21 +183,22 @@ async function saveToFirebase() {
     if(!currentUserEmail) return;
     const totalScore = (level * 100) + xp;
     try {
-        const q = query(collection(db, "leaderboard"), where("email", "==", currentUserEmail));
+        const lbRef = collection(db, "leaderboard");
+        const q = query(lbRef, where("email", "==", currentUserEmail));
         const querySnapshot = await getDocs(q);
         
         if (querySnapshot.empty) {
-            await addDoc(collection(db, "leaderboard"), { name: currentUserName, email: currentUserEmail, score: totalScore, level: level });
+            await addDoc(lbRef, { name: currentUserName, email: currentUserEmail, score: totalScore, level: level, lastSeen: new Date() });
         } else {
             const userDoc = querySnapshot.docs[0];
             if(totalScore > userDoc.data().score) {
-                await updateDoc(doc(db, "leaderboard", userDoc.id), { score: totalScore, level: level });
+                await updateDoc(doc(db, "leaderboard", userDoc.id), { score: totalScore, level: level, lastSeen: new Date() });
             }
         }
-    } catch (e) { console.error("Firebase Save Error", e); }
+    } catch (e) { console.error("Sync Error", e); }
 }
 
-// Real-time Leaderboard Listener
+// Real-time Leaderboard
 const lbList = document.getElementById('leaderboard-list');
 if(lbList) {
     onSnapshot(query(collection(db, "leaderboard"), orderBy("score", "desc"), limit(5)), (snapshot) => {
@@ -202,10 +210,10 @@ if(lbList) {
     });
 }
 
-// Initial Run
 setInterval(checkHeartStatus, 1000);
 
 window.onload = () => {
+    handleAuthStatus(); // Auto-login check
     checkHeartStatus();
     syncStatsUI();
     if(document.getElementById('game-container')) generateNextChallenge();
