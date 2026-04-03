@@ -18,7 +18,7 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 provider.setCustomParameters({ prompt: 'select_account' });
 
-// --- 2. GAME VARIABLES & DATABASE (With Unique IDs) ---
+// --- 2. GAME VARIABLES & DATABASE ---
 let xp = parseInt(localStorage.getItem('inf_xp')) || 0;
 let level = parseInt(localStorage.getItem('inf_lvl')) || 1;
 let hearts = 3; 
@@ -27,24 +27,20 @@ let currentUserEmail = localStorage.getItem('user_email') || "";
 const REFILL_TIME = 3 * 60 * 60 * 1000;
 
 const database = [
-    // HTML (ID: 1-10)
     { id: 1, type: 'quiz', q: "Which tag is used for an image?", opt: ["<img>", "<pic>", "<src>"], c: "<img>" },
     { id: 2, type: 'quiz', q: "Largest heading tag?", opt: ["<h1>", "<h6>", "<head>"], c: "<h1>" },
     { id: 3, type: 'quiz', q: "Tag for a line break?", opt: ["<br>", "<lb>", "<break>"], c: "<br>" },
     { id: 4, type: 'quiz', q: "Tag for unordered list?", opt: ["<ul>", "<ol>", "<li>"], c: "<ul>" },
     { id: 5, type: 'quiz', q: "How to make a checkbox?", opt: ["<input type='checkbox'>", "<check>", "<checkbox>"], c: "<input type='checkbox'>" },
-    // CSS (ID: 11-20)
     { id: 11, type: 'quiz', q: "CSS stands for?", opt: ["Cascading Style Sheets", "Color Style", "Creative Sheets"], c: "Cascading Style Sheets" },
     { id: 12, type: 'quiz', q: "Property for background color?", opt: ["background-color", "color", "bgcolor"], c: "background-color" },
     { id: 13, type: 'quiz', q: "Select element with id 'demo'?", opt: ["#demo", ".demo", "demo"], c: "#demo" },
     { id: 14, type: 'quiz', q: "Property to change text color?", opt: ["color", "font-color", "text-style"], c: "color" },
     { id: 15, type: 'quiz', q: "Make text bold in CSS?", opt: ["font-weight:bold", "style:bold", "font:bold"], c: "font-weight:bold" },
-    // JS (ID: 21-30)
     { id: 21, type: 'quiz', q: "JS comments start with?", opt: ["//", "/*", "#"], c: "//" },
     { id: 22, type: 'quiz', q: "How to write an alert?", opt: ["alert('Hi')", "msg('Hi')", "log('Hi')"], c: "alert('Hi')" },
     { id: 23, type: 'quiz', q: "Symbol for strict equality?", opt: ["===", "==", "="], c: "===" },
     { id: 24, type: 'quiz', q: "Which is a JS variable?", opt: ["let", "var", "Both"], c: "Both" },
-    // PUZZLES (ID: 31-40)
     { id: 31, type: 'puzzle', q: "What has a head and a tail but no body?", a: "Coin" },
     { id: 32, type: 'puzzle', q: "I have cities but no houses. What am I?", a: "Map" },
     { id: 33, type: 'puzzle', q: "The more of me there is, the less you see?", a: "Darkness" },
@@ -77,13 +73,18 @@ function handleAuthStatus() {
     });
 }
 
-// --- 4. GAMEPLAY & SOLVE/SKIP LOGIC ---
+// --- 4. GAMEPLAY LOGIC ---
 function markAsSolved(id) {
     let solved = JSON.parse(localStorage.getItem('solved_ids')) || [];
     if(!solved.includes(id)) {
         solved.push(id);
         localStorage.setItem('solved_ids', JSON.stringify(solved));
     }
+}
+
+// Helper to show HTML tags as text
+function escapeHTML(str) {
+    return str.replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
 window.generateNextChallenge = function() {
@@ -115,18 +116,18 @@ window.generateNextChallenge = function() {
             <div class="card">
                 <h3>💻 ${item.q}</h3>
                 <div class="options">
-                    ${item.opt.map(o => `<button onclick="checkAnswer(this, '${o}', '${item.c}', ${item.id})">${o}</button>`).join('')}
+                    ${item.opt.map(o => `<button onclick="checkAnswer(this, '${o}', '${item.c}', ${item.id})">${escapeHTML(o)}</button>`).join('')}
                 </div>
             </div>`;
     }
 }
 
-window.skipChallenge = () => generateNextChallenge(); // Skip pool se ID nahi hatayega
+window.skipChallenge = () => generateNextChallenge();
 
 window.checkPuzzleAnswer = (correct, id) => {
     const val = document.getElementById('puzzle-answer').value.trim().toLowerCase();
     if(val === correct.toLowerCase()) { 
-        markAsSolved(id); // ID save: ab dobara nahi aayega
+        markAsSolved(id);
         updateXP(15); 
         generateNextChallenge(); 
     } else { 
@@ -137,24 +138,30 @@ window.checkPuzzleAnswer = (correct, id) => {
 window.revealPuzzleSolution = (ans, id) => {
     const p = document.getElementById('solution-text');
     p.innerText = "Ans: " + ans; p.style.display = "block";
-    markAsSolved(id); // Show answer pe bhi solve mana jayega taaki spam na ho
+    markAsSolved(id);
     setTimeout(generateNextChallenge, 2500);
 };
 
 window.checkAnswer = (btn, sel, cor, id) => {
     if(sel === cor) { 
         btn.style.background = "#10b981"; 
-        markAsSolved(id); // ID save
+        markAsSolved(id);
         updateXP(20); 
         setTimeout(generateNextChallenge, 800); 
     } else { 
-        btn.style.background = "#ef4444"; hearts--; syncStatsUI(); if(hearts <= 0) handleGameOver(); 
+        btn.style.background = "#ef4444"; hearts--; syncStatsUI(); if(hearts <= 0) handleGameOver(); else alert("Wrong! 💔");
     }
 };
 
-// --- 5. XP, FIREBASE & UI ---
+// --- 5. XP & FIREBASE ---
 function updateXP(val) {
-    xp += val; if(xp >= level * 100) { level++; xp = 0; alert("🎉 LEVEL UP!"); }
+    xp += val; 
+    const target = level * 100;
+    if(xp >= target) { 
+        xp = xp - target; // Carry forward extra XP
+        level++; 
+        alert("🎉 LEVEL UP!"); 
+    }
     localStorage.setItem('inf_xp', xp); localStorage.setItem('inf_lvl', level);
     syncStatsUI(); saveToFirebase();
 }

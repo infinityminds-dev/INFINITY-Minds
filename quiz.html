@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Infinity Brain-Gym | Weekly League</title>
     <link rel="stylesheet" href="quiz.css">
-   
 </head>
 <body>
 
@@ -33,19 +32,22 @@
             <h2 style="color:#ef4444;">⏳ Hearts Empty!</h2>
             <p>Wait for refill to play again.</p>
             <div id="countdown-display" class="timer-countdown">00:00:00</div>
-            <p style="font-size: 12px; opacity: 0.6;">Next Heart in 3 hours ⏱️</p>
+            <p style="font-size: 12px; opacity: 0.6;">Refill in progress... ⏱️</p>
         </div>
 
         <div id="main-game-area" style="display: none;">
             <div id="game-container">
                 </div>
-            <button class="btn-next" onclick="generateNextChallenge()">Skip Challenge ➡️</button>
+            
+            <button class="btn-next" style="background: #10b981; width: 100%; margin-top: 15px;" onclick="generateNextChallenge()">
+                Skip Challenge ➡️
+            </button>
         </div>
 
         <br> 
         
         <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
-            <button class="btn-main" style="flex: 1;" onclick="window.location.href='home.html'">Back Home 🏠</button>
+            <button class="btn-main" style="flex: 1; background:#3b82f6;" onclick="window.location.href='home.html'">Back Home 🏠</button>
             <button class="btn-main" style="flex: 1; background:#475569;" onclick="logout()">Logout 🚪</button>
         </div>
         

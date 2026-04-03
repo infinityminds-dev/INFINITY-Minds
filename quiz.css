@@ -42,9 +42,18 @@ body {
     box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 }
 
-input {
-    width: 80%; padding: 12px; border-radius: 10px; border: 1px solid #334155;
-    background: #0f172a; color: white; margin-bottom: 15px; outline: none;
+/* --- FIX: Input aur Puzzle Styling --- */
+input, #puzzle-answer {
+    width: 85%; 
+    padding: 12px; 
+    border-radius: 12px; 
+    border: 1px solid #334155;
+    background: #0f172a; 
+    color: white; 
+    margin: 15px 0; 
+    outline: none;
+    text-align: center;
+    font-size: 16px;
 }
 
 .btn-main, .btn-next {
@@ -55,9 +64,21 @@ input {
 .btn-main { background: #3b82f6; box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3); }
 .btn-next { background: #10b981; margin-top: 15px; }
 
+/* --- CRITICAL ERROR FIX: Options Button Visibility --- */
 .options button {
-    width: 100%; padding: 12px; margin: 8px 0; border-radius: 12px;
-    background: #0f172a; color: white; border: 1px solid #475569; cursor: pointer;
+    width: 100%; 
+    min-height: 50px; /* Ensure button pichke nahi */
+    padding: 12px; 
+    margin: 10px 0; 
+    border-radius: 12px;
+    background: #0f172a; 
+    color: #ffffff !important; /* Force text visibility */
+    border: 1px solid #475569; 
+    cursor: pointer;
+    font-weight: 600;
+    display: block;
+    word-wrap: break-word; /* Long tags niche shift ho jayenge */
+    overflow: hidden;
 }
 
 .leaderboard-card { border: 1px solid #fbbf24; background: #0f172a; }
@@ -65,22 +86,25 @@ input {
 #leaderboard-list li { 
     display: flex; justify-content: space-between; padding: 12px; 
     border-bottom: 1px solid #1e293b; 
+    background: rgba(255, 255, 255, 0.03);
+    margin-bottom: 8px;
+    border-radius: 12px;
 }
 
-/* --- Timer Specific Styling --- */
-#timer-screen {
-    border: 2px solid #ef4444; /* Red border for alert */
-    animation: pulse-border 2s infinite;
-}
-
+/* --- Timer & Animations (Same as your Design) --- */
 .timer-countdown {
     font-size: 2.5rem;
     font-weight: 800;
-    color: #fbbf24; /* Golden Color */
+    color: #fbbf24;
     text-shadow: 0 0 15px rgba(251, 191, 36, 0.6);
     margin: 15px 0;
-    font-family: 'Courier New', Courier, monospace; /* Digital look */
+    font-family: 'Courier New', Courier, monospace;
     letter-spacing: 2px;
+}
+
+#timer-screen {
+    border: 2px solid #ef4444;
+    animation: pulse-border 2s infinite;
 }
 
 @keyframes pulse-border {
@@ -89,54 +113,12 @@ input {
     100% { box-shadow: 0 0 5px rgba(239, 68, 68, 0.2); }
 }
 
-/* --- Premium Leaderboard Look --- */
-.leaderboard-card h3 {
-    color: #fbbf24;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 15px;
-}
-
-#leaderboard-list li {
-    background: rgba(255, 255, 255, 0.03);
-    margin-bottom: 8px;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: 0.3s;
-}
-
-#leaderboard-list li:hover {
-    background: rgba(59, 130, 246, 0.1);
-    transform: translateX(5px);
-}
-
-#leaderboard-list li span:first-child {
-    font-weight: 600;
-    color: #94a3b8; /* Player name color */
-}
-
-#leaderboard-list li b {
-    color: #10b981; /* Score color */
-}
-
-/* --- Quiz Options Hover Effect --- */
 .options button:hover {
     background: #3b82f6 !important;
-    border-color: #60a5fa;
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
 }
 
-/* Scrollbar styling for a cleaner look */
-::-webkit-scrollbar {
-    width: 6px;
-}
-::-webkit-scrollbar-thumb {
-    background: #3b82f6;
-    border-radius: 10px;
-}
-
-/* --- New: Monday Refresh Notice (Gold Look) --- */
 .refresh-notice {
     font-size: 11px;
     color: #fbbf24;
@@ -144,48 +126,12 @@ input {
     margin-bottom: 15px;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    opacity: 0.8;
-}
-
-/* --- New: Puzzle Input Styling (Matches your Theme) --- */
-#puzzle-answer {
-    width: 85%;
-    padding: 12px;
-    border-radius: 12px;
-    border: 1px solid #334155;
-    background: #0f172a;
-    color: white;
-    margin: 15px 0;
-    outline: none;
-    text-align: center;
-    font-size: 16px;
-    transition: 0.3s;
-}
-
-#puzzle-answer:focus {
-    border-color: #3b82f6;
-    box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
-}
-
-/* --- Secondary Button (For "Show Answer") --- */
-.btn-secondary {
-    background: transparent;
-    color: #94a3b8;
-    border: none;
-    font-size: 13px;
-    cursor: pointer;
-    margin-top: 10px;
-    text-decoration: underline;
-    transition: 0.3s;
-}
-
-.btn-secondary:hover {
-    color: #fbbf24;
 }
 
 #solution-text {
     animation: fadeIn 0.5s ease-in;
+    color: #10b981;
+    font-weight: 800;
 }
 
 @keyframes fadeIn {
