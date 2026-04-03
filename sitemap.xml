@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- Home -->
-  <url>
-    <loc>https://infinitymind1.netlify.app/</loc>
-    <lastmod>2026-02-22</lastmod>
+  <!-- Login -->
+ <url>
+    <loc>https://infinitymind1.netlify.app/index.html</loc>
+    <lastmod>2026-04-03</lastmod>
     <priority>1.0</priority>
+  </url>
+  
+    <!-- Home -->
+  <url>
+    <loc>https://infinitymind1.netlify.app/home.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <priority>0.9</priority>
+  </url>
+
+    <!-- quiz -->
+  <url>
+    <loc>https://infinitymind1.netlify.app/quiz.html</loc>
+    <lastmod>2026-04-03</lastmod>
+    <priority>0.9</priority>
   </url>
 
   <!-- Courses -->
@@ -51,11 +65,11 @@
   </url>
 
   <!-- Changelog -->
-  <url>
+    <url>
     <loc>https://infinitymind1.netlify.app/changelog.html</loc>
-    <lastmod>2026-02-22</lastmod>
-    <priority>0.5</priority>
-  </url>
+    <lastmod>2026-04-03</lastmod> <priority>0.6</priority> 
+    </url>
+    
 
   <!-- Developer Tools -->
   <url>
