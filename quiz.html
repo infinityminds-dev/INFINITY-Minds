@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Infinity Brain-Gym | Weekly League</title>
     <link rel="stylesheet" href="quiz.css">
+   
 </head>
 <body>
 
@@ -22,7 +23,7 @@
         
         <div id="login-screen" class="card">
             <h3>🎮 Join the Gym</h3>
-            <p style="font-size: 14px; opacity: 0.8; margin-bottom: 20px;">If you want to join Leaderboard you need to login</p>
+            <p style="font-size: 14px; opacity: 0.8; margin-bottom: 20px;">Login to save your progress and join the Global Leaderboard!</p>
             <button class="btn-main" onclick="loginWithGoogle()">
                 Continue with Google 🚀
             </button>
@@ -45,11 +46,13 @@
         
         <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
             <button class="btn-main" style="flex: 1;" onclick="window.location.href='home.html'">Back Home 🏠</button>
-            <button class="btn-main" style="flex: 1; background:#475569;" onclick="localStorage.clear(); location.reload();">Logout 🚪</button>
+            <button class="btn-main" style="flex: 1; background:#475569;" onclick="logout()">Logout 🚪</button>
         </div>
         
         <div class="card leaderboard-card">
             <h3>🥇 Global Champions</h3>
+            <div class="refresh-notice">⏳ Monday to Monday Leaderboard will Refresh</div>
+            
             <ul id="leaderboard-list">
                 <p style="font-size:12px; color:gray; text-align:center;">Loading scores...</p>
             </ul>

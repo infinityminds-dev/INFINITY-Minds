@@ -4,6 +4,26 @@
 
 const changelogData = [
 
+{
+    version: "2.10.3",
+    date: "April 3, 2026",
+    title: "🧠 The Brainiac Content Update",
+    added: [
+      "Dynamic Question Pool (HTML, CSS, JS aur naye Puzzles ka bhandar 📚)",
+      "Smart Question ID Tracking (Solve kiya toh lock, Skip kiya toh baad mein wapas aayega 🔄)",
+      "Daily Quota System (Saare sawal khatam hone par 'Mission Accomplished' screen 🏆)"
+    ],
+    improved: [
+      "Puzzle Validation (Ab answers aur bhi accuracy se check honge ⚡)",
+      "Question Randomizer (Har baar naya challenge, koi repetition nahi 🎲)"
+    ],
+    fixed: [
+      "XP Farming Patch (Ek hi sawal ko baar-baar solve karke XP lena ab impossible 🛡️)",
+      "Skip Button Logic (Sawal skip karne par pool se delete nahi hoga, sirf shuffle hoga)"
+    ]
+},
+
+
   {
     version: "2.10.2",
     date: "April 2, 2026",
