@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Infinity Brain-Gym | Weekly League</title>
     <link rel="stylesheet" href="quiz.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
     <header class="gym-header">
         <div class="stats-container">
-            <div class="stat-box">👤 <span id="display-name">Explorer</span></div>
-            <div class="stat-box">❤️ <span id="user-hearts">3</span></div>
-            <div class="stat-box">🔥 <span id="user-xp">0</span></div>
-            <div class="stat-box">🏆 <span id="user-level">1</span></div>
+            <div class="stat-box"><i class="fas fa-user"></i> <span id="display-name">Explorer</span></div>
+            <div class="stat-box"><i class="fas fa-heart" style="color: #ef4444;"></i> <span id="user-hearts">3</span></div>
+            <div class="stat-box"><i class="fas fa-bolt" style="color: #f59e0b;"></i> <span id="user-xp">0</span></div>
+            <div class="stat-box"><i class="fas fa-trophy" style="color: #fbbf24;"></i> <span id="user-level">1</span></div>
         </div>
         <h1>⚡ INFINITY Brain-Gym</h1>
     </header>
@@ -44,21 +45,29 @@
             </button>
         </div>
 
-        <br> 
-        
-        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 10px;">
+        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
             <button class="btn-main" style="flex: 1; background:#3b82f6;" onclick="window.location.href='home.html'">Back Home 🏠</button>
             <button class="btn-main" style="flex: 1; background:#475569;" onclick="logout()">Logout 🚪</button>
         </div>
         
         <div class="card leaderboard-card">
             <h3>🥇 Global Champions</h3>
-            <div class="refresh-notice">⏳ Monday to Monday Leaderboard will Refresh</div>
+            <div class="refresh-notice" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b; padding: 5px; border-radius: 5px; font-size: 11px; margin-bottom: 10px;">
+                <i class="fas fa-clock"></i> Monday to Monday Leaderboard will Refresh
+            </div>
             
             <ul id="leaderboard-list">
                 <p style="font-size:12px; color:gray; text-align:center;">Loading scores...</p>
             </ul>
         </div>
+
+        <div id="last-week-winners" class="card" style="margin-top: 20px; border: 1px solid #fbbf24; background: rgba(251, 191, 36, 0.05);">
+            <h4 style="color: #fbbf24; margin-bottom: 10px;"><i class="fas fa-crown"></i> Hall of Fame</h4>
+            <div id="winner-list">
+                <p style="font-size:12px; color:gray;">Next winners announced this Monday! 🏆</p>
+            </div>
+        </div>
+
     </main>
 
     <script type="module" src="quiz.js"></script>

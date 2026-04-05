@@ -178,6 +178,6 @@ footer {
 }
 
 .b{
-  position: fixed;
-  top: 655px;
+  position: relative;
+  top: -30px;
 }

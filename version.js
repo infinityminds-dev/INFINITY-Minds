@@ -1,8 +1,29 @@
+
 /* ---------------------------------------------------
-    INFINITY MINDS - MASTER VERSION CONTROL (v2.10.1)
+    INFINITY MINDS - MASTER VERSION CONTROL (v2.10.3)
 ----------------------------------------------------- */
 
+
 const changelogData = [
+
+{
+    version: "2.10.3",
+    date: "April 5, 2026",
+    title: "🧠 The Brainiac Content Update",
+    added: [
+      "Dynamic Question Pool (HTML, CSS, JS & New Puzzles 📚)",
+      "Smart Question ID Tracking (Solved = Lock | Skipped = Shuffle 🔄)",
+      "Daily Quota System ('Mission Accomplished' Final Screen 🏆)"
+    ],
+    improved: [
+      "Puzzle Validation (High-accuracy answer checking ⚡)",
+      "Question Randomizer (Zero repetition, fresh challenges 🎲)"
+    ],
+    fixed: [
+      "XP Farming Patch (Secure & Fair Play enforced 🛡️)",
+      "Skip Button Logic (Shuffle mechanism optimized)"
+    ]
+},
 
 {
     version: "2.10.3",

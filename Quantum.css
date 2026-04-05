@@ -65,13 +65,10 @@ body {
   box-shadow: 0 4px 15px rgba(123, 47, 247, 0.4);
 }
 
-.sidebar .b {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  width: calc(100% - 40px);
+.b{
+  position: relative;
+  top: 5px;
 }
-
 /* ===== 3. CONTENT WRAPPER ===== */
 .content-wrapper {
   margin-left: 240px; /* Sidebar space fix */
