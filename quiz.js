@@ -1,11 +1,17 @@
 // --- 1. IMPORTS & CONFIG ---
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
 import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, doc, updateDoc, getDocs, where } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
-import { getAuth, signInWithRedirect, getRedirectResult, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+import { getAuth, signInWithPopup, signInWithRedirect, getRedirectResult, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+
+// Dynamic AuthDomain Helper
+const currentHost = window.location.hostname;
+const dynamicAuthDomain = currentHost === "localhost" || currentHost === "127.0.0.1" 
+    ? "infinitybraingym.firebaseapp.com" 
+    : currentHost;
 
 const firebaseConfig = {
     apiKey: "AIzaSyAFRj4L-nsDW37e5gc4WC4lpbGgostvN6A",
-    authDomain: "infinitybraingym.firebaseapp.com",
+    authDomain: dynamicAuthDomain, // 🔥 Ye ab automatic detect karega (Vercel ya Netlify)
     projectId: "infinitybraingym",
     storageBucket: "infinitybraingym.firebasestorage.app",
     messagingSenderId: "218368274077",
