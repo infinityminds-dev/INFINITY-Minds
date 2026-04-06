@@ -168,17 +168,23 @@ function checkHeartStatus() {
         hearts = 3; syncStatsUI(); window.location.reload();
     }
 }
-
-// --- 6. AUTH FIXED & STABLE (FOR MOBILE & LAPTOP) ---
+// --- 6. AUTH FIXED & STABLE (FINAL VERSION) ---
 
 // 1. Google Login Function
 window.loginWithGoogle = async () => { 
     try { 
-        // Mobile/Laptop redirect mode is best for compatibility
-        await signInWithRedirect(auth, provider); 
+        // Popup mode fast hota hai, agar block ho toh redirect par jata hai
+        const result = await signInWithPopup(auth, provider);
+        if (result.user) {
+            console.log("Popup Login Success");
+            localStorage.setItem('user_name', result.user.displayName);
+            localStorage.setItem('user_email', result.user.email);
+            window.location.replace("home.html");
+        }
     } catch (e) { 
-        console.error("Login Error:", e); 
-        alert("Login failed! Please check your connection.");
+        console.error("Popup blocked or error, trying Redirect...", e);
+        // Agar Popup block ho jaye (mobile par aksar hota hai), toh Redirect try karo
+        await signInWithRedirect(auth, provider);
     } 
 };
 
@@ -188,44 +194,34 @@ window.logout = () => signOut(auth).then(() => {
     window.location.replace("index.html"); 
 });
 
-// 3. CATCH REDIRECT RESULT (Account choose karne ke baad ye data pakadta hai)
+// 3. CATCH REDIRECT RESULT (Sirf tab chalta hai jab redirect use hua ho)
 getRedirectResult(auth).then((result) => {
     if (result && result.user) {
-        console.log("Redirect Success: User Logged In");
         localStorage.setItem('user_name', result.user.displayName);
         localStorage.setItem('user_email', result.user.email);
-        // Turant home page par bhej do
         window.location.replace("home.html");
     }
-}).catch((e) => {
-    console.error("Redirect Result Error:", e);
-});
+}).catch((e) => console.error("Redirect Error:", e));
 
-// 4. AUTH STATE MONITOR (Automatic Login & Page Guard)
+// 4. AUTH STATE MONITOR
 onAuthStateChanged(auth, (user) => {
     const path = window.location.pathname;
-    // Check if user is on Login/Index page
     const isLoginPage = path.endsWith("index.html") || path.endsWith("/") || path === "";
 
     if (user) {
-        // User is Logged In
         currentUserName = user.displayName; 
         currentUserEmail = user.email;
         localStorage.setItem('user_name', user.displayName);
         localStorage.setItem('user_email', user.email);
         
-        // Agar login hai aur login page par baitha hai, toh home bhejo
         if (isLoginPage) {
             window.location.replace("home.html");
         }
         
-        // Game initialize karo agar functions available hain
         if (typeof syncStatsUI === "function") syncStatsUI();
         if (typeof generateNextChallenge === "function") generateNextChallenge(); 
         
     } else {
-        // User is Logged Out
-        // Agar logout hai aur home page access karne ki koshish kare, toh wapis index bhejo
         if (!isLoginPage) {
             window.location.replace("index.html");
         }
