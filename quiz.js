@@ -1,14 +1,11 @@
 // --- 1. IMPORTS & CONFIG ---
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
 import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, doc, updateDoc, getDocs, where } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
-import { getAuth, signInWithPopup, signInWithRedirect, getRedirectResult, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
-
-// 🔥 FIX: dynamicAuthDomain ko hata diya hai kyunki ye 404 error de raha tha.
-// Firebase Auth popup/redirect ke liye hamesha original firebaseapp domain hi best hota hai.
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAFRj4L-nsDW37e5gc4WC4lpbGgostvN6A",
-    authDomain: "infinitybraingym.firebaseapp.com", // ✅ Ise fix rakho, 404 gayab ho jayega
+    authDomain: "infinitybraingym.firebaseapp.com",
     projectId: "infinitybraingym",
     storageBucket: "infinitybraingym.firebasestorage.app",
     messagingSenderId: "218368274077",
@@ -19,70 +16,6 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
-// --- 1. IMPORTS & CONFIG ---
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, doc, updateDoc, getDocs, where } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
-import { getAuth, signInWithPopup, signInWithRedirect, getRedirectResult, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
-
-// 🔥 FIX: dynamicAuthDomain ko hata diya hai kyunki ye 404 error de raha tha.
-// Firebase Auth popup/redirect ke liye hamesha original firebaseapp domain hi best hota hai.
-
-const firebaseConfig = {
-    apiKey: "AIzaSyAFRj4L-nsDW37e5gc4WC4lpbGgostvN6A",
-    authDomain: "infinitybraingym.firebaseapp.com", // ✅ Ise fix rakho, 404 gayab ho jayega
-    projectId: "infinitybraingym",
-    storageBucket: "infinitybraingym.firebasestorage.app",
-    messagingSenderId: "218368274077",
-    appId: "1:218368274077:web:9827f219a718ef14546e74"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
-// --- 1. IMPORTS & CONFIG ---
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, doc, updateDoc, getDocs, where } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
-import { getAuth, signInWithPopup, signInWithRedirect, getRedirectResult, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
-
-// 🔥 FIX: dynamicAuthDomain ko hata diya hai kyunki ye 404 error de raha tha.
-// Firebase Auth popup/redirect ke liye hamesha original firebaseapp domain hi best hota hai.
-
-const firebaseConfig = {
-    apiKey: "AIzaSyAFRj4L-nsDW37e5gc4WC4lpbGgostvN6A",
-    authDomain: "infinitybraingym.firebaseapp.com", // ✅ Ise fix rakho, 404 gayab ho jayega
-    projectId: "infinitybraingym",
-    storageBucket: "infinitybraingym.firebasestorage.app",
-    messagingSenderId: "218368274077",
-    appId: "1:218368274077:web:9827f219a718ef14546e74"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
-// --- 1. IMPORTS & CONFIG ---
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, doc, updateDoc, getDocs, where } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
-import { getAuth, signInWithPopup, signInWithRedirect, getRedirectResult, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
-
-// 🔥 FIX: dynamicAuthDomain ko hata diya hai kyunki ye 404 error de raha tha.
-// Firebase Auth popup/redirect ke liye hamesha original firebaseapp domain hi best hota hai.
-
-const firebaseConfig = {
-    apiKey: "AIzaSyAFRj4L-nsDW37e5gc4WC4lpbGgostvN6A",
-    authDomain: "infinitybraingym.firebaseapp.com", // ✅ Ise fix rakho, 404 gayab ho jayega
-    projectId: "infinitybraingym",
-    storageBucket: "infinitybraingym.firebasestorage.app",
-    messagingSenderId: "218368274077",
-    appId: "1:218368274077:web:9827f219a718ef14546e74"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
-const provider = new GoogleAuthProvider();
-
 
 // --- 2. GAME VARIABLES ---
 let xp = parseInt(localStorage.getItem('inf_xp')) || 0;
@@ -93,7 +26,7 @@ let currentUserEmail = localStorage.getItem('user_email') || "";
 let currentCategory = 'all'; 
 const REFILL_TIME = 3 * 60 * 60 * 1000;
 
-// --- 3. DATABASE (SAME AS BEFORE) ---
+// --- 3. MEGA DATABASE (SAB CATEGORIES KE SATH) ---
 const database = [
     { id: 1, type: 'quiz', category: 'webdev', q: "Which tag is used for an image?", opt: ["<img>", "<pic>", "<src>"], c: "<img>" },
     { id: 2, type: 'quiz', category: 'webdev', q: "Largest heading tag?", opt: ["<h1>", "<h6>", "<head>"], c: "<h1>" },
@@ -103,6 +36,7 @@ const database = [
     { id: 201, type: 'quiz', category: 'python', q: "Python function define karne ka keyword?", opt: ["def", "func", "lambda"], c: "def" },
     { id: 202, type: 'quiz', category: 'python', q: "Python file extension?", opt: [".py", ".pyt", ".python"], c: ".py" },
     { id: 210, type: 'quiz', category: 'cpp', q: "C++ output operator?", opt: ["<<", ">>", "cout"], c: "<<" },
+    { id: 250, type: 'quiz', category: 'java', q: "Java is a ___ language?", opt: ["Platform Independent", "Platform Dependent", "Low Level"], c: "Platform Independent" },
     { id: 301, type: 'quiz', category: 'word', q: "MS Word primarily used for?", opt: ["Documents", "Calculations", "Slides"], c: "Documents" },
     { id: 302, type: 'quiz', category: 'excel', q: "Excel formula starts with?", opt: ["=", "@", "#"], c: "=" },
     { id: 303, type: 'quiz', category: 'ppt', q: "MS PowerPoint extension?", opt: [".pptx", ".docx", ".xlsx"], c: ".pptx" },
@@ -114,7 +48,7 @@ const database = [
     { id: 68, type: 'puzzle', category: 'puzzle', q: "I shave every day, but my beard stays the same. Who am I?", a: "Barber" }
 ];
 
-// --- 4. ENGINE & HELPERS ---
+// --- 4. ENGINE & UI HELPERS ---
 window.setCategory = (cat) => {
     currentCategory = cat;
     document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -133,6 +67,21 @@ function escapeHTML(str) {
     return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
+// --- 5. LEADERBOARD DISPLAY LOGIC ---
+function loadLeaderboard() {
+    const q = query(collection(db, "leaderboard"), orderBy("score", "desc"), limit(10));
+    onSnapshot(q, (snapshot) => {
+        const list = document.getElementById('leaderboard-list');
+        if(!list) return;
+        list.innerHTML = snapshot.docs.map((doc, i) => `
+            <li style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee; font-size:14px;">
+                <span>${i+1}. ${doc.data().name}</span>
+                <span style="font-weight:bold; color:#3b82f6;">${doc.data().score} XP</span>
+            </li>`).join('') || "<p>No scores yet</p>";
+    });
+}
+
+// --- 6. GAME ENGINE ---
 window.generateNextChallenge = function() {
     const container = document.getElementById('game-container');
     if(!container) return; 
@@ -151,28 +100,28 @@ window.generateNextChallenge = function() {
 
     if (pool.length === 0) {
         if (currentCategory !== 'all') { dailyDone[currentCategory] = today; localStorage.setItem('daily_completed_cats', JSON.stringify(dailyDone)); }
-        container.innerHTML = `<div class="card"><h3>🎯 Mastered!</h3><button class="btn-main" onclick="setCategory('all')">Go Back</button></div>`;
+        container.innerHTML = `<div class="card"><h3>🎯 Category Mastered!</h3><button class="btn-main" onclick="setCategory('all')">Go Home</button></div>`;
         return;
     }
 
     const item = pool[Math.floor(Math.random() * pool.length)];
     container.innerHTML = `
         <div class="card">
-            <span class="badge">${item.category.toUpperCase()}</span>
+            <span class="badge" style="background:#3b82f6; color:white; padding:2px 8px; border-radius:5px; font-size:10px; display:inline-block; margin-bottom:10px;">${item.category.toUpperCase()}</span>
             <h3>${item.type === 'puzzle' ? '🧩' : '💻'} ${item.q}</h3>
             ${item.type === 'puzzle' ? 
-                `<input type="text" id="puzzle-answer" placeholder="Answer..."><button class="btn-main" onclick="checkPuzzleAnswer('${item.a}', ${item.id})">Submit</button>` :
+                `<input type="text" id="puzzle-answer" placeholder="Type answer..."><button class="btn-main" onclick="checkPuzzleAnswer('${item.a}', ${item.id})">Submit 🚀</button>` :
                 `<div class="options">${item.opt.map(o => `<button onclick="checkAnswer(this, '${o.replace(/'/g, "\\'")}', '${item.c.replace(/'/g, "\\'")}', ${item.id})">${escapeHTML(o)}</button>`).join('')}</div>`
             }
         </div>`;
 };
 
-// --- 5. LOGIC & SYNC ---
+// --- 7. CORE LOGIC ---
 window.checkAnswer = (btn, sel, cor, id) => {
     if(sel === cor) { 
-        btn.style.background = "#10b981"; markAsSolved(id); updateXP(20); setTimeout(generateNextChallenge, 800); 
+        btn.style.background = "#10b981"; btn.style.color = "white"; markAsSolved(id); updateXP(20); setTimeout(generateNextChallenge, 800); 
     } else { 
-        btn.style.background = "#ef4444"; hearts--; syncStatsUI(); hearts <= 0 ? handleGameOver() : alert("Wrong! 💔");
+        btn.style.background = "#ef4444"; btn.style.color = "white"; hearts--; syncStatsUI(); hearts <= 0 ? handleGameOver() : alert("Wrong! 💔");
     }
 };
 
@@ -188,8 +137,7 @@ function markAsSolved(id) {
 }
 
 function updateXP(val) {
-    xp += val; 
-    if(xp >= level * 100) { xp -= level * 100; level++; }
+    xp += val; if(xp >= level * 100) { xp -= level * 100; level++; alert("🎉 LEVEL UP!"); }
     localStorage.setItem('inf_xp', xp); localStorage.setItem('inf_lvl', level);
     syncStatsUI(); saveToFirebase();
 }
@@ -235,62 +183,22 @@ function checkHeartStatus() {
         hearts = 3; syncStatsUI(); window.location.reload();
     }
 }
-// --- 6. AUTH FIXED & STABLE (FINAL VERSION) ---
 
-// 1. Google Login Function
-window.loginWithGoogle = async () => { 
-    try { 
-        // Popup mode fast hota hai, agar block ho toh redirect par jata hai
-        const result = await signInWithPopup(auth, provider);
-        if (result.user) {
-            console.log("Popup Login Success");
-            localStorage.setItem('user_name', result.user.displayName);
-            localStorage.setItem('user_email', result.user.email);
-            window.location.replace("home.html");
-        }
-    } catch (e) { 
-        console.error("Popup blocked or error, trying Redirect...", e);
-        // Agar Popup block ho jaye (mobile par aksar hota hai), toh Redirect try karo
-        await signInWithRedirect(auth, provider);
-    } 
-};
+// --- 8. AUTH & INIT ---
+window.loginWithGoogle = async () => { try { await signInWithPopup(auth, provider); } catch (e) { console.error(e); } };
+window.logout = () => signOut(auth).then(() => { localStorage.clear(); window.location.replace("index.html"); });
 
-// 2. Logout Function
-window.logout = () => signOut(auth).then(() => { 
-    localStorage.clear(); 
-    window.location.replace("index.html"); 
-});
-
-// 3. CATCH REDIRECT RESULT (Sirf tab chalta hai jab redirect use hua ho)
-getRedirectResult(auth).then((result) => {
-    if (result && result.user) {
-        localStorage.setItem('user_name', result.user.displayName);
-        localStorage.setItem('user_email', result.user.email);
-        window.location.replace("home.html");
-    }
-}).catch((e) => console.error("Redirect Error:", e));
-
-// 4. AUTH STATE MONITOR
 onAuthStateChanged(auth, (user) => {
-    const path = window.location.pathname;
-    const isLoginPage = path.endsWith("index.html") || path.endsWith("/") || path === "";
-
     if (user) {
-        currentUserName = user.displayName; 
-        currentUserEmail = user.email;
-        localStorage.setItem('user_name', user.displayName);
-        localStorage.setItem('user_email', user.email);
-        
-        if (isLoginPage) {
-            window.location.replace("home.html");
-        }
-        
-        if (typeof syncStatsUI === "function") syncStatsUI();
-        if (typeof generateNextChallenge === "function") generateNextChallenge(); 
-        
-    } else {
-        if (!isLoginPage) {
-            window.location.replace("index.html");
-        }
+        currentUserName = user.displayName; currentUserEmail = user.email;
+        if(document.getElementById('login-screen')) document.getElementById('login-screen').style.display = "none";
+        if(document.getElementById('main-game-area')) document.getElementById('main-game-area').style.display = "block";
+        if (window.location.pathname.includes("index.html")) window.location.href = "home.html";
+        generateNextChallenge(); syncStatsUI(); loadLeaderboard();
+    } else if (!window.location.pathname.includes("index.html")) {
+        window.location.replace("index.html");
     }
 });
+
+setInterval(checkHeartStatus, 1000);
+window.onload = () => { syncStatsUI(); checkHeartStatus(); };
