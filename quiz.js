@@ -169,41 +169,51 @@ function checkHeartStatus() {
     }
 }
 
-// --- 6. AUTH FIXED FOR LAPTOP ---
+// --- 6. AUTH FIXED & STABLE FOR LAPTOP ---
 window.loginWithGoogle = async () => { 
     try { 
-        // Laptop par block hone se bachne ke liye Redirect mode use kar rahe hain
         await signInWithRedirect(auth, provider); 
     } catch (e) { 
         console.error("Login Error:", e); 
     } 
 };
 
-window.logout = () => signOut(auth).then(() => { localStorage.clear(); window.location.replace("index.html"); });
+window.logout = () => signOut(auth).then(() => { 
+    localStorage.clear(); 
+    window.location.replace("index.html"); 
+});
 
-// Redirect hone ke baad data pakadne ke liye
-getRedirectResult(auth).catch((e) => console.error("Redirect Result Error:", e));
+// SUCCESS DATA HANDLING: Redirect ke baad data yahan pakda jayega
+getRedirectResult(auth).then((result) => {
+    if (result && result.user) {
+        // Redirect ke baad agar user mil gaya toh home par bhej do
+        localStorage.setItem('user_name', result.user.displayName);
+        localStorage.setItem('user_email', result.user.email);
+        window.location.href = "home.html";
+    }
+}).catch((e) => console.error("Redirect Result Error:", e));
 
 onAuthStateChanged(auth, (user) => {
+    // URL path check ko thoda smart banaya hai
+    const path = window.location.pathname;
+    const isLoginPage = path.endsWith("index.html") || path.endsWith("/");
+
     if (user) {
         currentUserName = user.displayName; 
         currentUserEmail = user.email;
         localStorage.setItem('user_name', user.displayName);
         localStorage.setItem('user_email', user.email);
         
-        // Agar login screen par hai toh home par bhej do
-        if (window.location.pathname.endsWith("index.html") || window.location.pathname.endsWith("/")) {
+        if (isLoginPage) {
             window.location.href = "home.html";
         }
-        generateNextChallenge(); 
-        syncStatsUI();
+        
+        // Functions check karke call karna safe hota hai
+        if (typeof generateNextChallenge === "function") generateNextChallenge(); 
+        if (typeof syncStatsUI === "function") syncStatsUI();
     } else {
-        // Agar login nahi hai aur home par jaane ki koshish kare toh wapis bhejo
-        if (!window.location.pathname.endsWith("index.html") && !window.location.pathname.endsWith("/")) {
+        if (!isLoginPage) {
             window.location.replace("index.html");
         }
     }
 });
-
-setInterval(checkHeartStatus, 1000);
-window.onload = syncStatsUI;
