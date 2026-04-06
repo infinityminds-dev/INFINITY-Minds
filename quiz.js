@@ -169,49 +169,63 @@ function checkHeartStatus() {
     }
 }
 
-// --- 6. AUTH FIXED & STABLE FOR LAPTOP ---
+// --- 6. AUTH FIXED & STABLE (FOR MOBILE & LAPTOP) ---
+
+// 1. Google Login Function
 window.loginWithGoogle = async () => { 
     try { 
+        // Mobile/Laptop redirect mode is best for compatibility
         await signInWithRedirect(auth, provider); 
     } catch (e) { 
         console.error("Login Error:", e); 
+        alert("Login failed! Please check your connection.");
     } 
 };
 
+// 2. Logout Function
 window.logout = () => signOut(auth).then(() => { 
     localStorage.clear(); 
     window.location.replace("index.html"); 
 });
 
-// SUCCESS DATA HANDLING: Redirect ke baad data yahan pakda jayega
+// 3. CATCH REDIRECT RESULT (Account choose karne ke baad ye data pakadta hai)
 getRedirectResult(auth).then((result) => {
     if (result && result.user) {
-        // Redirect ke baad agar user mil gaya toh home par bhej do
+        console.log("Redirect Success: User Logged In");
         localStorage.setItem('user_name', result.user.displayName);
         localStorage.setItem('user_email', result.user.email);
-        window.location.href = "home.html";
+        // Turant home page par bhej do
+        window.location.replace("home.html");
     }
-}).catch((e) => console.error("Redirect Result Error:", e));
+}).catch((e) => {
+    console.error("Redirect Result Error:", e);
+});
 
+// 4. AUTH STATE MONITOR (Automatic Login & Page Guard)
 onAuthStateChanged(auth, (user) => {
-    // URL path check ko thoda smart banaya hai
     const path = window.location.pathname;
-    const isLoginPage = path.endsWith("index.html") || path.endsWith("/");
+    // Check if user is on Login/Index page
+    const isLoginPage = path.endsWith("index.html") || path.endsWith("/") || path === "";
 
     if (user) {
+        // User is Logged In
         currentUserName = user.displayName; 
         currentUserEmail = user.email;
         localStorage.setItem('user_name', user.displayName);
         localStorage.setItem('user_email', user.email);
         
+        // Agar login hai aur login page par baitha hai, toh home bhejo
         if (isLoginPage) {
-            window.location.href = "home.html";
+            window.location.replace("home.html");
         }
         
-        // Functions check karke call karna safe hota hai
-        if (typeof generateNextChallenge === "function") generateNextChallenge(); 
+        // Game initialize karo agar functions available hain
         if (typeof syncStatsUI === "function") syncStatsUI();
+        if (typeof generateNextChallenge === "function") generateNextChallenge(); 
+        
     } else {
+        // User is Logged Out
+        // Agar logout hai aur home page access karne ki koshish kare, toh wapis index bhejo
         if (!isLoginPage) {
             window.location.replace("index.html");
         }
