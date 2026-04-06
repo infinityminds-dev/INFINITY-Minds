@@ -3,15 +3,12 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebas
 import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, doc, updateDoc, getDocs, where } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
 import { getAuth, signInWithPopup, signInWithRedirect, getRedirectResult, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 
-// Dynamic AuthDomain Helper
-const currentHost = window.location.hostname;
-const dynamicAuthDomain = currentHost === "localhost" || currentHost === "127.0.0.1" 
-    ? "infinitybraingym.firebaseapp.com" 
-    : currentHost;
+// 🔥 FIX: dynamicAuthDomain ko hata diya hai kyunki ye 404 error de raha tha.
+// Firebase Auth popup/redirect ke liye hamesha original firebaseapp domain hi best hota hai.
 
 const firebaseConfig = {
     apiKey: "AIzaSyAFRj4L-nsDW37e5gc4WC4lpbGgostvN6A",
-    authDomain: dynamicAuthDomain, // 🔥 Ye ab automatic detect karega (Vercel ya Netlify)
+    authDomain: "infinitybraingym.firebaseapp.com", // ✅ Ise fix rakho, 404 gayab ho jayega
     projectId: "infinitybraingym",
     storageBucket: "infinitybraingym.firebasestorage.app",
     messagingSenderId: "218368274077",
@@ -22,6 +19,70 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
+// --- 1. IMPORTS & CONFIG ---
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, doc, updateDoc, getDocs, where } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+import { getAuth, signInWithPopup, signInWithRedirect, getRedirectResult, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+
+// 🔥 FIX: dynamicAuthDomain ko hata diya hai kyunki ye 404 error de raha tha.
+// Firebase Auth popup/redirect ke liye hamesha original firebaseapp domain hi best hota hai.
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAFRj4L-nsDW37e5gc4WC4lpbGgostvN6A",
+    authDomain: "infinitybraingym.firebaseapp.com", // ✅ Ise fix rakho, 404 gayab ho jayega
+    projectId: "infinitybraingym",
+    storageBucket: "infinitybraingym.firebasestorage.app",
+    messagingSenderId: "218368274077",
+    appId: "1:218368274077:web:9827f219a718ef14546e74"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+// --- 1. IMPORTS & CONFIG ---
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, doc, updateDoc, getDocs, where } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+import { getAuth, signInWithPopup, signInWithRedirect, getRedirectResult, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+
+// 🔥 FIX: dynamicAuthDomain ko hata diya hai kyunki ye 404 error de raha tha.
+// Firebase Auth popup/redirect ke liye hamesha original firebaseapp domain hi best hota hai.
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAFRj4L-nsDW37e5gc4WC4lpbGgostvN6A",
+    authDomain: "infinitybraingym.firebaseapp.com", // ✅ Ise fix rakho, 404 gayab ho jayega
+    projectId: "infinitybraingym",
+    storageBucket: "infinitybraingym.firebasestorage.app",
+    messagingSenderId: "218368274077",
+    appId: "1:218368274077:web:9827f219a718ef14546e74"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+// --- 1. IMPORTS & CONFIG ---
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, doc, updateDoc, getDocs, where } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+import { getAuth, signInWithPopup, signInWithRedirect, getRedirectResult, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+
+// 🔥 FIX: dynamicAuthDomain ko hata diya hai kyunki ye 404 error de raha tha.
+// Firebase Auth popup/redirect ke liye hamesha original firebaseapp domain hi best hota hai.
+
+const firebaseConfig = {
+    apiKey: "AIzaSyAFRj4L-nsDW37e5gc4WC4lpbGgostvN6A",
+    authDomain: "infinitybraingym.firebaseapp.com", // ✅ Ise fix rakho, 404 gayab ho jayega
+    projectId: "infinitybraingym",
+    storageBucket: "infinitybraingym.firebasestorage.app",
+    messagingSenderId: "218368274077",
+    appId: "1:218368274077:web:9827f219a718ef14546e74"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
 
 // --- 2. GAME VARIABLES ---
 let xp = parseInt(localStorage.getItem('inf_xp')) || 0;
