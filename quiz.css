@@ -138,3 +138,75 @@ input, #puzzle-answer {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+/* --- NEW: Category Tabs & Section Titles Styling --- */
+
+.section-title {
+    font-size: 12px;
+    color: #fbbf24; /* Gold color matching your theme */
+    margin: 20px 0 8px 5px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 800;
+    text-align: left;
+    opacity: 0.9;
+}
+
+.category-tabs {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto; /* Mobile par slide karne ke liye */
+    padding: 5px 0 15px 0;
+    scrollbar-width: none; /* Firefox hide scrollbar */
+    -ms-overflow-style: none; /* IE hide scrollbar */
+}
+
+/* Hide scrollbar for Chrome/Safari */
+.category-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.tab-btn {
+    background: #1e293b;
+    color: #94a3b8;
+    border: 1px solid #334155;
+    padding: 8px 18px;
+    border-radius: 25px;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.tab-btn:hover {
+    background: #334155;
+    color: white;
+}
+
+.tab-btn.active {
+    background: #3b82f6; /* Blue matching your header */
+    color: white;
+    border-color: #60a5fa;
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+    transform: scale(1.05);
+}
+
+/* Hall of Fame (Last Week Winners) specific touch */
+#last-week-winners {
+    border: 1px solid #fbbf24;
+    background: rgba(251, 191, 36, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+#last-week-winners::before {
+    content: '🏆';
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    font-size: 40px;
+    opacity: 0.1;
+}
+
