@@ -266,5 +266,22 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
+// --- 9. FINAL INITIALIZATION ---
+
+window.onload = () => {
+    // 1. Stats UI update (XP, Hearts, Level)
+    syncStatsUI(); 
+    
+    // 2. Naam update (Display name set karega)
+    const name = localStorage.getItem('user_name');
+    const displayNameElement = document.getElementById('display-name');
+    if (name && displayNameElement) {
+        displayNameElement.innerText = name;
+    }
+
+    // 3. Heart refill check (Timer screen ke liye)
+    checkHeartStatus();
+};
+
+// Har 1 second mein timer refresh karne ke liye
 setInterval(checkHeartStatus, 1000);
-window.onload = syncStatsUI;
