@@ -1,8 +1,31 @@
 // --- 1. IMPORTS & CONFIG ---
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
-import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, doc, updateDoc, getDocs, where } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
-// Saare Auth functions ek hi line mein:
-import { getAuth, signInWithRedirect, getRedirectResult, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+import { 
+    getFirestore, 
+    collection, 
+    addDoc, 
+    onSnapshot, 
+    query, 
+    orderBy, 
+    limit, 
+    doc, 
+    updateDoc, 
+    getDocs, 
+    where 
+} from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
+
+// Saare Auth functions (Added Popup and Persistence for Mobile fix)
+import { 
+    getAuth, 
+    signInWithRedirect, 
+    signInWithPopup, 
+    getRedirectResult, 
+    GoogleAuthProvider, 
+    onAuthStateChanged, 
+    signOut,
+    setPersistence,
+    browserLocalPersistence 
+} from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAFRj4L-nsDW37e5gc4WC4lpbGgostvN6A",
@@ -219,48 +242,71 @@ function checkHeartStatus() {
     }
 }
 
+
 // --- 8. AUTH & INIT ---
 
-// A. Redirect Result Handle (Mobile users ke liye)
+// A. Persistence Set karna (Taaki login yaad rahe)
+const initializeAuth = async () => {
+    try {
+        await setPersistence(auth, browserLocalPersistence);
+    } catch (e) {
+        console.error("Persistence Error:", e);
+    }
+};
+initializeAuth();
+
+// B. Redirect Result Handle
 getRedirectResult(auth).then((result) => {
     if (result && result.user) {
         localStorage.setItem('user_name', result.user.displayName);
+        localStorage.setItem('user_email', result.user.email);
         window.location.replace("home.html");
     }
 }).catch((e) => {
     console.error("Redirect Login Error:", e);
 });
 
-// B. Login Trigger (Button ke liye)
+// C. Login Trigger (Smart Switch: Popup then Redirect)
 window.loginWithGoogle = async () => { 
     try { 
-        await signInWithRedirect(auth, provider); 
+        // Pehle Popup try karo (Mobile ke liye fast aur stable hai)
+        const result = await signInWithPopup(auth, provider);
+        if (result.user) {
+            localStorage.setItem('user_name', result.user.displayName);
+            window.location.replace("home.html");
+        }
     } catch (e) { 
-        console.error("Login Button Error:", e); 
+        console.warn("Popup blocked, trying redirect...", e); 
+        // Agar popup block ho jaye (Edge settings ki wajah se), toh redirect karo
+        await signInWithRedirect(auth, provider); 
     } 
 };
 
-// C. Logout
+// D. Logout
 window.logout = () => signOut(auth).then(() => { 
     localStorage.clear(); 
     window.location.replace("index.html"); 
 });
 
-// D. State Persistence
+// E. State Persistence (Auto-Redirect logic)
 onAuthStateChanged(auth, (user) => {
+    const isLoginPage = window.location.pathname.includes("index.html") || window.location.pathname === "/";
+    const isHomePage = window.location.pathname.includes("home.html");
+
     if (user) {
         currentUserName = user.displayName; 
         currentUserEmail = user.email;
         localStorage.setItem('user_name', user.displayName);
         
-        if (window.location.pathname.includes("index.html") || window.location.pathname === "/") {
+        if (isLoginPage) {
             window.location.replace("home.html");
         }
         
-        if (typeof generateNextChallenge === "function") generateNextChallenge(); 
+        // UI updates
         if (typeof syncStatsUI === "function") syncStatsUI();
+        if (typeof generateNextChallenge === "function") generateNextChallenge(); 
     } else {
-        if (window.location.pathname.includes("home.html")) {
+        if (isHomePage) {
             window.location.replace("index.html");
         }
     }
@@ -269,19 +315,17 @@ onAuthStateChanged(auth, (user) => {
 // --- 9. FINAL INITIALIZATION ---
 
 window.onload = () => {
-    // 1. Stats UI update (XP, Hearts, Level)
+    // Stats UI update
     syncStatsUI(); 
     
-    // 2. Naam update (Display name set karega)
+    // Naam update logic
     const name = localStorage.getItem('user_name');
     const displayNameElement = document.getElementById('display-name');
     if (name && displayNameElement) {
         displayNameElement.innerText = name;
     }
 
-    // 3. Heart refill check (Timer screen ke liye)
     checkHeartStatus();
 };
 
-// Har 1 second mein timer refresh karne ke liye
 setInterval(checkHeartStatus, 1000);
