@@ -197,6 +197,7 @@ function markAsSolved(id) {
 }
 
 function updateXP(val) {
+    // 1. Permanent Progress (Level Up Logic)
     xp += val; 
     if(xp >= level * 100) { 
         xp -= level * 100; 
@@ -205,30 +206,43 @@ function updateXP(val) {
     }
     localStorage.setItem('inf_xp', xp); 
     localStorage.setItem('inf_lvl', level);
+
+    // 2. Weekly Competition Logic (Reset every Monday)
+    const currentWeek = getWeekIdentifier();
+    const lastSavedWeek = localStorage.getItem('last_saved_week');
+    let weeklyXP = parseInt(localStorage.getItem('weekly_xp')) || 0;
+
+    // Agar hafta badal gaya hai toh weekly score 0 se shuru hoga
+    if (lastSavedWeek !== currentWeek) {
+        weeklyXP = val; 
+        localStorage.setItem('last_saved_week', currentWeek);
+    } else {
+        weeklyXP += val;
+    }
+    localStorage.setItem('weekly_xp', weeklyXP);
+
     syncStatsUI(); 
-    saveToFirebase(); // Firebase update trigger
+    saveToFirebase(weeklyXP); // Sirf Weekly XP Firebase bhej rahe hain
 }
 
-// FIXED: Monday Refresh & Score Logic
-async function saveToFirebase() {
+// FIXED: Monday Refresh & Fairness Score
+async function saveToFirebase(weeklyScore) {
     if(!currentUserEmail) return;
     try {
         const currentWeek = getWeekIdentifier();
-        // Sirf is week ka data search karo
+        // Database mein sirf is hafte ka entry dhoondo
         const q = query(collection(db, "leaderboard"), 
                   where("email", "==", currentUserEmail),
                   where("week", "==", currentWeek));
         
         const snap = await getDocs(q);
         
-        // Ranking Logic: Level 2 hamesha Level 1 se upar rahega
-        const totalScore = (level * 1000) + xp;
-
+        // Data format (Level safe hai, par rank Weekly Score se decide hogi)
         const data = { 
             name: currentUserName, 
             email: currentUserEmail, 
-            score: totalScore, 
-            level: level, 
+            score: weeklyScore, // Rank ke liye sirf is hafte ki mehnat
+            level: level,       // Level bas dikhane ke liye
             week: currentWeek, 
             lastSeen: new Date() 
         };
@@ -239,7 +253,6 @@ async function saveToFirebase() {
             await updateDoc(doc(db, "leaderboard", snap.docs[0].id), data); 
         }
         
-        // Instant Leaderboard Refresh
         if (typeof updateLeaderboard === "function") updateLeaderboard();
         
     } catch (e) { 
@@ -249,9 +262,10 @@ async function saveToFirebase() {
 
 function syncStatsUI() {
     localStorage.setItem('inf_hearts', hearts);
+    // UI par display stats
     const el = {
         'user-hearts': hearts, 
-        'user-xp': xp, 
+        'user-xp': xp, // Ye total progress dikhayega
         'user-level': level, 
         'display-name': currentUserName || "Explorer"
     };
@@ -286,6 +300,7 @@ function checkHeartStatus() {
         window.location.reload();
     }
 }
+
 
 
 // --- 8. AUTH & STATE LOGIC ---
@@ -372,30 +387,39 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
-// --- 9. FINAL INITIALIZATION ---
+// --- 9. FINAL INITIALIZATION (With Weekly Reset Logic) ---
 
 window.onload = async () => {
-    // 1. Local Storage se latest stats load karo
-    // Hum wahi keys use kar rahe hain jo Section 7 mein save ho rahi hain
+    // 1. Permanent Stats Load (Level aur Total XP jo kabhi reset nahi honge)
     xp = parseInt(localStorage.getItem('inf_xp')) || 0;
     level = parseInt(localStorage.getItem('inf_lvl')) || 1;
     hearts = parseInt(localStorage.getItem('inf_hearts')) || 3;
 
-    // 2. Stats UI update (XP, Hearts, etc.)
+    // 2. WEEKLY RESET CHECK (Leaderboard Fairness ke liye)
+    const currentWeek = getWeekIdentifier();
+    const lastSavedWeek = localStorage.getItem('last_saved_week');
+
+    if (lastSavedWeek !== currentWeek) {
+        // Naya hafta shuru! Weekly score reset karo par Level wahi rahega
+        localStorage.setItem('weekly_xp', 0); 
+        localStorage.setItem('last_saved_week', currentWeek);
+        console.log("Naya hafta shuru! Weekly XP reset ho gayi hai. 🚀");
+    }
+
+    // 3. Stats UI update (XP, Hearts, etc.)
     syncStatsUI(); 
     
-    // 3. User ka naam update logic
+    // 4. User ka naam update logic
     const name = localStorage.getItem('user_name');
     const displayNameElement = document.getElementById('display-name');
     if (name && displayNameElement) {
         displayNameElement.innerText = name;
     }
 
-    // 4. Heart refill check (Timer screen manage karega)
+    // 5. Heart refill check
     checkHeartStatus();
 
-    // 5. LEADERBOARD & WINNERS LOAD
-    // Ye functions Section 10 mein bane hue hain
+    // 6. LEADERBOARD & WINNERS LOAD
     if (typeof updateLeaderboard === "function") {
         updateLeaderboard(); 
     }
@@ -404,9 +428,8 @@ window.onload = async () => {
     }
 };
 
-// Har 1 second mein timer (hearts refill) ko refresh karne ke liye
+// Timer refresh
 setInterval(checkHeartStatus, 1000);
-
 
 
 // --- 10. LEADERBOARD & WINNERS UI ---
