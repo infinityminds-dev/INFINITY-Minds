@@ -1,9 +1,8 @@
 // --- 1. IMPORTS & CONFIG ---
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
 import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, doc, updateDoc, getDocs, where } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
-
-// Is line mein 'signInWithRedirect' aur 'getRedirectResult' add kiya hai:
-import { getAuth, signInWithPopup, signInWithRedirect, getRedirectResult, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+// Saare Auth functions ek hi line mein:
+import { getAuth, signInWithRedirect, getRedirectResult, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAFRj4L-nsDW37e5gc4WC4lpbGgostvN6A",
@@ -13,6 +12,12 @@ const firebaseConfig = {
     messagingSenderId: "218368274077",
     appId: "1:218368274077:web:9827f219a718ef14546e74"
 };
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
 
 // --- 2. GAME VARIABLES ---
 let xp = parseInt(localStorage.getItem('inf_xp')) || 0;
@@ -216,55 +221,50 @@ function checkHeartStatus() {
 
 // --- 8. AUTH & INIT ---
 
-// 1. Imports mein ye dono extra functions add kar lena upar (line 4 par):
-// signInWithRedirect, getRedirectResult
-
-import { getAuth, signInWithPopup, signInWithRedirect, getRedirectResult, GoogleAuthProvider, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
-
-// 2. Handle Redirect Result (Ye 403/Forbidden error ko bypass karega)
+// A. Redirect Result Handle (Mobile users ke liye)
 getRedirectResult(auth).then((result) => {
     if (result && result.user) {
         localStorage.setItem('user_name', result.user.displayName);
         window.location.replace("home.html");
     }
 }).catch((e) => {
-    console.error("Redirect Error Details:", e);
+    console.error("Redirect Login Error:", e);
 });
 
-// 3. Updated Login Function (Mobile ke liye best)
+// B. Login Trigger (Button ke liye)
 window.loginWithGoogle = async () => { 
     try { 
-        // Popup ki jagah Redirect use karo
         await signInWithRedirect(auth, provider); 
     } catch (e) { 
-        console.error("Login Trigger Error:", e); 
+        console.error("Login Button Error:", e); 
     } 
 };
 
+// C. Logout
 window.logout = () => signOut(auth).then(() => { 
     localStorage.clear(); 
     window.location.replace("index.html"); 
 });
 
+// D. State Persistence
 onAuthStateChanged(auth, (user) => {
     if (user) {
         currentUserName = user.displayName; 
         currentUserEmail = user.email;
         localStorage.setItem('user_name', user.displayName);
         
-        // Check if we are on login page, then move to home
         if (window.location.pathname.includes("index.html") || window.location.pathname === "/") {
             window.location.replace("home.html");
         }
         
-        // Agar functions exist karte hain tabhi call karo
         if (typeof generateNextChallenge === "function") generateNextChallenge(); 
         if (typeof syncStatsUI === "function") syncStatsUI();
-        if (typeof loadLeaderboard === "function") loadLeaderboard();
     } else {
-        // Agar user logged in nahi hai aur home.html par hai, toh login par bhejo
         if (window.location.pathname.includes("home.html")) {
             window.location.replace("index.html");
         }
     }
 });
+
+setInterval(checkHeartStatus, 1000);
+window.onload = syncStatsUI;
