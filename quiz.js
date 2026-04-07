@@ -242,10 +242,9 @@ function checkHeartStatus() {
     }
 }
 
+// --- 8. AUTH & STATE LOGIC ---
 
-// --- 8. AUTH & INIT ---
-
-// A. Persistence Set karna (Taaki login yaad rahe)
+// A. Persistence (Login yaad rakhne ke liye)
 const initializeAuth = async () => {
     try {
         await setPersistence(auth, browserLocalPersistence);
@@ -259,25 +258,20 @@ initializeAuth();
 getRedirectResult(auth).then((result) => {
     if (result && result.user) {
         localStorage.setItem('user_name', result.user.displayName);
-        localStorage.setItem('user_email', result.user.email);
         window.location.replace("home.html");
     }
-}).catch((e) => {
-    console.error("Redirect Login Error:", e);
-});
+}).catch((e) => console.error("Redirect Login Error:", e));
 
-// C. Login Trigger (Smart Switch: Popup then Redirect)
+// C. Login Trigger
 window.loginWithGoogle = async () => { 
     try { 
-        // Pehle Popup try karo (Mobile ke liye fast aur stable hai)
         const result = await signInWithPopup(auth, provider);
         if (result.user) {
             localStorage.setItem('user_name', result.user.displayName);
-            window.location.replace("home.html");
+            // Agar quiz page par hi ho, toh reload ya redirect ki zarurat nahi, State handle kar lega
         }
     } catch (e) { 
-        console.warn("Popup blocked, trying redirect...", e); 
-        // Agar popup block ho jaye (Edge settings ki wajah se), toh redirect karo
+        console.warn("Popup blocked, trying redirect..."); 
         await signInWithRedirect(auth, provider); 
     } 
 };
@@ -288,29 +282,50 @@ window.logout = () => signOut(auth).then(() => {
     window.location.replace("index.html"); 
 });
 
-// E. State Persistence (Auto-Redirect logic)
+// E. State Persistence & UI Toggle (Main Magic Here)
 onAuthStateChanged(auth, (user) => {
+    const loginScreen = document.getElementById('login-screen');
+    const gameArea = document.getElementById('main-game-area');
+    const timerScreen = document.getElementById('timer-screen');
     const isLoginPage = window.location.pathname.includes("index.html") || window.location.pathname === "/";
-    const isHomePage = window.location.pathname.includes("home.html");
 
     if (user) {
         currentUserName = user.displayName; 
         currentUserEmail = user.email;
         localStorage.setItem('user_name', user.displayName);
         
+        // Agar index page par hai toh home bhej do
         if (isLoginPage) {
             window.location.replace("home.html");
+            return;
+        }
+
+        // --- QUIZ PAGE UI LOGIC ---
+        // 1. Login card chhupao
+        if (loginScreen) loginScreen.style.display = 'none';
+
+        // 2. Stats update karo
+        if (typeof syncStatsUI === "function") syncStatsUI();
+
+        // 3. Hearts check karke Game ya Timer dikhao
+        const hearts = parseInt(localStorage.getItem('hearts')) || 3;
+        if (hearts > 0) {
+            if (gameArea) gameArea.style.display = 'block';
+            if (timerScreen) timerScreen.style.display = 'none';
+            if (typeof generateNextChallenge === "function") generateNextChallenge(); 
+        } else {
+            if (gameArea) gameArea.style.display = 'none';
+            if (timerScreen) timerScreen.style.display = 'block';
         }
         
-        // UI updates
-        if (typeof syncStatsUI === "function") syncStatsUI();
-        if (typeof generateNextChallenge === "function") generateNextChallenge(); 
     } else {
-        if (isHomePage) {
-            window.location.replace("index.html");
-        }
+        // User logout hai: Login screen dikhao, baki sab chhupao
+        if (loginScreen) loginScreen.style.display = 'block';
+        if (gameArea) gameArea.style.display = 'none';
+        if (timerScreen) timerScreen.style.display = 'none';
     }
 });
+
 
 // --- 9. FINAL INITIALIZATION ---
 
@@ -329,3 +344,4 @@ window.onload = () => {
 };
 
 setInterval(checkHeartStatus, 1000);
+r
