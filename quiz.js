@@ -167,8 +167,8 @@ window.generateNextChallenge = function() {
         </div>`;
 };
 
-
 // --- 7. CORE LOGIC (XP, HEARTS, SYNC) ---
+
 window.checkAnswer = (btn, sel, cor, id) => {
     if(sel === cor) { 
         btn.style.background = "#10b981"; btn.style.color = "white";
@@ -190,31 +190,74 @@ window.checkPuzzleAnswer = (correct, id) => {
 
 function markAsSolved(id) {
     let solved = JSON.parse(localStorage.getItem('solved_ids')) || [];
-    if(!solved.includes(id)) { solved.push(id); localStorage.setItem('solved_ids', JSON.stringify(solved)); }
+    if(!solved.includes(id)) { 
+        solved.push(id); 
+        localStorage.setItem('solved_ids', JSON.stringify(solved)); 
+    }
 }
 
 function updateXP(val) {
     xp += val; 
-    if(xp >= level * 100) { xp -= level * 100; level++; alert("🎉 LEVEL UP!"); }
-    localStorage.setItem('inf_xp', xp); localStorage.setItem('inf_lvl', level);
-    syncStatsUI(); saveToFirebase();
+    if(xp >= level * 100) { 
+        xp -= level * 100; 
+        level++; 
+        alert("🎉 LEVEL UP!"); 
+    }
+    localStorage.setItem('inf_xp', xp); 
+    localStorage.setItem('inf_lvl', level);
+    syncStatsUI(); 
+    saveToFirebase(); // Firebase update trigger
 }
 
+// FIXED: Monday Refresh & Score Logic
 async function saveToFirebase() {
     if(!currentUserEmail) return;
     try {
-        const q = query(collection(db, "leaderboard"), where("email", "==", currentUserEmail));
+        const currentWeek = getWeekIdentifier();
+        // Sirf is week ka data search karo
+        const q = query(collection(db, "leaderboard"), 
+                  where("email", "==", currentUserEmail),
+                  where("week", "==", currentWeek));
+        
         const snap = await getDocs(q);
-        const data = { name: currentUserName, email: currentUserEmail, score: (level * 100) + xp, level: level, week: getWeekIdentifier(), lastSeen: new Date() };
-        if (snap.empty) { await addDoc(collection(db, "leaderboard"), data); }
-        else { await updateDoc(doc(db, "leaderboard", snap.docs[0].id), data); }
-    } catch (e) { console.error(e); }
+        
+        // Ranking Logic: Level 2 hamesha Level 1 se upar rahega
+        const totalScore = (level * 1000) + xp;
+
+        const data = { 
+            name: currentUserName, 
+            email: currentUserEmail, 
+            score: totalScore, 
+            level: level, 
+            week: currentWeek, 
+            lastSeen: new Date() 
+        };
+
+        if (snap.empty) { 
+            await addDoc(collection(db, "leaderboard"), data); 
+        } else { 
+            await updateDoc(doc(db, "leaderboard", snap.docs[0].id), data); 
+        }
+        
+        // Instant Leaderboard Refresh
+        if (typeof updateLeaderboard === "function") updateLeaderboard();
+        
+    } catch (e) { 
+        console.error("Firebase Sync Error:", e); 
+    }
 }
 
 function syncStatsUI() {
     localStorage.setItem('inf_hearts', hearts);
-    const el = {'user-hearts': hearts, 'user-xp': xp, 'user-level': level, 'display-name': currentUserName || "Explorer"};
-    for (const [id, val] of Object.entries(el)) { if(document.getElementById(id)) document.getElementById(id).innerText = val; }
+    const el = {
+        'user-hearts': hearts, 
+        'user-xp': xp, 
+        'user-level': level, 
+        'display-name': currentUserName || "Explorer"
+    };
+    for (const [id, val] of Object.entries(el)) { 
+        if(document.getElementById(id)) document.getElementById(id).innerText = val; 
+    }
 }
 
 function handleGameOver() { 
@@ -238,9 +281,12 @@ function checkHeartStatus() {
             return;
         }
         localStorage.removeItem('last_heart_zero_time');
-        hearts = 3; syncStatsUI(); window.location.reload();
+        hearts = 3; 
+        syncStatsUI(); 
+        window.location.reload();
     }
 }
+
 
 // --- 8. AUTH & STATE LOGIC ---
 
@@ -326,22 +372,121 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
-
 // --- 9. FINAL INITIALIZATION ---
 
-window.onload = () => {
-    // Stats UI update
+window.onload = async () => {
+    // 1. Local Storage se latest stats load karo
+    // Hum wahi keys use kar rahe hain jo Section 7 mein save ho rahi hain
+    xp = parseInt(localStorage.getItem('inf_xp')) || 0;
+    level = parseInt(localStorage.getItem('inf_lvl')) || 1;
+    hearts = parseInt(localStorage.getItem('inf_hearts')) || 3;
+
+    // 2. Stats UI update (XP, Hearts, etc.)
     syncStatsUI(); 
     
-    // Naam update logic
+    // 3. User ka naam update logic
     const name = localStorage.getItem('user_name');
     const displayNameElement = document.getElementById('display-name');
     if (name && displayNameElement) {
         displayNameElement.innerText = name;
     }
 
+    // 4. Heart refill check (Timer screen manage karega)
     checkHeartStatus();
+
+    // 5. LEADERBOARD & WINNERS LOAD
+    // Ye functions Section 10 mein bane hue hain
+    if (typeof updateLeaderboard === "function") {
+        updateLeaderboard(); 
+    }
+    if (typeof updateWinners === "function") {
+        updateWinners();
+    }
 };
 
+// Har 1 second mein timer (hearts refill) ko refresh karne ke liye
 setInterval(checkHeartStatus, 1000);
-r
+
+
+
+// --- 10. LEADERBOARD & WINNERS UI ---
+
+// A. Weekly Leaderboard with (You) highlight
+window.updateLeaderboard = function() {
+    const list = document.getElementById('leaderboard-list');
+    if (!list) return;
+
+    const currentWeek = getWeekIdentifier();
+    const q = query(collection(db, "leaderboard"), 
+                  where("week", "==", currentWeek), 
+                  orderBy("score", "desc"), 
+                  limit(10));
+
+    onSnapshot(q, (snapshot) => {
+        list.innerHTML = "";
+        if (snapshot.empty) {
+            list.innerHTML = "<p style='text-align:center; font-size:12px; opacity:0.5;'>New week started! Be the first.</p>";
+            return;
+        }
+
+        snapshot.forEach((docSnap) => {
+            const user = docSnap.data();
+            const isMe = user.email === currentUserEmail;
+            const li = document.createElement('li');
+            
+            li.style.cssText = `
+                display:flex; justify-content:space-between; padding:10px; 
+                border-bottom:1px solid rgba(255,255,255,0.1); list-style:none;
+                ${isMe ? 'background: rgba(59, 130, 246, 0.2); border-radius: 8px; border: 1px solid #3b82f6;' : ''}
+            `;
+            
+            li.innerHTML = `
+                <span style="color:white; font-weight: ${isMe ? 'bold' : 'normal'};">
+                    ${user.name} ${isMe ? '<small style="color:#10b981;">(You)</small>' : ''}
+                </span>
+                <span style="color:#fbbf24; font-weight: bold;">${user.score} XP</span>
+            `;
+            list.appendChild(li);
+        });
+    });
+};
+
+// B. Weekly Winners (Pichle Hafte ke Top 3)
+window.updateWinners = function() {
+    const winnerList = document.getElementById('winner-list');
+    if (!winnerList) return;
+
+    // --- LAST WEEK NIKALNE KA LOGIC ---
+    const d = new Date();
+    // Aaj se 7 din peeche jao pichle hafte ka ID nikalne ke liye
+    d.setDate(d.getDate() - 7); 
+    d.setDate(d.getDate() + 4 - (d.getDay() || 7));
+    const lastWeekID = `${d.getFullYear()}-W${Math.ceil((((d - new Date(d.getFullYear(), 0, 1)) / 86400000) + 1) / 7)}`;
+
+    console.log("Fetching Winners for:", lastWeekID);
+
+    // Sirf pichle hafte (lastWeekID) ka Top 3 data uthao
+    const q = query(collection(db, "leaderboard"), 
+                  where("week", "==", lastWeekID), 
+                  orderBy("score", "desc"), 
+                  limit(3));
+    
+    onSnapshot(q, (snapshot) => {
+        if (!snapshot.empty) {
+            winnerList.innerHTML = "";
+            let rank = 1;
+            snapshot.forEach(doc => {
+                const d = doc.data();
+                const crown = rank === 1 ? '🥇' : (rank === 2 ? '🥈' : '🥉');
+                winnerList.innerHTML += `
+                    <div style="display:flex; justify-content:space-between; margin-bottom:5px; border-bottom: 1px dashed rgba(251,191,36,0.2); padding-bottom: 5px;">
+                        <span style="font-size:13px; color:#fbbf24;">${crown} ${d.name}</span>
+                        <span style="font-size:11px; opacity:0.7;">Score: ${d.score}</span>
+                    </div>`;
+                rank++;
+            });
+        } else {
+            winnerList.innerHTML = `<p style="font-size:12px; color:gray;">Next winners announced this Monday! 🏆</p>`;
+        }
+    });
+};
