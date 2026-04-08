@@ -82,10 +82,10 @@ const database = [
     // --- 🧩 PUZZLES (Merged IDs) ---
     { id: 31, type: 'puzzle', category: 'puzzle', q: "What has a head and a tail but no body?", a: "Coin" },
     { id: 67, type: 'puzzle', category: 'puzzle', q: "What goes up but never comes down?", a: "Age" },
-    { id: 68, type: 'puzzle', category: 'puzzle', q: "I shave every day, but my beard stays the same. Who am I?", a: "Barber" }
+    { id: 68, type: 'puzzle', category: 'puzzle', q: "I shave every day, but my beard stays the same. Who am I?", a: "Barber" },
 
     // --- ☕ PROGRAMMING: JAVA ---
-    { id: 220,type: 'quiz', category: 'java', q: "Which keyword is used to define a method in Java?",opt: ["public", "void", "static"], c: "void" },
+    { id: 220, type: 'quiz', category: 'java', q: "Which keyword is used to define a method in Java?",opt: ["public", "void", "static"], c: "void" },
     { id: 221, type: 'quiz', category: 'java', q: "Who developed the Java programming language?", opt: ["James Gosling", "Dennis Ritchie", "Bjarne Stroustrup"], c: "James Gosling"},
     {id: 222, type: 'quiz', category: 'java', q: "Which keyword is used to create an object in Java?", opt: ["new", "create", "alloc"], c: "new" }
 
