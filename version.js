@@ -7,6 +7,27 @@
 const changelogData = [
 
 {
+    version: "2.11.0",
+    date: "April 8, 2025",
+    title: "🛡️ The Fortified Security & Migration Update",
+    added: [
+      "Vercel Cloud Integration (High-speed server migration 🚀)",
+      "Multi-Domain Whitelisting (Vercel, Firebase, & Web.app secured 🔗)",
+      "Strict Admin-Only Controls (UID-based database protection 👑)"
+    ],
+    improved: [
+      "API Key Restriction (Unauthorized domain access blocked 🚫)",
+      "Authentication Flow (Google Login domain-validation fixed ⚡)",
+      "Leaderboard Ranking (Live real-time sorting by XP 🏅)"
+    ],
+    fixed: [
+      "Netlify Bandwidth Limit Fix (Moved to Vercel infrastructure)",
+      "Anti-Cheat Logic (Logout-XP reset mechanism to prevent farming 🛡️)",
+      "Security Rules Error (Corrected Firestore syntax issues)"
+    ]
+},
+
+{
     version: "2.10.3",
     date: "April 5, 2026",
     title: "🧠 The Brainiac Content Update",
@@ -108,6 +129,7 @@ const changelogData = [
       "CSS conflicts between About and Changelog pages"
     ]
   },
+
   {
     version: "2.7.0",
     date: "March 9, 2026",
