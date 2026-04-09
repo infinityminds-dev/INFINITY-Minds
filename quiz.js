@@ -53,42 +53,60 @@ const REFILL_TIME = 3 * 60 * 60 * 1000;
 
 // --- 3. MEGA DATABASE (FIXED & MERGED) ---
 const database = [
-    // --- 🌐 WEB & JS (Old Questions with Categories) ---
-    { id: 1, type: 'quiz', category: 'webdev', q: "Which tag is used for an image?", opt: ["<img>", "<pic>", "<src>"], c: "<img>" },
-    { id: 2, type: 'quiz', category: 'webdev', q: "Largest heading tag?", opt: ["<h1>", "<h6>", "<head>"], c: "<h1>" },
-    { id: 11, type: 'quiz', category: 'webdev', q: "CSS stands for?", opt: ["Cascading Style Sheets", "Color Style", "Creative Sheets"], c: "Cascading Style Sheets" },
-    { id: 24, type: 'quiz', category: 'javascript', q: "Which is a JS variable declaration?", opt: ["let", "var", "Both"], c: "Both" },
-    { id: 70, type: 'quiz', category: 'javascript', q: "In JS, 'null' is what type?", opt: ["Object", "String", "Undefined"], c: "Object" },
 
-    // --- 🐍 PROGRAMMING: PYTHON ---
-    { id: 201, type: 'quiz', category: 'python', q: "Python function define karne ka keyword?", opt: ["def", "func", "lambda"], c: "def" },
-    { id: 202, type: 'quiz', category: 'python', q: "Python file extension?", opt: [".py", ".pyt", ".python"], c: ".py" },
+    // --- 🚀 1. DSA (1 - 200) ---
+    { id: 1, type: 'quiz', category: 'dsa', q: "LIFO data structure?", opt: ["Stack", "Queue", "Tree"], c: "Stack" },
 
-    // --- 💻 PROGRAMMING: C++ ---
-    { id: 210, type: 'quiz', category: 'cpp', q: "C++ output operator?", opt: ["<<", ">>", "cout"], c: "<<" },
+    // --- 🧩 2. PUZZLE (201 - 400) ---
+    { id: 201, type: 'puzzle', category: 'puzzle', q: "What has a head and a tail but no body?", a: "Coin" },
+    { id: 202, type: 'puzzle', category: 'puzzle', q: "What goes up but never comes down?", a: "Age" },
+    { id: 203, type: 'puzzle', category: 'puzzle', q: "I shave every day, but my beard stays the same. Who am I?", a: "Barber" },
 
-    // --- 📊 MS OFFICE (Sub-Categories) ---
-    { id: 301, type: 'quiz', category: 'word', q: "MS Word primarily used for?", opt: ["Documents", "Calculations", "Slides"], c: "Documents" },
-    { id: 302, type: 'quiz', category: 'excel', q: "Excel formula starts with?", opt: ["=", "@", "#"], c: "=" },
-    { id: 303, type: 'quiz', category: 'ppt', q: "MS PowerPoint extension?", opt: [".pptx", ".docx", ".xlsx"], c: ".pptx" },
+    // --- 🛡️ 3. CYBER (401 - 600) ---
+    { id: 401, type: 'quiz', category: 'cyber', q: "What is Phishing?", opt: ["Fake link scam", "Virus", "Hardware error"], c: "Fake link scam" },
+    { id: 402, type: 'quiz', category: 'cyber', q: "Which of these is a strong password?", opt: ["123456", "p@ssword#2026", "pankaj123"], c: "p@ssword#2026" },
 
-    // --- 🖥️ COMPUTER & CYBER ---
-    { id: 105, type: 'quiz', category: 'computer', q: "Main memory of computer?", opt: ["RAM", "Hard Disk", "CPU"], c: "RAM" },
-    { id: 121, type: 'quiz', category: 'cyber', q: "What is Phishing?", opt: ["Fake link scam", "Virus", "Hardware error"], c: "Fake link scam" },
+    // --- 🖥️ 4. COMPUTER (601 - 800) ---
+    { id: 601, type: 'quiz', category: 'computer', q: "Main memory of computer?", opt: ["RAM", "Hard Disk", "CPU"], c: "RAM" },
+    { id: 602, type: 'quiz', category: 'computer', q: "1 Terabyte (TB) is equal to?", opt: ["1024 GB", "1000 GB", "1024 MB"], c: "1024 GB" },
 
-    // --- 🚀 DSA ---
-    { id: 74, type: 'quiz', category: 'dsa', q: "LIFO data structure?", opt: ["Stack", "Queue", "Tree"], c: "Stack" },
+    // --- 🐍 5. PYTHON (801 - 1000) ---
+    { id: 801, type: 'quiz', category: 'python', q: "Python function define karne ka keyword?", opt: ["def", "func", "lambda"], c: "def" },
+    { id: 802, type: 'quiz', category: 'python', q: "Python file extension?", opt: [".py", ".pyt", ".python"], c: ".py" },
+    { id: 803, type: 'quiz', category: 'python', q: "Which of these is used to define a block of code in Python?", opt: ["Brackets", "Indentation", "Parentheses"], c: "Indentation" },
+    { id: 804, type: 'quiz', category: 'python', q: "What is the output of 2**3?", opt: ["6", "8", "9"], c: "8" },
 
-    // --- 🧩 PUZZLES (Merged IDs) ---
-    { id: 31, type: 'puzzle', category: 'puzzle', q: "What has a head and a tail but no body?", a: "Coin" },
-    { id: 67, type: 'puzzle', category: 'puzzle', q: "What goes up but never comes down?", a: "Age" },
-    { id: 68, type: 'puzzle', category: 'puzzle', q: "I shave every day, but my beard stays the same. Who am I?", a: "Barber" },
+    // --- 💻 6. C++ (1001 - 1200) ---
+    { id: 1001, type: 'quiz', category: 'cpp', q: "C++ output operator?", opt: ["<<", ">>", "cout"], c: "<<" },
 
-    // --- ☕ PROGRAMMING: JAVA ---
-    { id: 220, type: 'quiz', category: 'java', q: "Which keyword is used to define a method in Java?",opt: ["public", "void", "static"], c: "void" },
-    { id: 221, type: 'quiz', category: 'java', q: "Who developed the Java programming language?", opt: ["James Gosling", "Dennis Ritchie", "Bjarne Stroustrup"], c: "James Gosling"},
-    {id: 222, type: 'quiz', category: 'java', q: "Which keyword is used to create an object in Java?", opt: ["new", "create", "alloc"], c: "new" }
+    // --- ☕ 7. JAVA (1201 - 1400) ---
+    { id: 1201, type: 'quiz', category: 'java', q: "Which keyword is used to define a method in Java?",opt: ["public", "void", "static"], c: "void" },
+    { id: 1202, type: 'quiz', category: 'java', q: "Who developed the Java programming language?", opt: ["James Gosling", "Dennis Ritchie", "Bjarne Stroustrup"], c: "James Gosling"},
+    { id: 1203, type: 'quiz', category: 'java', q: "Which keyword is used to create an object in Java?", opt: ["new", "create", "alloc"], c: "new" },
+    { id: 1204, type: 'quiz', category: 'java', q: "Which keyword is used to inherit a class in Java?", opt: ["extends", "implements", "inherits"], c: "extends" },
+    { id: 1205, type: 'quiz', category: 'java', q: "Which of these is not a primitive data type in Java?", opt: ["int", "boolean", "String"], c: "String" },
 
+    // --- 📜 8. JS (1401 - 1600) ---
+    { id: 1401, type: 'quiz', category: 'javascript', q: "Which is a JS variable declaration?", opt: ["let", "var", "Both"], c: "Both" },
+    { id: 1402, type: 'quiz', category: 'javascript', q: "In JS, 'null' is what type?", opt: ["Object", "String", "Undefined"], c: "Object" },
+    { id: 1403, type: 'quiz', category: 'javascript', q: "Which popup box is used to show a message?", opt: ["alert()", "msg()", "display()"], c: "alert()" },
+
+    // --- 🌐 9. WEBDEV (1601 - 1800) ---
+    { id: 1601, type: 'quiz', category: 'webdev', q: "Which tag is used for an image?", opt: ["<img>", "<pic>", "<src>"], c: "<img>" },
+    { id: 1602, type: 'quiz', category: 'webdev', q: "Largest heading tag?", opt: ["<h1>", "<h6>", "<head>"], c: "<h1>" },
+    { id: 1603, type: 'quiz', category: 'webdev', q: "CSS stands for?", opt: ["Cascading Style Sheets", "Color Style", "Creative Sheets"], c: "Cascading Style Sheets" },
+
+    // --- 🤖 10. AI (1801 - 2000) ---
+    { id: 1801, type: 'quiz', category: 'ai', q: "What does AI stand for?", opt: ["Artificial Intelligence", "Automated Info", "All Intel"], c: "Artificial Intelligence" },
+    { id: 1802, type: 'quiz', category: 'ai', q: "Which AI is developed by OpenAI?", opt: ["ChatGPT", "Gemini", "Alexa"], c: "ChatGPT" },
+    { id: 1803, type: 'quiz', category: 'ai', q: "What does NLP stand for in AI?", opt: ["Natural Language Processing", "Number Line Program", "New Logic Protocol"], c: "Natural Language Processing" },
+    { id: 1804, type: 'quiz', category: 'ai', q: "Who is often called the father of AI?", opt: ["John McCarthy", "Elon Musk", "Alan Turing"], c: "John McCarthy" },
+
+
+    // --- 📝 11, 12, 13 (MS OFFICE - As per Register) ---
+    { id: 2001, type: 'quiz', category: 'word', q: "MS Word primarily used for?", opt: ["Documents", "Calculations", "Slides"], c: "Documents" },
+    { id: 2201, type: 'quiz', category: 'excel', q: "Excel formula starts with?", opt: ["=", "@", "#"], c: "=" },
+    { id: 2401, type: 'quiz', category: 'ppt', q: "MS PowerPoint extension?", opt: [".pptx", ".docx", ".xlsx"], c: ".pptx" }
 ];
 
 // --- 4. CATEGORY SELECTOR ---
