@@ -56,6 +56,10 @@ const database = [
 
     // --- 🚀 1. DSA (1 - 200) ---
     { id: 1, type: 'quiz', category: 'dsa', q: "LIFO data structure?", opt: ["Stack", "Queue", "Tree"], c: "Stack" },
+    { id: 2, type: 'quiz', category: 'dsa', q: "Which data structure follows FIFO?", opt: ["Stack", "Queue", "Array"], c: "Queue" },
+    { id: 3, type: 'quiz', category: 'dsa', q: "Which of these is a linear data structure?", opt: ["Tree", "Graph", "Array"], c: "Array" },
+    { id: 4, type: 'quiz', category: 'dsa', q: "Array index starts with?", opt: ["0", "1", "-1"], c: "0" },
+    { id: 5, type: 'quiz', category: 'dsa', q: "Which structure is used for recursion?", opt: ["Stack", "Queue", "Linked List"], c: "Stack" },
 
     // --- 🧩 2. PUZZLE (201 - 400) ---
     { id: 201, type: 'puzzle', category: 'puzzle', q: "What has a head and a tail but no body?", a: "Coin" },
@@ -65,19 +69,34 @@ const database = [
     // --- 🛡️ 3. CYBER (401 - 600) ---
     { id: 401, type: 'quiz', category: 'cyber', q: "What is Phishing?", opt: ["Fake link scam", "Virus", "Hardware error"], c: "Fake link scam" },
     { id: 402, type: 'quiz', category: 'cyber', q: "Which of these is a strong password?", opt: ["123456", "p@ssword#2026", "pankaj123"], c: "p@ssword#2026" },
+    { id: 403, type: 'quiz', category: 'cyber', q: "What does 'HTTPS' have that 'HTTP' doesn't?", opt: ["Security (SSL)", "Images", "Speed"], c: "Security (SSL)" },
+    { id: 404, type: 'quiz', category: 'cyber', q: "Full form of VPN?", opt: ["Virtual Private Network", "Very Private Network", "Visual Plus Node"], c: "Virtual Private Network" },
 
     // --- 🖥️ 4. COMPUTER (601 - 800) ---
     { id: 601, type: 'quiz', category: 'computer', q: "Main memory of computer?", opt: ["RAM", "Hard Disk", "CPU"], c: "RAM" },
     { id: 602, type: 'quiz', category: 'computer', q: "1 Terabyte (TB) is equal to?", opt: ["1024 GB", "1000 GB", "1024 MB"], c: "1024 GB" },
+    { id: 603, type: 'quiz', category: 'computer', q: "Which of the following is an Output device?", opt: ["Monitor", "Keyboard", "Mouse"], c: "Monitor" },
+    { id: 604, type: 'quiz', category: 'computer', q: "What is the brain of the computer?", opt: ["CPU", "RAM", "UPS"], c: "CPU" },
+    { id: 605, type: 'quiz', category: 'computer', q: "Full form of ROM?", opt: ["Read Only Memory", "Random Only Memory", "Read Once Memory"], c: "Read Only Memory" },
+    { id: 606, type: 'quiz', category: 'computer', q: "Who is known as the father of computer?", opt: ["Charles Babbage", "Alan Turing", "Bill Gates"], c: "Charles Babbage" },
+    { id: 607, type: 'quiz', category: 'computer', q: "What is the physical part of computer called?", opt: ["Hardware", "Software", "Operating System"], c: "Hardware" },
 
     // --- 🐍 5. PYTHON (801 - 1000) ---
     { id: 801, type: 'quiz', category: 'python', q: "Python function define karne ka keyword?", opt: ["def", "func", "lambda"], c: "def" },
     { id: 802, type: 'quiz', category: 'python', q: "Python file extension?", opt: [".py", ".pyt", ".python"], c: ".py" },
     { id: 803, type: 'quiz', category: 'python', q: "Which of these is used to define a block of code in Python?", opt: ["Brackets", "Indentation", "Parentheses"], c: "Indentation" },
     { id: 804, type: 'quiz', category: 'python', q: "What is the output of 2**3?", opt: ["6", "8", "9"], c: "8" },
+    { id: 805, type: 'quiz', category: 'python', q: "How to add an element to a list?", opt: ["add()", "append()", "push()"], c: "append()" },
+    { id: 806, type: 'quiz', category: 'python', q: "Correct way to start a 'for' loop?", opt: ["for x in y:", "for x to y", "for (x in y)"], c: "for x in y:" },
 
     // --- 💻 6. C++ (1001 - 1200) ---
     { id: 1001, type: 'quiz', category: 'cpp', q: "C++ output operator?", opt: ["<<", ">>", "cout"], c: "<<" },
+    { id: 1002, type: 'quiz', category: 'cpp', q: "Who developed C++?", opt: ["Bjarne Stroustrup", "Dennis Ritchie", "James Gosling"], c: "Bjarne Stroustrup" },
+    { id: 1003, type: 'quiz', category: 'cpp', q: "Which header file is used for Input/Output?", opt: ["<iostream>", "<stdio.h>", "<conio.h>"], c: "<iostream>" },
+    { id: 1004, type: 'quiz', category: 'cpp', q: "What is the extension of a C++ source file?", opt: [".cpp", ".c", ".obj"], c: ".cpp" },
+    { id: 1005, type: 'quiz', category: 'cpp', q: "Which operator is used for input?", opt: [">>", "<<", "cin"], c: ">>" },
+    { id: 1006, type: 'quiz', category: 'cpp', q: "How do you insert a single line comment in C++?", opt: ["//", "/*", "#"], c: "//" },
+    { id: 1007, type: 'quiz', category: 'cpp', q: "Which keyword is used to create a class in C++?", opt: ["class", "struct", "object"], c: "class" },
 
     // --- ☕ 7. JAVA (1201 - 1400) ---
     { id: 1201, type: 'quiz', category: 'java', q: "Which keyword is used to define a method in Java?",opt: ["public", "void", "static"], c: "void" },
@@ -85,6 +104,7 @@ const database = [
     { id: 1203, type: 'quiz', category: 'java', q: "Which keyword is used to create an object in Java?", opt: ["new", "create", "alloc"], c: "new" },
     { id: 1204, type: 'quiz', category: 'java', q: "Which keyword is used to inherit a class in Java?", opt: ["extends", "implements", "inherits"], c: "extends" },
     { id: 1205, type: 'quiz', category: 'java', q: "Which of these is not a primitive data type in Java?", opt: ["int", "boolean", "String"], c: "String" },
+    { id: 1206, type: 'quiz', category: 'java', q: "Default value of an int variable?", opt: ["0", "null", "undefined"], c: "0" },
 
     // --- 📜 8. JS (1401 - 1600) ---
     { id: 1401, type: 'quiz', category: 'javascript', q: "Which is a JS variable declaration?", opt: ["let", "var", "Both"], c: "Both" },
@@ -101,12 +121,37 @@ const database = [
     { id: 1802, type: 'quiz', category: 'ai', q: "Which AI is developed by OpenAI?", opt: ["ChatGPT", "Gemini", "Alexa"], c: "ChatGPT" },
     { id: 1803, type: 'quiz', category: 'ai', q: "What does NLP stand for in AI?", opt: ["Natural Language Processing", "Number Line Program", "New Logic Protocol"], c: "Natural Language Processing" },
     { id: 1804, type: 'quiz', category: 'ai', q: "Who is often called the father of AI?", opt: ["John McCarthy", "Elon Musk", "Alan Turing"], c: "John McCarthy" },
+    { id: 1805, type: 'quiz', category: 'ai', q: "Which company made Gemini AI?", opt: ["Google", "OpenAI", "Meta"], c: "Google" },
 
-
-    // --- 📝 11, 12, 13 (MS OFFICE - As per Register) ---
+    // --- 📝 11, 12, 13 (MS OFFICE - Word) ---
     { id: 2001, type: 'quiz', category: 'word', q: "MS Word primarily used for?", opt: ["Documents", "Calculations", "Slides"], c: "Documents" },
+    { id: 2002, type: 'quiz', category: 'word', q: "Shortcut for 'Bold' in Word?", opt: ["Ctrl+B", "Ctrl+V", "Ctrl+C"], c: "Ctrl+B" },
+    { id: 2003, type: 'quiz', category: 'word', q: "Shortcut for 'Undo' in MS Word?", opt: ["Ctrl+Z", "Ctrl+Y", "Ctrl+U"], c: "Ctrl+Z" },
+    { id: 2004, type: 'quiz', category: 'word', q: "Which orientation is vertical (straight up)?", opt: ["Portrait", "Landscape", "Square"], c: "Portrait" },
+    { id: 2005, type: 'quiz', category: 'word', q: "Shortcut for 'Save' a document?", opt: ["Ctrl+S", "Ctrl+P", "Ctrl+A"], c: "Ctrl+S" },
+    { id: 2006, type: 'quiz', category: 'word', q: "What is the smallest font size in Word's list?", opt: ["8", "10", "12"], c: "8" },
+    { id: 2007, type: 'quiz', category: 'word', q: "Shortcut to 'Select All' text?", opt: ["Ctrl+A", "Ctrl+S", "Ctrl+X"], c: "Ctrl+A" },
+
+
+    // --- 📝 12 (MS OFFICE - Excel) ---
     { id: 2201, type: 'quiz', category: 'excel', q: "Excel formula starts with?", opt: ["=", "@", "#"], c: "=" },
-    { id: 2401, type: 'quiz', category: 'ppt', q: "MS PowerPoint extension?", opt: [".pptx", ".docx", ".xlsx"], c: ".pptx" }
+    { id: 2202, type: 'quiz', category: 'excel', q: "Function for average in Excel?", opt: ["AVERAGE()", "AVG()", "MEAN()"], c: "AVERAGE()" },
+    { id: 2203, type: 'quiz', category: 'excel', q: "The intersection of a row and a column is called?", opt: ["Cell", "Box", "Table"], c: "Cell" },
+    { id: 2204, type: 'quiz', category: 'excel', q: "Shortcut to 'Find' something in Excel?", opt: ["Ctrl+F", "Ctrl+H", "Ctrl+G"], c: "Ctrl+F" },
+    { id: 2205, type: 'quiz', category: 'excel', q: "Which function is used to find the largest value?", opt: ["MAX()", "LARGE()", "HIGH()"], c: "MAX()" },
+    { id: 2206, type: 'quiz', category: 'excel', q: "How many columns were in older Excel versions (approx)?", opt: ["256", "100", "500"], c: "256" },
+    { id: 2207, type: 'quiz', category: 'excel', q: "Shortcut to insert current Date?", opt: ["Ctrl+;", "Ctrl+:", "Ctrl+D"], c: "Ctrl+;" },
+
+    // --- 📝 13 (MS OFFICE - PPT) ---
+    { id: 2401, type: 'quiz', category: 'ppt', q: "MS PowerPoint extension?", opt: [".pptx", ".docx", ".xlsx"], c: ".pptx" },
+    { id: 2402, type: 'quiz', category: 'ppt', q: "Key to exit a Slideshow?", opt: ["Esc", "Enter", "Tab"], c: "Esc" },
+    { id: 2403, type: 'quiz', category: 'ppt', q: "Which view is used to rearrange slides easily?", opt: ["Slide Sorter", "Normal", "Reading"], c: "Slide Sorter" },
+    { id: 2404, type: 'quiz', category: 'ppt', q: "Shortcut to create a 'New Slide'?", opt: ["Ctrl+M", "Ctrl+N", "Ctrl+S"], c: "Ctrl+M" },
+    { id: 2405, type: 'quiz', category: 'ppt', q: "Individual pages of a presentation are called?", opt: ["Slides", "Pages", "Sheets"], c: "Slides" },
+    { id: 2406, type: 'quiz', category: 'ppt', q: "Which tab is used to add pictures in PPT?", opt: ["Insert", "Design", "Home"], c: "Insert" },
+    { id: 2407, type: 'quiz', category: 'ppt', q: "Animation effect that happens when moving slides?", opt: ["Transition", "Motion", "Fly-in"], c: "Transition" },
+
+
 ];
 
 // --- 4. CATEGORY SELECTOR ---

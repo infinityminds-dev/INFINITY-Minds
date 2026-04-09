@@ -7,8 +7,30 @@
 const changelogData = [
 
 {
+    version: "2.12.0",
+    date: "April 9, 2026",
+    title: "🗿 The Master Blueprint & Content Expansion",
+    added: [
+      "Master Register System (200-ID Block range for future-proof scaling 📜)",
+      "New Categories: Artificial Intelligence (AI) & Computer Basics 🤖",
+      "Massive Content Drop: 50+ new questions across all 13 categories 📚"
+    ],
+    improved: [
+      "Database Architecture (Fixed ID overlaps and messy commas 🛠️)",
+      "UI Navigation (Programming & AI sections merged for better flow 💻)",
+      "MS Office Suite (Full expansion of Word, Excel, and PPT challenges 📊)"
+    ],
+    fixed: [
+      "Category Filter Bug (All buttons now sync perfectly with ID blocks 🔗)",
+      "Anti-Cheating 'Feature' (Sacrifice XP for Heart Refill logic finalized 😎)",
+      "Database Syntax (Master merged version with zero syntax errors 🚀)"
+    ]
+},
+
+
+{
     version: "2.11.0",
-    date: "April 8, 2025",
+    date: "April 8, 2026",
     title: "🛡️ The Fortified Security & Migration Update",
     added: [
       "Vercel Cloud Integration (High-speed server migration 🚀)",
