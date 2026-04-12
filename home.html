@@ -20,7 +20,7 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="theme.css">
+  
 
 
   <!-- Google Analytics -->
@@ -33,128 +33,88 @@
   </script>
 
   
-     <script src="version.js" defer></script>
+     
 <script type="module" src="quiz.js"></script>
 
      
   
 </head>
 
-<body>
 
- <!-- MENU BUTTON (MOBILE) -->
+<body>
 <button class="menu-btn" onclick="toggleSidebar()">☰</button>
 
-<!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
-  <h2 class="logo">INFINITY</h2>
-  <nav>
-    <a href="home.html" class="active">Home 🌐</a> 
-      <a href="tutorials.html">Digital Skills Hub 📊</a>
-    <a href="Computer.html">Computer Basics 💻</a>
-    <a href="Course.html">Programming 🛰️</a>
-    <a href="devlog.html">Developer Tools 🛠️</a>
-    <a href="Quantum.html">Quantum Computing ⚛️</a>
-    <a href="Download.html">Downloads 📥</a>
-    <a href="feedback.html" >Feedback 📬</a>
-    <a href="faq.html">FAQ❓</a>
-    <a href="contact.html">Contact ✉️</a>
-    <a href="quiz.html" >INFINITY Quiz 🧩 </a>
-    <a href="about.html" class="b">About INFINITY 🧠 </a>
-    
-  </nav>
+    <div class="sidebar-header">
+        <h2 class="logo-text">INFINITY</h2>
+    </div>
+    <nav>
+        <a href="home.html" class="active"><span>🌐</span> Home</a>
+        <a href="tutorials.html"><span>📊</span> Digital Skills</a>
+        <a href="Computer.html"><span>💻</span> Computer Basics</a>
+        <a href="Course.html"><span>🛰️</span> Programming</a>
+        <a href="devlog.html"><span>🛠️</span> Dev Tools</a>
+        <a href="Quantum.html"><span>⚛️</span> Quantum Computing</a>
+        <a href="Download.html"><span>📥</span> Downloads</a>
+        <a href="feedback.html"><span>📬</span> Feedback</a>
+        <a href="faq.html"><span>❓</span>FAQ</a>
+        <a href="contact.html"><span>✉️</span> Contact</a>
+        <a href="quiz.html"><span>🧩</span>INFINITY Quiz</a>
+        <a href="about.html" class="b"><span>🧠</span>About INFINITY</a>
+    </nav>
 </aside>
 
-  <main>
-<!-- MAIN CONTENT -->
-<div class="content-wrapper">
-  
 
-  
-  <!-- 🔥 SPECIAL LAUNCH BANNER -->
-  <section class="launch-banner" role="region" aria-label="InfinityMinds Phase 2 Announcement">
-    <h2>🚀 NEW ERA STARTS NOW</h2>
-    <p><strong>March 1, 2026</strong> – InfinityMinds enters its Learning Expansion Phase.</p>
-    <p>Foundation Complete. Tutorials & Courses Begin.</p>
-  </section>
+<main id="main-content">
+    <header class="hero-section">
+        <div class="collab-container">
+            <span class="official-tag">OFFICIAL PARTNERSHIP</span>
+            <div class="logos">
+                <img src="infinity.jpg" alt="InfinityMinds" class="mini-logo">
+                <span class="x-sign">×</span>
+                <img src="riser.jpg" alt="Riser" class="mini-logo">
+            </div>
+            <p class="tagline">"Rising Beyond Limits. Expanding Your World."</p>
+        </div>
 
-    <header class="header">
-    <h1>INFINITY Minds</h1>
-    <p>Welcome, <span id="display-name" style="color: #10b981; font-weight: 800;">Explorer</span>! 👋</p>
-    <p>Learn Computer Science Step-by-Step 🚀</p>
-    <a href="Computer.html" class="btn">Start Learning</a>
-  </header>
+        <div class="hero-text">
+            <h1 class="glow-text">NEW ERA STARTS NOW</h1>
+            <p class="date-badge">March 1, 2026</p>
+            <p>Learn Computer Science Step-by-Step 🚀</p>
+            <a href="#" class="main-btn">Start Learning</a>
+        </div>
+    </header>
 
-  
-  <!-- CARDS -->
-  <section class="cards">
-    <h2>What You Will Learn</h2>
-    <div class="card-container">
-      <div class="card">💻 Computer Basics</div>
-      <div class="card">🐍 Programming</div>
-      <div class="card">🌐 Web Development</div>
-      <div class="card">🔐 Cybersecurity</div>
-      <div class="card">📡 Networking</div>
-      <div class="card">⚛️ Quantum Computing</div>
-    </div>
-  </section>
+    <section class="learning-grid">
+        <h2>What You Will Learn</h2>
+        <div class="card-container">
+            <div class="card"><span>💻</span><p>Computer Basics</p></div>
+            <div class="card"><span>🐍</span><p>Programming</p></div>
+            <div class="card"><span>🌐</span><p>Web Dev</p></div>
+            <div class="card"><span>🔐</span><p>Cybersecurity</p></div>
+            <div class="card"><span>📡</span><p>Networking</p></div>
+            <div class="card"><span>⚛️</span><p>Quantum</p></div>
+        </div>
+    </section>
 
-  <!-- ROADMAP -->
-  <section class="roadmap">
-    <h2>Learning Roadmap</h2>
-    <p>Beginner → Intermediate → Advanced</p>
-  </section>
+    <section class="info-section">
+        <div class="founder-card">
+            <h3>Message from Founder</h3>
+            <p>"Built with consistency and long-term vision."</p>
+            <small>— Pankaj Panwar Founder of INFINITYMinds</small>
+            <small>— Shivin Gusain, Technical Advisor & QA Tester</small>
+        </div>
+    </section>
 
-  <!-- WHY -->
-  <section class="why-section">
-    <h2>Why INFINITY Minds?</h2>
-    <ul>
-      <li>✔ Beginner Friendly</li>
-      <li>✔ Simple Notes & Images</li>
-      <li>✔ Free Resources</li>
-      <li>✔ Career Guidance</li>
-    </ul>
-  </section>
+    <footer>
+        <p>&copy; 2026 INFINITY Minds | v2.12.0</p>
+    </footer>
+</main>
 
-  <!-- 🎓 PHASE 2 PROFESSIONAL SECTION -->
-  <section class="phase-two">
-    <h2>InfinityMinds – Phase 2 Begins</h2>
-    <p>
-      InfinityMinds officially moves from foundation stage 
-      to structured learning expansion.
-    </p>
-    <p>
-      Tutorials. Courses. Growth.
-      Structured. Focused. Powerful.
-    </p>
-  </section>
-
-  <!-- ❤️ FOUNDER MESSAGE -->
-  <section class="founder-note">
-    <h2>Message from the Founder</h2>
-    <p>
-      InfinityMinds started as an idea — built with consistency,
-      patience, and long-term vision.
-    </p>
-    <p>
-      The base system is now complete.
-      The next step is delivering powerful learning experiences.
-    </p>
-    
-    <p><strong>— Pankaj Panwar, Founder of INFINITYMinds</strong></p>
-    <p><strong>— Shivin Gusain, Technical Advisor & QA Tester</strong></p>
-  </section>
-
-
-
-<!-- FOOTER -->
-<footer>
-  <p>© 2026 INFINITY Minds</p>
-<p id="version-number"></p>
-</footer>
-
-  
-  </main>
-  
+<script>
+    function toggleSidebar() {
+        document.getElementById('sidebar').classList.toggle('active');
+    }
+</script>
 </body>
 </html>
