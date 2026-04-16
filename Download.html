@@ -118,9 +118,21 @@
     </div>
   </div>
 
-  <div class="main-card">
+ <div class="main-card">
     <h1 class="hg">Infinity Apps Hub</h1>
     <div class="app-card-container">
+      
+   <div class="app-card neon-border shadow-special">
+    <img src="ShadowLogo.png" alt="Shadow INFINITY" class="shadow-logo-main"> 
+    <h3 style="color: #bc13fe; text-shadow: 0 0 10px #bc13fe;">Shadow INFINITY ♾️</h3>
+    <p>Offline Vault-to-Vault messaging. Remote unlock media via SMS signal. No Internet Required! 🛰️</p>
+    <div class="app-meta">
+        <span>v1.0 (Beta)</span> | <span>15MB</span> | <span class="offline-tag">OFFLINE</span>
+    </div>
+    <a href="ShadowInfinity.apk" class="app-download shadow-btn" download>Download APK</a>
+</div>
+
+      
       <div class="app-card neon-border">
           <img src="unit.png" alt="Unit Converter">
           <h3>Unit Converter</h3>
@@ -128,6 +140,7 @@
           <div class="app-meta"><span>v1.0</span> | <span>10MB</span></div>
           <a href="UnitConverter.apk" class="app-download" download>Download APK</a>
       </div>
+
       <div class="app-card neon-border">
           <img src="Applogo.png" alt="Focus Reminder">
           <h3>INFINITYFocus</h3>
@@ -135,8 +148,11 @@
           <div class="app-meta"><span>v1.0</span> | <span>12MB</span></div>
           <a href="InfinityFocusReminder.apk" class="app-download" download>Download APK</a>
       </div>
+
     </div>
-  </div>
+</div>
+
+  
 <h1 class="hg">INFINITYMinds X Riser-Corporation</h1>
 <div class="app-card moksha-card">
  <div class="poster-space">
@@ -249,6 +265,66 @@
     transform: scale(1.02);
     filter: brightness(1.2);
   }
+  
+/* Card Container Fix */
+.shadow-special {
+    background: #12121b !important; /* Deep dark background */
+    border: 2px solid #bc13fe !important;
+    box-shadow: 0 0 15px rgba(188, 19, 254, 0.3); /* Subtle glow, not blinding */
+    padding: 25px 15px !important;
+    border-radius: 20px !important;
+    transition: 0.4s ease-in-out;
+}
+
+/* Image/Logo Fix - Isse logo bada aur clear dikhega */
+.shadow-logo-main {
+    width: 140px !important; /* Size badha diya */
+    height: auto;
+    margin: 0 auto 15px auto;
+    display: block;
+    filter: drop-shadow(0 0 12px rgba(188, 19, 254, 0.6));
+    animation: pulseLogo 2s infinite ease-in-out;
+}
+
+@keyframes pulseLogo {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 12px rgba(188, 19, 254, 0.6)); }
+    50% { transform: scale(1.05); filter: drop-shadow(0 0 20px rgba(0, 242, 255, 0.5)); }
+}
+
+/* Title & Description Balance */
+.shadow-special h3 {
+    font-size: 1.6rem !important;
+    margin-bottom: 10px;
+}
+
+.shadow-special p {
+    color: #e0e0e0 !important;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    padding: 0 10px;
+}
+
+/* Metadata (v1.0 | 15MB | OFFLINE) */
+.app-meta {
+    margin: 15px 0 !important;
+    font-weight: bold;
+}
+
+.offline-tag {
+    color: #00f2ff !important; /* Cyan glow for Offline */
+    text-shadow: 0 0 8px rgba(0, 242, 255, 0.6);
+}
+
+/* Download Button Fix */
+.shadow-btn {
+    width: 85% !important;
+    margin: 10px auto !important;
+    background: linear-gradient(45deg, #bc13fe, #7a0bc0) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 5px 15px rgba(188, 19, 254, 0.4) !important;
+}
+
+
 </style>
 
 
