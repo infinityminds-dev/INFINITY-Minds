@@ -1,110 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- Login -->
- <url>
-    <loc>https://infinitymind1.netlify.app/index.html</loc>
-    <lastmod>2026-04-03</lastmod>
+  <url>
+    <loc>https://infinityminds.vercel.app/index.html</loc>
+    <lastmod>2026-04-25</lastmod>
     <priority>1.0</priority>
   </url>
   
-    <!-- Home -->
   <url>
-    <loc>https://infinitymind1.netlify.app/home.html</loc>
-    <lastmod>2026-04-03</lastmod>
+    <loc>https://infinityminds.vercel.app/home.html</loc>
+    <lastmod>2026-04-25</lastmod>
     <priority>0.9</priority>
   </url>
 
-    <!-- quiz -->
   <url>
-    <loc>https://infinitymind1.netlify.app/quiz.html</loc>
-    <lastmod>2026-04-03</lastmod>
+    <loc>https://infinityminds.vercel.app/quiz.html</loc>
+    <lastmod>2026-04-25</lastmod>
     <priority>0.9</priority>
   </url>
 
-  <!-- basic tutorials-->
- <url>
-    <loc>https://infinitymind1.netlify.app/tutorials.html</loc>
-    <lastmod>2026-04-05</lastmod>
+  <url>
+    <loc>https://infinityminds.vercel.app/tutorials.html</loc>
+    <lastmod>2026-04-25</lastmod>
     <priority>0.9</priority>
   </url>
 
-  <!-- Courses -->
   <url>
-    <loc>https://infinitymind1.netlify.app/course.html</loc>
-    <lastmod>2026-02-22</lastmod>
+    <loc>https://infinityminds.vercel.app/course.html</loc>
+    <lastmod>2026-04-25</lastmod>
     <priority>0.9</priority>
   </url>
 
-  <!-- Computer -->
   <url>
-    <loc>https://infinitymind1.netlify.app/Computer.html</loc>
-    <lastmod>2026-02-22</lastmod>
+    <loc>https://infinityminds.vercel.app/Computer.html</loc>
+    <lastmod>2026-04-25</lastmod>
     <priority>0.9</priority>
   </url>
 
-  <!-- Quantum -->
   <url>
-    <loc>https://infinitymind1.netlify.app/Quantum.html</loc>
-    <lastmod>2026-02-22</lastmod>
+    <loc>https://infinityminds.vercel.app/Quantum.html</loc>
+    <lastmod>2026-04-25</lastmod>
     <priority>0.9</priority>
   </url>
 
-  <!-- Downloads -->
   <url>
-    <loc>https://infinitymind1.netlify.app/Download.html</loc>
-    <lastmod>2026-02-22</lastmod>
+    <loc>https://infinityminds.vercel.app/Download.html</loc>
+    <lastmod>2026-04-25</lastmod>
     <priority>0.7</priority>
   </url>
 
-  <!-- Feedback -->
   <url>
-    <loc>https://infinitymind1.netlify.app/feedback.html</loc>
-    <lastmod>2026-02-22</lastmod>
+    <loc>https://infinityminds.vercel.app/feedback.html</loc>
+    <lastmod>2026-04-25</lastmod>
     <priority>0.6</priority>
   </url>
 
-  <!-- About -->
   <url>
-    <loc>https://infinitymind1.netlify.app/about.html</loc>
-    <lastmod>2026-02-22</lastmod>
+    <loc>https://infinityminds.vercel.app/about.html</loc>
+    <lastmod>2026-04-25</lastmod>
     <priority>0.8</priority>
   </url>
 
-  <!-- Changelog -->
-    <url>
-    <loc>https://infinitymind1.netlify.app/changelog.html</loc>
-    <lastmod>2026-04-03</lastmod> <priority>0.6</priority> 
-    </url>
-    
-
-  <!-- Developer Tools -->
   <url>
-    <loc>https://infinitymind1.netlify.app/developertools.html</loc>
-    <lastmod>2026-02-22</lastmod>
+    <loc>https://infinityminds.vercel.app/changelog.html</loc>
+    <lastmod>2026-04-25</lastmod>
+    <priority>0.6</priority> 
+  </url>
+
+  <url>
+    <loc>https://infinityminds.vercel.app/developertools.html</loc>
+    <lastmod>2026-04-25</lastmod>
     <priority>0.8</priority>
   </url>
 
-  <!-- Developer Tutorials -->
   <url>
-    <loc>https://infinitymind1.netlify.app/developer-tutorials.html</loc>
-    <lastmod>2026-02-26</lastmod>
+    <loc>https://infinityminds.vercel.app/developer-tutorials.html</loc>
+    <lastmod>2026-04-25</lastmod>
     <priority>0.8</priority>
   </url>
 
-        <!-- FAQ -->  
-<url>
-  <loc>https://infinitymind1.netlify.app/faq.html</loc>
-  <lastmod>2026-03-08</lastmod>
-  <priority>0.7</priority>
-</url>
+  <url>
+    <loc>https://infinityminds.vercel.app/faq.html</loc>
+    <lastmod>2026-04-25</lastmod>
+    <priority>0.7</priority>
+  </url>
 
-         <!-- Contact --> 
-
-<url>
-  <loc>https://infinitymind1.netlify.app/contact.html</loc>
-  <lastmod>2026-03-08</lastmod>
-  <priority>0.7</priority>
-</url>
+  <url>
+    <loc>https://infinityminds.vercel.app/contact.html</loc>
+    <lastmod>2026-04-25</lastmod>
+    <priority>0.7</priority>
+  </url>
   
 </urlset>
