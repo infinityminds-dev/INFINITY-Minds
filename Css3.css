@@ -1,4 +1,13 @@
 /* ---------------- 1. RESET & BASE ---------------- */
+:root {
+    --bg-color: #050810;
+    --sidebar-bg: #0a0f1c;
+    --accent-purple: #a855f7;
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --glass: rgba(15, 23, 42, 0.6);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -13,59 +22,58 @@ body {
 }
 
 /* ---------------- 2. SIDEBAR ---------------- */
+/* 3. SIDEBAR (PROFESSIONAL & SCROLLABLE) */
 .sidebar {
-  font-family: 'Cinzel', serif;
-  width: 250px;
-  background: #0f0f1a;
-  border-right: 1px solid rgba(168, 85, 247, 0.2);
-  height: 100vh;
-  position: fixed;
-  left: 0;
-  top: 0;
-  padding: 20px;
-  z-index: 1000;
-  transition: transform 0.3s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100%;
+    background: var(--sidebar-bg);
+    z-index: 10000;
+    transform: translateX(-100%);
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 80px 20px 30px;
+    border-right: 1px solid rgba(168, 85, 247, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
 }
 
-.logo {
-  color: #a855f7;
-  text-align: center;
-  margin-bottom: 30px;
-  font-weight: bold;
-  font-size: 24px;
-  position: relative;
-  left: 15px;
+.sidebar.active {
+    transform: translateX(0);
 }
 
-.b{
-  position: relative;
-  top: 570px;
+.sidebar .logo {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--accent-purple);
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
 }
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 .sidebar nav a {
-  display: block;
-  padding: 12px;
-  margin-bottom: 10px;
-  text-decoration: none;
-  color: #94a3b8;
-  border-radius: 8px;
-  transition: 0.3s;
+    text-decoration: none;
+    color: var(--text-muted);
+    padding: 12px 15px;
+    border-radius: 10px;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.03);
+    transition: 0.3s;
+    display: block;
 }
 
-.sidebar nav a:hover {
-  background: rgba(168, 85, 247, 0.1);
-  color: #a855f7;
-  padding-left: 18px;
-}
-
-.sidebar nav a.active {
-  background: linear-gradient(45deg, #7b2ff7, #9f44d3);
-  color: white !important;
-  box-shadow: 0 4px 15px rgba(123, 47, 247, 0.3);
-}
-
-.b{
-  position: relative;
-  top: -1px;
+.sidebar nav a:hover, .sidebar nav a.active {
+    background: rgba(168, 85, 247, 0.15);
+    color: var(--accent-purple);
+    transform: translateX(5px);
 }
 
 /* ---------------- 3. CONTENT WRAPPER ---------------- */

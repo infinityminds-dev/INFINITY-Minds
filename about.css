@@ -1,4 +1,12 @@
 /* RESET & BASE */
+:root {
+    --bg-color: #050810;
+    --sidebar-bg: #0a0f1c;
+    --accent-purple: #a855f7;
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --glass: rgba(15, 23, 42, 0.6);
+}
 * {
   margin: 0;
   padding: 0;
@@ -13,58 +21,60 @@ body {
   overflow-x: hidden;
 }
 
-/* SIDEBAR - Fixed Desktop Layout */
+/* 3. SIDEBAR (PROFESSIONAL & SCROLLABLE) */
 .sidebar {
-  width: 240px;
-  background: #0f0f1a;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
-  height: 100vh;
-  position: fixed;
-  left: 0;
-  top: 0;
-  padding: 20px;
-  transition: 0.3s ease;
-  z-index: 1001;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100%;
+    background: var(--sidebar-bg);
+    z-index: 10000;
+    transform: translateX(-100%);
+    transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    padding: 80px 20px 30px;
+    border-right: 1px solid rgba(168, 85, 247, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
 }
 
-.logo {
-  color: #fff;
-  text-align: center;
-  font-size: 22px;
-  margin-bottom: 30px;
-  font-weight: bold;
-  letter-spacing: 2px;
+.sidebar.active {
+    transform: translateX(0);
+}
+
+.sidebar .logo {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--accent-purple);
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+}
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
 .sidebar nav a {
-  display: block;
-  padding: 12px;
-  margin-bottom: 8px;
-  text-decoration: none;
-  color: #bbb;
-  border-radius: 10px;
-  transition: 0.3s;
-  font-size: 15px;
+    text-decoration: none;
+    color: var(--text-muted);
+    padding: 12px 15px;
+    border-radius: 10px;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.03);
+    transition: 0.3s;
+    display: block;
 }
 
-.sidebar nav a:hover {
-  background: rgba(168, 85, 247, 0.1);
-  color: #c084fc;
+.sidebar nav a:hover, .sidebar nav a.active {
+    background: rgba(168, 85, 247, 0.15);
+    color: var(--accent-purple);
+    transform: translateX(5px);
 }
 
-.sidebar nav a.active {
-  background: linear-gradient(45deg, #7b2ff7, #9f44d3);
-  color: white;
-}
-
-/* CONTENT WRAPPER */
-.content-wrapper {
-  margin-left: 240px; /* Sidebar ke liye jagah */
-  padding: 40px 20px;
-  display: flex;
-  justify-content: center;
-  transition: 0.3s;
-}
 
 /* ABOUT SECTION */
 .about-infinity {
@@ -140,20 +150,6 @@ body {
   cursor: pointer;
 }
 
-/* MOBILE RESPONSIVE FIXES */
-@media (max-width: 768px) {
-  .sidebar {
-    transform: translateX(-100%); /* Mobile par chhupa do */
-  }
-
-  .sidebar.show {
-    transform: translateX(0); /* Button click par dikhao */
-  }
-
-  .content-wrapper {
-    margin-left: 0; /* Mobile par sidebar ki jagah zero */
-    padding-top: 80px;
-  }
 
   .menu-btn {
     display: flex;
